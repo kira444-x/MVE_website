@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/MVE_logo.png">
+  <title>MVE Service - Hygiène et Lutte Antiparasitaire</title>
+  <!-- Consider linking Font Awesome or another icon library if you want richer icons -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+      /* Prevent horizontal scroll */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    h2 { /* Removed h4 from here as it's used differently now */
+      margin-bottom: 1rem;
+      color: #dfdfdf; /* Default heading color, overridden by section-heading */
+    }
+
+     h3 {
+        color: #374151;
+        margin-bottom: 1rem; /* Added consistent margin */
+     }
+
+    p {
+      margin-bottom: 1rem;
+      color: #6b7280;
+      /* Slightly lighter default paragraph color */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      /* Use percentage padding for better fluidity */
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-heading h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      color: #1f2937;
+      /* Ensure heading color consistency */
+    }
+
+    .section-heading h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: #4CAF50;
+      /* Main accent color */
+    }
+
+    .section-heading p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 1rem auto 0;
+      /* Add top margin for spacing */
+      color: #6b7280;
+    }
+
+    section {
+      padding: 5rem 0;
+      overflow: hidden;
+      /* Prevent content overflow issues */
+    }
+
+    .hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    color: white; /* Adjust based on your background */
+  }
+
+  .glow-text {
+    color: #68d16c;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.7), 
+                 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: subtle-glow 2s infinite alternate;
+  }
+
+  @keyframes subtle-glow {
+    0% {
+      text-shadow: 0 0 5px rgba(76, 175, 80, 0.7), 
+                   0 0 10px rgba(255, 255, 255, 0.3);
+      transform: scale(1);
+    }
+    100% {
+      text-shadow: 0 0 8px rgba(76, 175, 80, 0.8), 
+                   0 0 15px rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+    }
+  }
+  
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      /* Ensure text is centered */
+    }
+
+    .btn:hover {
+      background-color: #3e8e41;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #4CAF50;
+      color: #4CAF50;
+    }
+
+    .btn-outline:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Header and Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      /* Ensure header is above other content */
+      width: 100%;
+      /* Ensure header spans full width */
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      max-width: 1400px;
+      /* Max width for nav content */
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      /* Prevent logo from shrinking */
+    }
+
+    .logo img {
+      height: 50px;
+      /* Add max-width to prevent image distortion if needed */
+      max-width: 100%;
+    }
+
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .desktop-nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+      /* Prevent text wrapping */
+    }
+
+    .desktop-nav a:hover {
+      color: #4CAF50;
+    }
+
+    .desktop-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #4CAF50;
+      transition: width 0.3s ease;
+    }
+
+    .desktop-nav a:hover::after,
+    .desktop-nav a.active::after {
+      /* Style for active link */
+      width: 100%;
+    }
+
+    .desktop-nav a.active {
+      /* Style for active link */
+      color: #4CAF50;
+    }
+
+    /* Different variable name to avoid conflict */
+    .desktop-nav a.nav-cta {
+      background-color: #4CAF50;
+      color: white !important;
+      /* Ensure white text */
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .desktop-nav a.nav-cta:hover {
+      background-color: #3e8e41;
+      box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .desktop-nav a.nav-cta::after {
+      display: none;
+      /* No underline for CTA */
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      /* Hidden by default */
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #333;
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      z-index: 1001;
+      /* Above mobile menu background */
+    }
+
+    /* Hamburger Icon Styles */
+    .hamburger-icon {
+      position: relative;
+      width: 24px;
+      height: 18px;
+      /* Total height of the 3 bars */
+    }
+
+    .hamburger-icon span {
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background-color: #333;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-icon span:nth-child(1) {
+      top: 0;
+    }
+
+    .hamburger-icon span:nth-child(2) {
+      top: 8px;
+    }
+
+    /* Middle bar */
+    .hamburger-icon span:nth-child(3) {
+      top: 16px;
+    }
+
+    /* Bottom bar */
+
+    /* X Animation when active */
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      /* Hidden by default */
+      position: absolute;
+      /* Position relative to header */
+      top: 100%;
+      /* Position below the header */
+      left: 0;
+      right: 0;
+      background-color: white;
+      border-top: 1px solid #eee;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      /* Smooth transition */
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+      padding: 0 1rem;
+      /* Add padding when open */
+    }
+
+    .mobile-menu.active {
+      display: block;
+      /* Show the menu */
+      max-height: 500px;
+      /* Allow height to expand */
+      padding: 1rem;
+      /* Add padding when open */
+    }
+
+    .mobile-menu a {
+      display: block;
+      /* Stack links vertically */
+      padding: 1rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-align: center;
+      /* Center text */
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-menu a:hover {
+      background-color: #f9f9f9;
+      color: #4CAF50;
+    }
+
+    .mobile-menu a.active {
+      /* Style for active link in mobile */
+      color: #4CAF50;
+      background-color: #f0f9f0;
+      /* Light green background */
+    }
+
+    .mobile-menu a.nav-cta {
+      /* Consistent CTA naming */
+      background-color: #4CAF50;
+      color: white !important;
+      /* Ensure white text */
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 30px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .mobile-menu a.nav-cta:hover {
+      background-color: #3e8e41;
+    }
+
+
+    /* Hero Section */
+
+    .hero-container {
+      height: 100vh;
+      /* Full viewport height */
+      min-height: 600px;
+      /* Minimum height for content visibility */
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px 5%;
+      /* Add padding */
+      overflow: hidden;
+      /* Ensure video doesn't spill out */
+    }
+
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      /* Same opacity as your original gradient */
+      z-index: 0;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      /* Place content above video and overlay */
+    }
+
+    .main-heading {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      /* Animation setup */
+      transform: translateX(-100%);
+      opacity: 0;
+      animation: slideFromLeft 1s ease-out forwards;
+    }
+
+    .sub-heading {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 40px;
+      max-width: 800px;
+      /* Limit width */
+      margin-left: auto;
+      margin-right: auto;
+      /* Animation setup */
+      transform: translateX(100%);
+      opacity: 0;
+      animation: slideFromRight 1s ease-out forwards 0.3s;
+      /* Delay */
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 1.1rem;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      /* Animation setup */
+      opacity: 0;
+      animation: fadeIn 1s ease-in forwards 0.6s;
+      /* Delay */
+    }
+
+    .cta-button:hover {
+      background-color: #3e8e41;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Keyframe Animations */
+    @keyframes slideFromLeft {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideFromRight {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* About Section */
+    .about-section {
+      background-color: #f9f9f9;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      /* Increased gap */
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-image {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-around;
+      /* Better distribution */
+      margin-top: 2.5rem;
+      /* Increased margin */
+      flex-wrap: wrap;
+      /* Allow wrapping on smaller screens */
+      gap: 1rem;
+      /* Add gap between items */
+    }
+
+    .stat-item {
+      text-align: center;
+      flex-basis: 150px;
+      /* Base width */
+      flex-grow: 1;
+      /* Allow items to grow */
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4CAF50;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: #6b7280;
+    }
+
+    /* Services Section */
+    #services {
+      background-color: #ffffff;
+      /* White background */
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      /* Softer shadow */
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      /* Use flex for content alignment */
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .service-image {
+      height: 220px;
+      /* Slightly larger image area */
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.1);
+    }
+
+    .service-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      /* Allow content to fill space */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      /* Slightly adjusted size */
+      margin-bottom: 0.8rem;
+      color: #1f2937;
+    }
+
+    .service-card p {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      /* Push button to bottom if needed */
+    }
+
+    .service-card .btn {
+      margin-top: auto;
+      /* Push button to the bottom */
+      align-self: flex-start;
+      /* Align button to the left */
+    }
+
+    /* Why Choose Us Section */
+    .why-choose-section {
+      background-color: #f0fdf4;
+      /* Light green background */
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      /* Adjusted minmax */
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      /* Slightly more lift */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      width: 65px;
+      /* Adjusted size */
+      height: 65px;
+      background-color: rgba(76, 175, 80, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      color: #4CAF50;
+      font-size: 1.8rem;
+      /* Icon size */
+      /* Placeholder for icon - use text or font icon */
+      font-weight: bold;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: #1f2937;
+    }
+
+    .feature-card p {
+      color: #6b7280;
+      font-size: 0.95rem;
+      /* Slightly smaller text */
+    }
+
+
+    /* --- START: NEW CAROUSEL STYLES --- */
+     .partners-section { /* Optional: Style the section wrapper */
+        background-color: #f0f2f5; /* Match carousel background */
+     }
+
+    .carousel-viewport {
+        max-width: 1000px;
+        width: 95%;
+        margin: 0 auto 50px auto; /* Removed top margin, handled by section padding */
+        position: relative;
+    }
+
+    .carousel-container {
+        overflow: hidden;
+        position: relative;
+        /* Slightly increased top padding for taller card + elevation */
+        padding: 35px 0 15px 0;
+    }
+
+    .carousel-track {
+        display: flex;
+        position: relative;
+        align-items: center; /* Align items vertically */
+    }
+
+    .carousel-card {
+        /* Adjusted width/height for logo presentation */
+        flex: 0 0 230px; /* Can adjust width slightly if needed */
+        height: 150px; /* INCREASED height */
+        margin: 0 15px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px; /* Slightly increased padding */
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s ease;
+        opacity: 0.7;
+        transform: scale(0.95);
+        overflow: hidden;
+    }
+
+    .carousel-card.active {
+        opacity: 1;
+        /* Adjust translateY slightly for new height */
+        transform: translateY(-18px) scale(1.05); /* Adjusted elevation */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        z-index: 2;
+    }
+
+    /* Styles specific to the image */
+    .carousel-card img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* Navigation Buttons - Styles remain the same */
+    .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .carousel-button:hover {
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .carousel-button.prev {
+        left: -35px; /* Adjusted for container padding */
+    }
+    .carousel-button.next {
+        right: -35px; /* Adjusted for container padding */
+    }
+    .carousel-button svg {
+        width: 20px;
+        height: 20px;
+        fill: #333;
+    }
+
+    /* Mobile Responsiveness for Carousel */
+    @media (max-width: 1100px) { /* Adjust breakpoint based on when buttons overlap */
+         .carousel-button.prev { left: 10px; } /* Move inside viewport */
+         .carousel-button.next { right: 10px; } /* Move inside viewport */
+    }
+
+    @media (max-width: 768px) {
+        .carousel-card {
+            flex-basis: 190px; /* Adjust width */
+            height: 125px;     /* Adjust height */
+            margin: 0 10px;
+            padding: 15px;    /* Adjust padding */
+        }
+        .carousel-card.active {
+            transform: translateY(-15px) scale(1.03); /* Adjust elevation */
+        }
+         .carousel-button { width: 40px; height: 40px; }
+         .carousel-button svg { width: 18px; height: 18px; }
+         /* Button position already adjusted in previous breakpoint */
+    }
+
+    @media (max-width: 480px) {
+        .carousel-viewport { width: 100%; }
+        .carousel-container { padding-left: 5px; padding-right: 5px; }
+        .carousel-card {
+            flex-basis: 150px; /* Adjust width */
+            height: 100px;     /* Adjust height */
+            margin: 0 8px;
+            padding: 10px;    /* Adjust padding */
+        }
+        .carousel-card.active {
+            transform: translateY(-12px) scale(1.02); /* Adjust elevation */
+        }
+        .carousel-button { width: 35px; height: 35px; }
+         .carousel-button.prev { left: 5px; }
+         .carousel-button.next { right: 5px; }
+         .carousel-button svg { width: 16px; height: 16px; }
+    }
+     /* --- END: NEW CAROUSEL STYLES --- */
+
+
+    /* Call to Action Section */
+    .cta-section {
+      background: linear-gradient(45deg, #4CAF50, #3e8e41);
+      /* Gradient background */
+      color: white;
+      text-align: center;
+      padding: 5rem 0;
+      /* Increased padding */
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 5%;
+      /* Padding for smaller screens */
+    }
+
+    .cta-content h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      /* Slightly bolder */
+    }
+
+    .cta-content p {
+      margin-bottom: 2.5rem;
+      /* Increased margin */
+      font-size: 1.1rem;
+      opacity: 0.95;
+      /* Slightly less opaque */
+      color: #f0fdf4;
+      /* Very light green/white */
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      /* Increased gap */
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background-color: white;
+      color: #4CAF50;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-white:hover {
+      background-color: #f1f1f1;
+      /* Slightly off-white hover */
+      color: #3e8e41;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-outline-white {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      box-shadow: none;
+      /* No shadow for outline */
+    }
+
+    .btn-outline-white:hover {
+      background-color: white;
+      color: #4CAF50;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+      /* Subtle glow */
+    }
+
+
+    /* Footer */
+    footer {
+      background-color: #1f2937;
+      /* Dark background */
+      color: #d1d5db;
+      /* Lighter text color */
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      /* Increased gap */
+      margin-bottom: 3rem;
+      /* Increased margin */
+    }
+
+    .footer-column h3 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+      /* Space for underline */
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4CAF50;
+    }
+
+    .footer-column p {
+      color: #9ca3af;
+      /* Slightly dimmer paragraph */
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-logo img {
+      max-width: 150px;
+      /* Limit logo size in footer */
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding-left: 0; /* Remove default padding */
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+      /* Adjusted spacing */
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      /* Needed for transform */
+    }
+
+    .footer-links a::before {
+      content: '→';
+      /* Arrow character */
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+      color: #4CAF50;
+      /* Arrow color */
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      /* Brighter hover color */
+      transform: translateX(5px);
+      /* Move text slightly */
+    }
+
+    .footer-links a:hover::before {
+      transform: translateX(5px);
+      /* Move arrow with text */
+      color: #ffffff;
+      /* Change arrow color on hover */
+    }
+
+    /* Base styles for all social links */
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background-color: #363f4b;
+      /* Default color for all icons */
+    }
+
+    /* Set icon size */
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    /* Hover effects for each platform */
+    /* Facebook */
+    .social-link.fb:hover {
+      background-color: #3b5998;
+      transform: scale(1.1);
+    }
+
+    /* WhatsApp */
+    .social-link.wa:hover {
+      background-color: #25d366;
+      transform: scale(1.1);
+    }
+
+    /* Instagram */
+    .social-link.ig:hover {
+      background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+      transform: scale(1.1);
+    }
+
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      /* Ensure space above */
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 992px) {
+      .container {
+        padding: 0 4%;
+        /* Adjust padding */
+      }
+
+      .desktop-nav {
+        gap: 1.2rem;
+      }
+
+      .desktop-nav a.nav-cta {
+        padding: 0.6rem 1.2rem;
+      }
+
+      .about-content {
+        flex-direction: column;
+        gap: 2rem;
+        /* Adjust gap for column layout */
+      }
+
+      /* Removed contact section responsive styles */
+
+      .main-heading {
+        font-size: 2.8rem;
+      }
+
+      .sub-heading {
+        font-size: 1.4rem;
+      }
+
+      .footer-content {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+        /* Hide desktop nav */
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+        /* Show mobile menu button */
+        align-items: center;
+        justify-content: center;
+      }
+
+      nav {
+        padding: 0.8rem 5%;
+        /* Adjust nav padding */
+      }
+
+      .logo img {
+        height: 45px;
+        /* Slightly smaller logo */
+      }
+
+      section {
+        padding: 4rem 0;
+        /* Reduce section padding */
+      }
+
+      .main-heading {
+        font-size: 2.2rem;
+      }
+
+      .sub-heading {
+        font-size: 1.2rem;
+      }
+
+      .section-heading h2 {
+        font-size: 2rem;
+      }
+
+      .stats-row {
+        justify-content: center;
+        /* Center stats when wrapping */
+      }
+
+      .stat-item {
+        flex-basis: 120px;
+        /* Adjust base width */
+        margin-bottom: 1rem;
+        /* Add margin when stacking */
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      /* Removed testimonials responsive styles */
+
+      .cta-content h2 {
+        font-size: 2rem;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        /* Allow more flexible wrapping */
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 5%;
+        /* Standard padding for smallest screens */
+      }
+
+      .main-heading {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        /* Improve line height */
+      }
+
+      .sub-heading {
+        font-size: 1.1rem;
+        /* Adjusted size */
+        line-height: 1.4;
+      }
+
+      .cta-button {
+        padding: 12px 28px;
+        /* Adjusted padding */
+        font-size: 1rem;
+      }
+
+      .section-heading h2 {
+        font-size: 1.8rem;
+      }
+
+      .section-heading p {
+        font-size: 1rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        /* Center buttons when stacked */
+      }
+
+      .cta-buttons .btn {
+        width: 80%;
+        /* Limit button width */
+        max-width: 300px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        /* Stack service cards */
+        gap: 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        /* Stack feature cards */
+        gap: 1.5rem;
+      }
+
+      /* Removed testimonials responsive styles */
+
+      /* Removed contact form responsive styles */
+
+      .footer-content {
+        text-align: center;
+        /* Center footer columns */
+      }
+
+      .footer-column h3::after {
+        left: 50%;
+        /* Center underline */
+        transform: translateX(-50%);
+      }
+
+      .footer-links {
+        padding-left: 0;
+        /* Remove padding for centered text */
+      }
+
+      .footer-links a::before {
+        margin-right: 5px;
+      }
+
+      .footer-links a:hover {
+        transform: none;
+        /* Disable hover transform */
+      }
+
+      .social-links {
+        justify-content: center;
+        /* Center social links */
+      }
+    }
+
+    /* Fix for very small screens to ensure buttons/nav don't wrap awkwardly */
+    @media (max-width: 400px) {
+      nav {
+        padding: 0.8rem 3%;
+        /* Further reduce nav padding */
+      }
+
+      .logo img {
+        height: 40px;
+        /* Smaller logo */
+      }
+
+      .main-heading {
+        font-size: 1.6rem;
+      }
+
+      .sub-heading {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="#" class="logo" aria-label="MVE Service Accueil">
+        <img src="img/MVE_logo.png" alt="M.V.E SERVICE Logo">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav">
+        <a href="#" class="active">Accueil</a> <!-- Add 'active' class to current page -->
+        <a href="#about">À Propos</a>
+        <a href="#services">Services</a>
+        <a href="#why-choose">Pourquoi Nous</a>
+        <a href="#partners">Nos Partenaires</a> <!-- CHANGED: Link text and target -->
+        <a href="/contact.html" class="nav-cta">Obtenir un Devis</a> <!-- CHANGED: Point to separate contact page -->
+      </div>
+
+      <!-- Mobile Menu Toggle with Animated Burger Icon -->
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#" class="active">Accueil</a>
+      <a href="#about">À Propos</a>
+      <a href="#services">Services</a>
+      <a href="#why-choose">Pourquoi Nous</a>
+      <a href="#partners">Nos Partenaires</a> <!-- CHANGED: Link text and target -->
+      <a href="/contact.html" class="nav-cta">Obtenir un Devis</a> <!-- CHANGED: Point to separate contact page -->
+    </div>
+  </header>
+
+  <main> <!-- Wrap main content in <main> tag -->
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-container">
+      <!-- Video Background -->
+      <video class="video-background" autoplay muted playsinline> <!-- Added loop and playsinline -->
+        <!-- video path -->
+        <source src="bg_video/MVE_vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <!-- Overlay to darken video -->
+      <div class="overlay"></div>
+
+      <div class="content-wrapper">
+        <h1 class="main-heading">
+          Votre expert  en hygiène et lutte antiparasitaire</h1>
+        <h2 class="sub-heading">Solutions professionnelles pour <span class="glow-text">un environnement propre</span>, sain et sécurisé, adaptées à
+          tous vos besoins.</h2>
+        <a href="/contact.html" class="cta-button">Demandez votre Devis Gratuit</a> <!-- CHANGED: Point to separate contact page -->
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>À Propos de MVE Service</h2>
+          <p>Votre partenaire de confiance pour garantir un environnement sain et sans nuisibles depuis plus de 5 ans.
+          </p>
+        </div>
+
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Notre Engagement : Expertise & Confiance</h3>
+            <p>Forts d'une solide expérience dans le domaine de l'hygiène et de la lutte antiparasitaire, <strong>MVE
+                Service</strong> s'engage à fournir des solutions efficaces, durables et respectueuses de
+              l'environnement. Nous protégeons votre santé, votre propriété et votre tranquillité d'esprit.</p>
+            <p>Notre équipe qualifiée et certifiée utilise des méthodes de pointe et des produits homologués pour
+              éliminer tous types de nuisibles (rongeurs, insectes, volatiles) tout en préservant votre environnement et
+              celui de vos proches.</p>
+
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Années d'expérience</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Clients Satisfaits</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">Certifié</div>
+                <div class="stat-label">CertiBiocide</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Intervention Rapide</div>
+              </div>
+            </div>
+            <a href="/contact.html" class="btn" style="margin-top: 2rem;">En Savoir Plus</a> <!-- CHANGED: Point to separate contact page -->
+          </div>
+
+          <div class="about-image">
+            <img src="img/image-asset.jpeg" alt="Équipe MVE Service en intervention d'hygiène">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Nos Services Professionnels</h2>
+          <p>Des solutions expertes en dératisation, nettoyage et entretien des espaces verts pour un environnement
+            propre et sain.</p>
+        </div>
+        <div class="services-grid">
+          <!-- Service Card 1 -->
+          <div class="service-card">
+            <div class="service-image">
+              <img
+                src="img/unrecognizable-person-white-chemical-protection-suit-doing-disinfection-public-areas-stop-spreading-highly-contagious-corona-virus.jpg"
+                alt="Service de Dératisation">
+            </div>
+            <div class="service-content">
+              <h3>Dératisation</h3>
+              <p>Élimination efficace et durable des rats, souris et autres rongeurs grâce à des solutions adaptées aux
+                particuliers et aux professionnels. Sécurité et prévention garanties.</p>
+              <!-- <a href="#" class="btn btn-outline">Détails</a> -->
+            </div>
+          </div>
+          <!-- Service Card 2 -->
+          <div class="service-card">
+            <div class="service-image">
+              <img src="img/close-up-hand-with-rubber-glove-cleaning-window.jpg" alt="Nettoyage Professionnel">
+            </div>
+            <div class="service-content">
+              <h3>Nettoyage
+              </h3>
+              <p>Services de nettoyage professionnels pour bureaux, commerces et habitations. Des solutions sur mesure
+                pour un environnement propre, sain et agréable.</p>
+              <!-- <a href="#" class="btn btn-outline">Détails</a> -->
+            </div>
+          </div>
+          <!-- Service Card 3 -->
+          <div class="service-card">
+            <div class="service-image">
+              <img src="img/gardener-with-weedwacker-cutting-grass-garden.jpg" alt="Entretien Jardin">
+            </div>
+            <div class="service-content">
+              <h3>Jardinage</h3>
+              <p>Entretien et aménagement des espaces verts : tonte, taille, arrosage et plantation. Offrez à vos
+                jardins une beauté durable avec des soins adaptés.</p>
+              <!-- <a href="#" class="btn btn-outline">Détails</a> -->
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+           <a href="/contact.html" class="btn">Voir toutes nos prestations</a> <!-- CHANGED: Point to separate contact page -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose" class="why-choose-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Pourquoi Choisir MVE Service ?</h2>
+          <p>Nous nous engageons à fournir un service exceptionnel, rapide et discret.</p>
+        </div>
+        <div class="features-grid">
+          <!-- Feature Card 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">✔</div> <!-- Placeholder Icon -->
+            <h3>Intervention Rapide</h3>
+            <p>Nous intervenons rapidement au Maroc, souvent dans la journée, en utilisant des produits biocides
+              respectueux de l'environnement et sans danger pour les occupants.</p>
+          </div>
+          <!-- Feature Card 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">⭐</div> <!-- Placeholder Icon -->
+            <h3>Techniciens Qualifiés & Certifiés</h3>
+            <p>Nos techniciens, formés et certifiés (CertiBiocide), vous garantissent des interventions
+              professionnelles, efficaces et sécurisées</p>
+          </div>
+          <!-- Feature Card 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">💲</div> <!-- Placeholder Icon -->
+            <h3>Devis Gratuit & Prix Justes</h3>
+            <p>Nous offrons des devis clairs et détaillés sans engagement, avec des tarifs compétitifs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos Partenaires Section -->
+    <section id="partners" class="partners-section"> <!-- New ID, New Class for styling if needed -->
+        <div class="container">
+            <div class="section-heading">
+                 <h2>Nos Partenaires</h2> <!-- French Title -->
+                 <p>Les entreprises et organisations qui nous ont fait confiance.</p> <!-- Optional Subtitle -->
+            </div>
+
+            <!-- Carousel HTML Structure -->
+            <div class="carousel-viewport">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Cards - Only Images included -->
+                        <div class="carousel-card">
+                            <img src="img/amdie-logo-2.png" alt="AMDIE Logo">
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/mines-rabat-logo.png" alt="Mines Rabat Logo">
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/10ampmaplantema.png" alt="MAP Logo">
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/72438498_1073826382961051_4022793410271248384_n.jpg" alt="Club Genie Civil Logo">
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/Logo_de_la_DGAPR.svg.png" alt="DGAPR Logo">
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/Marsa-Maroc.webp" alt="Marsa Maroc Logo">
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/centreregional de transfusion Sanguine.jpg" alt="Centre Regional de Transfusion Sanguine Logo">
+                        </div>
+                        <div class="carousel-card">
+                          <img src="img/300780276_473311121471238_441732540215848638_n.png" alt="Faculte de Medecine Logo">
+                        </div>
+                        <div class="carousel-card">
+                          <img src="img/logo-ministere-sante (1).png" alt="Ministere Sante Logo">
+                        </div>
+                         <!-- Add more cards as needed -->
+                    </div>
+                </div>
+
+                <!-- Buttons remain the same -->
+                <button class="carousel-button prev" id="prevBtn" aria-label="Previous Slide">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <button class="carousel-button next" id="nextBtn" aria-label="Next Slide">
+                     <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+            </div>
+            <!-- End Carousel HTML Structure -->
+        </div>
+    </section>
+
+
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Prêt à retrouver un environnement sain ?</h2>
+          <p>Contactez <strong>MVE Service</strong> dès aujourd'hui pour une évaluation gratuite de vos besoins et un
+            devis personnalisé sans engagement.</p>
+          <div class="cta-buttons">
+             <a href="/contact.html" class="btn btn-white">Demander un Devis Gratuit</a> <!-- CHANGED: Point to separate contact page -->
+            <a href="tel:+212650649109" class="btn btn-outline-white">Appelez-nous : +212 650-649109</a> <!-- Updated tel link -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <img src="img/MVE_logo.png" alt="MVE Service Logo Footer">
+          </div>
+          <p>Expert en hygiène et lutte antiparasitaire au Maroc. MVE Service vous propose des solutions rapides,
+            efficaces et respectueuses de l'environnement.</p>
+          <div class="social-links">
+        <!-- Facebook -->
+        <a href="#" class="social-link fb" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <path
+              d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+          </svg>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/212650649109" class="social-link wa" aria-label="WhatsApp" target="_blank"> <!-- Added link -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path
+              d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="#" class="social-link ig" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path
+              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+          </svg>
+        </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liens Rapides</h3>
+          <ul class="footer-links">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#about">À Propos</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why-choose">Pourquoi Nous</a></li>
+            <li><a href="#partners">Nos Partenaires</a></li> <!-- CHANGED -->
+            <li><a href="/contact.html">Contact</a></li> <!-- CHANGED: Point to separate contact page -->
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Nos Prestations</h3>
+          <ul class="footer-links">
+            <li><a href="#services">Dératisation</a></li>
+            <li><a href="#services">Désinsectisation</a></li>
+            <li><a href="#services">Désinfection</a></li>
+            <li><a href="#services">Punaises de lit</a></li>
+            <li><a href="#services">Traitement Bois</a></li>
+            <li><a href="#services">Dépigeonnage</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <p><strong>Adresse :</strong><br>123 Rue Fictive, 75000 Paris</p> <!-- Update Address -->
+          <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a></p> <!-- Updated tel link -->
+          <p><strong>Email :</strong><br><a href="mailto:soattimarouane@gmail.com"
+              style="color:#d1d5db;">soattimarouane@gmail.com</a></p> <!-- Updated email link -->
+          <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra & partout au Maroc</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> |
+          <a href="#">Politique de Confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Mobile Menu Toggle ---
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const navLinksMobile = mobileMenu.querySelectorAll('a'); // Get all links in mobile menu
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          menuToggle.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+          // ARIA attribute update
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Close menu when a link is clicked
+        navLinksMobile.forEach(link => {
+          // Only add listener for hash links to close menu on same page navigation
+          if (link.getAttribute('href').startsWith('#')) {
+              link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                  menuToggle.classList.remove('active');
+                  mobileMenu.classList.remove('active');
+                  menuToggle.setAttribute('aria-expanded', 'false');
+                }
+              });
+          }
+        });
+
+        // Optional: Close menu if clicked outside
+        document.addEventListener('click', (event) => {
+          const isClickInsideNav = menuToggle.contains(event.target) || mobileMenu.contains(event.target);
+          if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // --- REMOVED: Testimonial Slider Logic ---
+
+      // --- START: NEW CAROUSEL JAVASCRIPT ---
+      const track = document.getElementById('carouselTrack');
+      if (track) { // Check if the carousel track exists before running its JS
+          const prevBtn = document.getElementById('prevBtn');
+          const nextBtn = document.getElementById('nextBtn');
+          const cards = Array.from(track.children).filter(node => node.classList.contains('carousel-card')); // Ensure we only count cards
+          const cardCount = cards.length;
+
+          if (cardCount > 0 && prevBtn && nextBtn) { // Only proceed if cards and buttons exist
+
+              const transitionDuration = 500;
+              const autoScrollInterval = 3000;
+
+              let currentIndex = 0;
+              let cardWidth = 0;
+              // let trackOffset = 0; // This variable wasn't used, removed
+              let isTransitioning = false;
+              let autoScrollTimer = null;
+
+              // Calculate how many clones are needed based on viewport width and card width (simplified approach)
+              // Simplified: Use a fixed number of clones suitable for most screens
+              const clonesToUse = Math.min(cardCount, 3); // Use up to 3 clones at each end
+
+              const clonesStart = cards.slice(-clonesToUse).map(card => card.cloneNode(true));
+              const clonesEnd = cards.slice(0, clonesToUse).map(card => card.cloneNode(true));
+
+              clonesStart.reverse().forEach(clone => track.insertBefore(clone, track.firstChild));
+              clonesEnd.forEach(clone => track.appendChild(clone));
+
+              const allCards = track.querySelectorAll('.carousel-card');
+              const totalCardsWithClones = allCards.length;
+              const clonesStartCount = clonesStart.length; // Actual number of start clones added
+
+              function calculateCardWidthAndOffset() {
+                  if (cards.length === 0) return;
+                  const firstOriginalCard = track.children[clonesStartCount];
+                  if (!firstOriginalCard) return;
+
+                  const cardStyle = window.getComputedStyle(firstOriginalCard);
+                  const cardMargin = parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
+                  cardWidth = firstOriginalCard.getBoundingClientRect().width + cardMargin;
+              }
+
+              function updateCarousel(instant = false) {
+                  if (isTransitioning && !instant) return;
+                  isTransitioning = !instant;
+
+                  const targetDomIndex = currentIndex + clonesStartCount;
+                  const viewportWidth = track.parentElement.offsetWidth; // carousel-container width
+                  if (cardWidth === 0) calculateCardWidthAndOffset(); // Calculate if not already done
+                  if (cardWidth === 0) { // Still zero? Use a fallback
+                     cardWidth = 230 + 30; // Approx card width + margin
+                  }
+
+                  const centeringAdjustment = (viewportWidth / 2) - (cardWidth / 2);
+                  const targetTranslateX = -(targetDomIndex * cardWidth) + centeringAdjustment;
+
+                  if (instant) {
+                      track.style.transition = 'none';
+                  } else {
+                      track.style.transition = `transform ${transitionDuration}ms ease-in-out`;
+                  }
+
+                  track.style.transform = `translateX(${targetTranslateX}px)`;
+
+                  allCards.forEach((card, index) => {
+                      card.classList.toggle('active', index === targetDomIndex);
+                  });
+
+                  if (!instant) {
+                      setTimeout(() => {
+                          isTransitioning = false;
+                          checkInfiniteLoopJump();
+                      }, transitionDuration);
+                  } else {
+                      isTransitioning = false; // Ensure flag is reset even on instant jumps
+                       checkInfiniteLoopJump(); // Check immediately after instant jump
+                  }
+              }
+
+              function checkInfiniteLoopJump() {
+                   // Important: Check against the original card count
+                   if (currentIndex <= -1) {
+                      currentIndex = cardCount - 1; // Jump to the equivalent original card at the end
+                      updateCarousel(true); // Instant jump
+                   } else if (currentIndex >= cardCount) {
+                      currentIndex = 0; // Jump to the equivalent original card at the start
+                      updateCarousel(true); // Instant jump
+                   }
+              }
+
+
+              function moveToNext() {
+                  if (isTransitioning) return;
+                  currentIndex++;
+                  updateCarousel();
+              }
+
+              function moveToPrev() {
+                  if (isTransitioning) return;
+                  currentIndex--;
+                  updateCarousel();
+              }
+
+              function startAutoScroll() {
+                  stopAutoScroll(); // Clear any existing timer
+                  autoScrollTimer = setInterval(moveToNext, autoScrollInterval);
+              }
+
+              function stopAutoScroll() {
+                   clearInterval(autoScrollTimer);
+              }
+
+              nextBtn.addEventListener('click', () => { moveToNext(); stopAutoScroll(); /* User interaction pauses auto-scroll */ });
+              prevBtn.addEventListener('click', () => { moveToPrev(); stopAutoScroll(); /* User interaction pauses auto-scroll */ });
+
+              const viewport = document.querySelector('.carousel-viewport');
+               if (viewport) { // Check if viewport exists
+                  viewport.addEventListener('mouseenter', stopAutoScroll);
+                  viewport.addEventListener('mouseleave', startAutoScroll);
+               }
+
+               let resizeTimeout;
+               window.addEventListener('resize', () => {
+                   clearTimeout(resizeTimeout);
+                   resizeTimeout = setTimeout(() => {
+                      calculateCardWidthAndOffset();
+                      updateCarousel(true); // Update instantly on resize
+                   }, 150);
+               });
+
+              // Initial setup
+              calculateCardWidthAndOffset();
+              updateCarousel(true); // Set initial position instantly
+              startAutoScroll();
+          } else {
+              console.warn("Carousel track, cards, or buttons not found. Carousel script not fully initialized.");
+          }
+      } else {
+          // console.log("Carousel track not found on this page."); // Optional: Log if carousel isn't expected everywhere
+      }
+      // --- END: NEW CAROUSEL JAVASCRIPT ---
+
+
+      // --- Update Footer Year ---
+      const yearSpan = document.getElementById('currentYear');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // --- REMOVED: Contact Form Handler ---
+
+      // --- Active Nav Link Highlighting on Scroll --- (Updated)
+      const sections = document.querySelectorAll('section[id]'); // Get all sections with an ID
+      const navLinksDesktop = document.querySelectorAll('.desktop-nav a[href^="#"]');
+      const navLinksMobileAll = document.querySelectorAll('.mobile-menu a[href^="#"]'); // Only select hash links
+
+      function setActiveLink() {
+        let currentSectionId = '';
+        const headerHeight = (document.querySelector('header')?.offsetHeight || 70) + 10; // Offset for sticky header + small buffer
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - headerHeight; // Adjust for header height
+          const sectionHeight = section.clientHeight;
+          const scrollPosition = window.scrollY;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            currentSectionId = section.getAttribute('id');
+          }
+        });
+
+         // Special case for top of page or scrolling up past first section
+         if (window.scrollY < (sections[0]?.offsetTop - headerHeight || 200)) {
+             currentSectionId = ''; // No specific section active, implies 'Home'
+         }
+
+
+        // Update Desktop Nav
+        navLinksDesktop.forEach(link => {
+          link.classList.remove('active');
+          const linkHref = link.getAttribute('href');
+          if (linkHref === `#${currentSectionId}` || (currentSectionId === '' && linkHref === '#')) { // Highlight section or Home
+            link.classList.add('active');
+          }
+        });
+
+        // Update Mobile Nav
+        navLinksMobileAll.forEach(link => {
+          link.classList.remove('active');
+           const linkHref = link.getAttribute('href');
+          if (linkHref === `#${currentSectionId}` || (currentSectionId === '' && linkHref === '#')) { // Highlight section or Home
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Use throttle to limit frequency of setActiveLink calls during scroll
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+          if (!scrollTimeout) {
+              scrollTimeout = setTimeout(() => {
+                  setActiveLink();
+                  scrollTimeout = null;
+              }, 100); // Adjust throttle time (ms) as needed
+          }
+      });
+
+      setActiveLink(); // Initial check on load
+
+    });
+  </script>
+
+</body>
+
+</html>
