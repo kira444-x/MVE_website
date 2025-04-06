@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/MVE_logo.png"> <!-- Adjust path if needed -->
+  <title>Contactez-Nous - MVE Service</title>
+
+  <!-- Font Awesome (Required for Form Icons & potentially Footer) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* --- Global Resets & Basic Styles --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px; /* Base font size */
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f9fa; /* Light background for contrast */
+    }
+
+    main {
+      flex-grow: 1; /* Pushes footer down */
+      /* padding-top: 80px; */ /* REMOVED: This padding was to prevent overlap with sticky header. Removing it will cause the banner top to hide under the header initially. */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #6b7280;
+    }
+
+    a {
+      color: #1a8754; /* Link color consistent with primary */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #0d6e3c;
+      text-decoration: underline;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Prevents extra space below images */
+    }
+
+    /* --- Utility Classes --- */
+    .container { /* Used in footer and potentially main content */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .btn {
+      display: inline-flex; /* Use flex for icon alignment */
+      align-items: center;
+      justify-content: center;
+      gap: 10px; /* Space between text and icon */
+      background-color: #1a8754; /* Primary color from form */
+      color: white;
+      padding: 12px 28px;
+      border-radius: 8px; /* Consistent with form */
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background-color: #0d6e3c; /* Darker primary */
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(26, 135, 84, 0.2);
+    }
+
+    .btn i { /* Icon specific style within button */
+       transition: transform 0.3s ease;
+    }
+    .btn:hover i {
+        transform: translateX(5px);
+    }
+
+    /* --- Header & Navigation --- */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 100%;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      max-width: 1400px; /* Max width for nav content */
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex; /* Use flex for alignment if needed */
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      height: 50px;
+      max-width: 100%; /* Ensure logo is responsive */
+    }
+
+    .desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .desktop-nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+    .desktop-nav a:hover {
+      color: #4CAF50;
+      text-decoration: none; /* Remove underline from nav links */
+    }
+    .desktop-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #4CAF50;
+      transition: width 0.3s ease;
+    }
+    .desktop-nav a:hover::after,
+    .desktop-nav a.active::after {
+      width: 100%;
+    }
+    .desktop-nav a.active {
+      color: #4CAF50;
+    }
+
+    .desktop-nav a.nav-cta {
+      background-color: #4CAF50;
+      color: white !important; /* Use !important cautiously */
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      white-space: nowrap;
+      text-align: center;
+    }
+    .desktop-nav a.nav-cta:hover {
+      background-color: #3e8e41;
+      box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+      transform: translateY(-2px);
+      text-decoration: none; /* Ensure no underline on hover */
+    }
+    .desktop-nav a.nav-cta::after {
+      display: none; /* No underline for CTA */
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #333;
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      z-index: 1001;
+    }
+    .hamburger-icon {
+      position: relative;
+      width: 24px;
+      height: 18px;
+    }
+    .hamburger-icon span {
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background-color: #333;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+    .hamburger-icon span:nth-child(1) { top: 0; }
+    .hamburger-icon span:nth-child(2) { top: 8px; }
+    .hamburger-icon span:nth-child(3) { top: 16px; }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      border-top: 1px solid #eee;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+      padding: 0 1rem;
+    }
+    .mobile-menu.active {
+      display: block;
+      max-height: 500px; /* Adjust as needed */
+      padding: 1rem;
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 1rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-align: center;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover {
+      background-color: #f9f9f9;
+      color: #4CAF50;
+      text-decoration: none;
+    }
+    .mobile-menu a.active {
+      color: #4CAF50;
+      background-color: #f0f9f0;
+    }
+    .mobile-menu a.nav-cta {
+      background-color: #4CAF50;
+      color: white !important;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 30px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .mobile-menu a.nav-cta:hover {
+      background-color: #3e8e41;
+      text-decoration: none;
+    }
+
+    /* --- Contact Page Specific Styles --- */
+
+    /* Banner */
+    .contact-banner {
+      width: 100%;
+      height: 400px; /* Increased height for text */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(Contact.jpg); /* Added overlay */
+      background-size: cover;
+      background-position: center;
+      display: flex; /* Use flex for centering */
+      flex-direction: column; /* Stack title and description */
+      align-items: center;
+      justify-content: center; /* Center vertically */
+      text-align: center; /* Center text horizontally */
+      padding: 2rem 5%; /* Add some padding */
+      position: relative; /* Context for absolute elements if needed */
+    }
+
+    /* Typing Text Effect */
+    .typing-text-wrapper { /* Added wrapper for layout */
+        display: inline-block; /* Fit content */
+        position: relative; /* For cursor positioning */
+        margin-bottom: 1rem; /* Space below typing text */
+    }
+
+    .typing-text {
+      font-size: clamp(1.8rem, 5vw, 3rem); /* Responsive font size */
+      letter-spacing: 3px; /* Adjusted spacing for smoother look */
+      font-family: monospace;
+      max-width: 100%; /* Ensure it doesn't overflow container */
+      width: 0; /* Start with no width */
+      display: inline-block; /* Important for width animation */
+      white-space: nowrap;
+      overflow: hidden;
+      color: white;
+      /* Smooth width animation instead of steps */
+      animation: typing 2.5s linear forwards, cursor .6s step-end infinite alternate;
+      margin: 0; /* Remove default margins */
+      border-right: 3px solid white; /* Initial cursor */
+    }
+
+    @keyframes cursor {
+      0%, 100% { border-color: white; } /* Visible cursor */
+      50% { border-color: transparent; } /* Blinking */
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 20ch; } /* FIXED: Adjusted to 15 characters ("Contactez-Nous...") */
+    }
+
+    /* Banner Description Text */
+    .banner-description {
+        color: #f0f0f0; /* Slightly off-white */
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        max-width: 700px; /* Limit width */
+        line-height: 1.7;
+        margin: 0 auto; /* Center block */
+        padding: 10px 20px; /* Add some padding */
+        background-color: rgba(0, 0, 0, 0.3); /* Subtle background for readability */
+        border-radius: 5px;
+        margin-bottom: 0; /* Reset paragraph margin */
+    }
+
+    /* Main Contact Section Layout (using CSS Grid) */
+     .contact-section {
+        padding: 3rem 0; /* Add vertical padding */
+     }
+
+    .contact-grid-parent {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem; /* Add gap between columns */
+      max-width: 1200px; /* Limit width */
+      margin: 0 auto; /* Center the grid */
+      padding: 0 5%; /* Padding for smaller screens */
+    }
+
+    /* REMOVED .contact-intro as text moved to banner */
+
+    .contact-info-column { /* Was div2 */
+      grid-column: span 5 / span 5; /* Default: full width */
+      /* Styles moved to .info-card */
+    }
+
+    .contact-form-column { /* Was div3 */
+      grid-column: span 5 / span 5; /* Default: full width */
+      /* Form styles below */
+    }
+
+    /* Contact Info Cards */
+    .contact-info-column h2 {
+        color: #1a8754;
+        font-size: 1.8rem; /* Slightly smaller than main heading */
+        margin-bottom: 1.5rem;
+        text-align: center; /* Center heading */
+        margin-top: 0; /* Added to reset potential top margin */
+    }
+
+    .info-card {
+      background-color: #fff;
+      margin-bottom: 1.5rem; /* Space between cards */
+      padding: 25px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      transition: box-shadow 0.3s ease-in-out; /* Remove transform transition */
+      text-align: center; /* Center card content */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+     /* Styling for Font Awesome Icons in Info Cards */
+     .info-card .info-icon {
+        font-size: 2.2rem; /* Adjust icon size */
+        color: #1a8754; /* Primary color */
+        margin-bottom: 15px; /* Space below icon */
+        display: inline-block; /* Needed for margin */
+        transition: transform 0.3s ease;
+     }
+
+    .info-card h3 { /* Changed from h2 for better hierarchy */
+      margin-top: 0; /* Reset top margin */
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      color: #333;
+    }
+    .info-card a {
+      text-decoration: none;
+      color: #333;
+      display: block; /* Make links block level for easier clicking */
+      margin-bottom: 5px; /* Space between multiple links */
+      font-weight: 500;
+    }
+     .info-card a:hover {
+        color: #1a8754; /* Highlight on hover */
+        text-decoration: none; /* Keep no underline */
+     }
+
+    .info-card:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      /* Apply bounce animation on hover */
+      animation: bounce 0.7s ease; /* Play once on hover */
+    }
+
+    /* Bounce animation */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.05); } /* Adjust scale/translate */
+    }
+
+
+    /* --- Contact Form Styles --- */
+    :root { /* Keep variables for consistency */
+        --primary: #1a8754;
+        --primary-dark: #0d6e3c;
+        --primary-light: rgba(26, 135, 84, 0.1);
+        --white: #ffffff;
+        --light-bg: #f8f9fa;
+        --text-dark: #333333;
+        --text-muted: #6c757d;
+        --shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+        --border-color: #ddd;
+        --input-bg: #f9f9f9;
+    }
+
+    .contact-form-container { /* Was .container-2 */
+       /* Removed max-width and margin, handled by grid parent */
+       /* Removed padding, handled by .contact-form */
+    }
+
+    .contact-form {
+        background: var(--white);
+        padding: 30px 40px; /* More padding */
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    .contact-form h2 { /* Form heading */
+        color: var(--primary);
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        position: relative;
+        padding-bottom: 15px;
+        text-align: center; /* Center form heading */
+    }
+    .contact-form h2::after { /* Underline for heading */
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%; /* Center underline */
+        transform: translateX(-50%);
+        width: 60px; /* Wider underline */
+        height: 3px;
+        background-color: var(--primary);
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+        gap: 20px; /* Space between columns */
+        margin-bottom: 15px; /* Spacing between rows */
+    }
+    .form-col {
+        flex: 1; /* Each column takes equal space */
+        min-width: 200px; /* Minimum width before wrapping */
+    }
+
+    .form-group {
+        margin-bottom: 0; /* Row handles bottom margin now */
+        position: relative; /* Crucial for icon positioning */
+    }
+
+    .form-label {
+        display: block; /* Ensure label is on its own line */
+        margin-bottom: 8px; /* Space below label */
+        font-weight: 500;
+        color: var(--text-dark);
+        font-size: 0.95rem;
+    }
+
+    .required {
+        color: #dc3545; /* Red asterisk */
+        margin-left: 3px;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%; /* Take full width of column */
+        padding: 14px 15px 14px 45px; /* Adjust padding for icon */
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: var(--transition);
+        background-color: var(--input-bg);
+        line-height: 1.5; /* Ensure text fits well */
+        position: relative; /* Needed if icon was relative *to input* */
+    }
+    .form-control:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(26, 135, 84, 0.2);
+        background-color: var(--white);
+    }
+    /* Select specific styles */
+     select.form-control {
+        appearance: none; /* Remove default arrow */
+        background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231a8754" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>'); /* Custom arrow */
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 16px 12px;
+        padding-right: 40px; /* Make space for arrow */
+        cursor: pointer;
+     }
+
+     /* Textarea specific styles */
+    textarea.form-control {
+        min-height: 120px; /* Increased height */
+        resize: vertical;
+        padding-top: 14px; /* Match other inputs */
+        padding-left: 45px; /* Ensure icon space */
+    }
+
+    /* --- FORM ICON POSITIONING (Centered Vertically in Input Area) --- */
+    .form-icon {
+        position: absolute;
+        left: 15px;
+        /* Calculate top: Add label height+margin, then half of the input's height */
+        /* Approx Label height (1em * line-height + margin-bottom) = ~ (0.95rem * 1.3) + 8px = ~19px + 8px = 27px */
+        /* Input height = padding-top + padding-bottom + line-height + border = 14px + 14px + (1rem * 1.5) + 2px = 28 + 24 + 2 = 54px */
+        /* Half input height = 54px / 2 = 27px */
+        /* Total top offset = 27px (label area) + 27px (half input) = 54px */
+        top: 54px;
+        transform: translateY(-50%); /* Vertically center the icon itself at the 'top' position */
+
+        color: var(--primary);
+        font-size: 1rem;
+        pointer-events: none; /* Make icon non-interactive */
+        z-index: 2; /* Ensure icon is above input background */
+        transition: color 0.3s ease; /* Add transition for focus */
+    }
+
+    /* Change icon color on input focus */
+    .form-control:focus ~ .form-icon {
+        color: var(--primary-dark);
+    }
+
+    /* Adjust icon top position specifically for TEXTAREA (Align near top) */
+    textarea ~ .form-icon {
+        /* Place near the top padding, without vertical centering transform */
+        /* Top position = label area + input padding-top + a small offset */
+        top: calc( (0.95rem * 1.3) + 8px + 14px + 4px); /* Label area + padding-top + 4px offset */
+        top: 45px; /* Fine-tuned value */
+        transform: none; /* Remove vertical centering */
+    }
+
+    /* Form Button Style (Using .btn class defined earlier) */
+    .contact-form .btn {
+        width: 100%; /* Make button full width */
+        margin-top: 15px; /* Add space above button */
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: #1f2937;
+      color: #d1d5db;
+      padding: 4rem 0 2rem;
+      margin-top: auto; /* Ensures footer is at the bottom */
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-column h3 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4CAF50;
+    }
+
+    .footer-column p {
+      color: #9ca3af;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-logo img {
+      max-width: 150px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding-left: 0;
+    }
+    .footer-links li { margin-bottom: 0.8rem; }
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-links a::before {
+      content: '→';
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+      color: #4CAF50;
+    }
+    .footer-links a:hover {
+      color: #ffffff;
+      transform: translateX(5px);
+      text-decoration: none; /* Remove underline */
+    }
+    .footer-links a:hover::before {
+      /* transform: translateX(5px); */ /* Optional: move arrow with text */
+      color: #ffffff;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background-color: #363f4b;
+    }
+    .social-link svg { /* Style for inline SVGs */
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+    .social-link i { /* Style for Font Awesome Icons */
+        font-size: 20px;
+        color: white;
+    }
+    /* Hover effects */
+    .social-link.fb:hover { background-color: #3b5998; transform: scale(1.1); }
+    .social-link.wa:hover { background-color: #25d366; transform: scale(1.1); }
+    .social-link.ig:hover { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); transform: scale(1.1); }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+    .footer-bottom a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Media Queries for Responsiveness --- */
+
+    /* Laptops / Desktops */
+    @media (min-width: 901px) {
+         .contact-grid-parent {
+            grid-template-columns: 2fr 3fr; /* Info column smaller, Form column larger */
+         }
+        .contact-info-column {
+            grid-column: 1 / 2; /* First column */
+        }
+        .contact-form-column {
+            grid-column: 2 / 3; /* Second column */
+        }
+         .contact-info-column h2, .contact-form h2 {
+            text-align: left; /* Align headings left on larger screens */
+         }
+         .contact-form h2::after {
+             left: 0; /* Align underline left */
+             transform: none;
+         }
+          .info-card {
+            text-align: left; /* Align card content left */
+          }
+          /* Align icon left */
+          .info-card .info-icon {
+             margin-left: 0;
+             margin-right: auto; /* Keep margin bottom */
+          }
+
+    }
+
+     /* Tablets */
+    @media (max-width: 992px) {
+      .desktop-nav { gap: 1.2rem; }
+      .desktop-nav a.nav-cta { padding: 0.6rem 1.2rem; }
+      .footer-content { gap: 2rem; }
+    }
+
+    /* Mobile Menu Trigger Point & Tablet Grid Adjustments */
+    @media (max-width: 768px) {
+      /* main { padding-top: 70px; } */ /* Padding removed globally */
+      .desktop-nav { display: none; }
+      .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+      nav { padding: 0.8rem 5%; }
+      .logo img { height: 45px; }
+
+       .contact-grid-parent {
+           gap: 1.5rem; /* Reduce gap */
+       }
+       /* Stack columns */
+       .contact-info-column, .contact-form-column {
+            grid-column: 1 / -1; /* Full width */
+       }
+       /* Center headings again on mobile */
+        .contact-info-column h2, .contact-form h2 {
+            text-align: center;
+         }
+         .contact-form h2::after {
+             left: 50%;
+             transform: translateX(-50%);
+         }
+         /* Center info card content/icon on mobile */
+         .info-card {
+            text-align: center;
+         }
+          .info-card .info-icon {
+             margin-left: auto;
+             margin-right: auto;
+          }
+
+        /* Adjust form padding on mobile */
+        .contact-form {
+             padding: 25px 20px;
+        }
+        .form-row {
+            flex-direction: column; /* Stack form fields */
+            gap: 0; /* Remove gap when stacked */
+            margin-bottom: 0; /* Remove row margin */
+        }
+        .form-col {
+            min-width: 100%; /* Full width */
+            margin-bottom: 15px; /* Add margin back between stacked fields */
+        }
+        .form-group {
+             margin-bottom: 0; /* Reset margin here as .form-col handles it */
+        }
+        /* Recalculate icon position for stacked view */
+         .form-icon { top: 54px; } /* Re-assert center position */
+         textarea ~ .form-icon { top: 45px; } /* Re-assert textarea position */
+
+        .footer-content { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    }
+
+    /* Small Mobiles */
+    @media (max-width: 576px) {
+       /* main { padding-top: 65px; } */ /* Padding removed globally */
+       .footer-content { text-align: center; }
+       .footer-column h3::after { left: 50%; transform: translateX(-50%); }
+       .footer-links { padding-left: 0; }
+       .footer-links a::before { margin-right: 5px; }
+       .footer-links a:hover { transform: none; }
+       .social-links { justify-content: center; }
+       .typing-text { font-size: 1.5rem; letter-spacing: 2px;} /* Adjust typing text */
+       .banner-description { font-size: 0.9rem; padding: 8px 15px; }
+       .contact-banner { height: 350px; } /* Adjust height if needed */
+       /* Adjust headings */
+       .contact-info-column h2, .contact-form h2 { font-size: 1.6rem;}
+    }
+
+     @media (max-width: 400px) {
+       /* main { padding-top: 60px; } */ /* Padding removed globally */
+       nav { padding: 0.8rem 3%; }
+       .logo img { height: 40px; }
+       .contact-form { padding: 20px 15px; } /* Reduce form padding further */
+       .typing-text { font-size: 1.3rem; letter-spacing: 1px;}
+       .banner-description { font-size: 0.85rem;}
+        /* Adjust icon position slightly for very small screens if needed */
+        .form-icon { top: 52px; }
+        textarea ~ .form-icon { top: 43px; }
+     }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <nav>
+      <a href="mve_accueil.html" class="logo" aria-label="MVE Service Accueil">
+        <!-- Adjust path if needed -->
+        <img src="/img/MVE_logo.png" alt="M.V.E SERVICE Logo">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav">
+        <a href="mve_accueil.html">Accueil</a> <!-- Assuming mve_accueil.html is home -->
+        <a href="mve_accueil.html#about">À Propos</a>
+        <a href="services.html">Services</a>
+        <a href="mve_accueil.html#why-choose">Pourquoi Nous</a>
+        <a href="mve_accueil.html#partners">Nos Partenaires</a>
+        <!-- Link to this contact page (active state handled by JS if needed, or manually add 'active' class here) -->
+        <a href="contact.html" class="nav-cta active">Obtenir un Devis</a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="mve_accueil.html">Accueil</a>
+      <a href="mve_accueil.html#about">À Propos</a>
+      <a href="nos_services.html">Services</a>
+      <a href="mve_accueil.html#why-choose">Pourquoi Nous</a>
+      <a href="mve_accueil.html#partners">Nos Partenaires</a>
+      <a href="contact.html" class="nav-cta active">Obtenir un Devis</a>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main>
+    <!-- Banner Section -->
+    <section class="contact-banner">
+      <div class="typing-text-wrapper">
+          <h1 class="typing-text">Contactez-Nous...</h1>
+      </div>
+      <p class="banner-description">
+        Pour toute demande de devis, question ou renseignement sur nos services d'hygiène et de lutte antiparasitaire, n'hésitez pas à nous contacter. Remplissez le formulaire ci-dessous ou utilisez nos coordonnées directes.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-grid-parent">
+
+            <!-- Contact Information Column -->
+            <div class="contact-info-column">
+                <h2>Nos Coordonnées</h2>
+                <div class="info-card">
+                    <!-- Using Font Awesome Icon -->
+                    <i class="fas fa-phone-alt info-icon"></i>
+                    <h3>Appelez-nous</h3>
+                    <a href="tel:+212650649109" class="nmber">(+212) 6 50 64 91 09</a><br>
+                    <a href="tel:+212632533159" class="nmber">(+212) 6 32 53 31 59</a>
+                </div>
+
+                <div class="info-card">
+                    <!-- Using Font Awesome Icon -->
+                    <i class="fas fa-envelope info-icon"></i>
+                    <h3>Email</h3>
+                    <a href="mailto:soattimarouane@gmail.com" class="nmber">soattimarouane@gmail.com</a>
+                 </div>
+
+                 <div class="info-card">
+                     <!-- Using Font Awesome Icon -->
+                     <i class="fas fa-map-marker-alt info-icon"></i>
+                    <h3>Adresse</h3>
+                    <p style="color:#555; margin-bottom: 0;">Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p>
+                 </div>
+            </div>
+
+            <!-- Contact Form Column -->
+            <div class="contact-form-column">
+                <div class="contact-form-container">
+                    <div class="contact-form">
+                        <h2>Envoyez-nous un Message</h2>
+                        <!-- Form submits to Web3Forms -->
+                        <form action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="bf2ad1cc-83c6-418a-ac07-bea4e101d063">
+                            <!-- Optional: Add redirect URL or subject -->
+                            <!-- <input type="hidden" name="redirect" value="https://yoursite.com/thank-you.html"> -->
+                            <input type="hidden" name="subject" value="Nouveau Message de Contact - MVE Service"> <!-- Added Subject -->
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="contact-name" class="form-label">Nom<span class="required">*</span></label>
+                                        <input type="text" id="contact-name" name="Name" class="form-control" placeholder="Votre nom" required>
+                                        <span class="form-icon"><i class="fas fa-user"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="contact-email" class="form-label">Email<span class="required">*</span></label>
+                                        <input type="email" id="contact-email" name="Email" class="form-control" placeholder="Votre email" required>
+                                        <span class="form-icon"><i class="fas fa-envelope"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="contact-phone" class="form-label">Téléphone</label>
+                                        <input type="tel" id="contact-phone" name="Number" class="form-control" placeholder="Votre numéro (Optionnel)">
+                                        <span class="form-icon"><i class="fas fa-phone-alt"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="contact-address" class="form-label">Adresse</label>
+                                        <input type="text" id="contact-address" name="Adresse" class="form-control" placeholder="Votre adresse (Optionnel)">
+                                        <span class="form-icon"><i class="fas fa-home"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;"> <!-- Add margin bottom here as it's not in a row -->
+                                <label for="contact-service" class="form-label">Service souhaité<span class="required">*</span></label>
+                                <select id="contact-service" class="form-control" name="Service" required>
+                                    <option value="" selected disabled>Sélectionnez un service</option>
+                                    <option value="Dératisation">● Dératisation</option>
+                                    <option value="Désinsectisation">● Désinsectisation</option>
+                                    <option value="Désinfection">● Désinfection</option>
+                                    <option value="Traitement Punaises de lit">● Traitement Punaises de lit</option>
+                                    <option value="Traitement Bois">● Traitement Bois</option>
+                                    <option value="Déreptilisation">● Déreptilisation</option>
+                                    <option value="Dépigeonnisation">● Dépigeonnisation</option>
+                                    <option value="Nettoyage">● Nettoyage</option>
+                                    <option value="Jardinage">● Jardinage</option>
+                                    <option value="Autre">● Autre / Demande Générale</option>
+                                </select>
+                                <span class="form-icon"><i class="fas fa-concierge-bell"></i></span>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;"> <!-- Add margin bottom here as it's not in a row -->
+                                <label for="contact-message" class="form-label">Message<span class="required">*</span></label>
+                                <textarea id="contact-message" class="form-control" name="Message" placeholder="Décrivez votre besoin en détail..." required></textarea>
+                                <span class="form-icon"><i class="fas fa-comment-alt"></i></span>
+                            </div>
+
+                            <!-- The button type is "submit" which works with the form action -->
+                            <button type="submit" class="btn">Envoyer le message <i class="fas fa-paper-plane"></i></button>
+
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- End Form Column -->
+
+        </div> <!-- End Contact Grid Parent -->
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <!-- Adjust path if needed -->
+            <img src="img/MVE_logo.png" alt="MVE Service Logo Footer">
+          </div>
+          <p>Expert en hygiène et lutte antiparasitaire au Maroc. MVE Service vous propose des solutions rapides, efficaces et respectueuses de l'environnement.</p>
+          <div class="social-links">
+            <!-- Facebook -->
+            <a href="#" class="social-link fb" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/212650649109" class="social-link wa" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" /></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" class="social-link ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" /></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liens Rapides</h3>
+          <ul class="footer-links">
+            <li><a href="mve_accueil.html">Accueil</a></li>
+            <li><a href="mve_accueil.html#about">À Propos</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="mve_accueil.html#why-choose">Pourquoi Nous</a></li>
+            <li><a href="mve_accueil.html#partners">Nos Partenaires</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Nos Prestations</h3>
+          <ul class="footer-links">
+            <!-- services links -->
+            <li><a href="nos_services.html#deratisation">Dératisation</a></li>
+            <li><a href="nos_services.html#desinsectisation">Désinsectisation</a></li>
+            <li><a href="nos_services.html#desinfection">Désinfection</a></li>
+            <li><a href="nos_services.html#punaises">Punaises de lit</a></li>
+            <li><a href="nos_services.html#bois">Traitement Bois</a></li>
+            <li><a href="nos_services.html#depigeonnage">Dépigeonnage</a></li>
+            <li><a href="nos_services.html#nettoyage">Nettoyage</a></li>
+             <li><a href="nos_services.html#jardinage">Jardinage</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <p><strong>Adresse :</strong><br>Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p>
+          <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a><br><a href="tel:+212632533159" style="color:#d1d5db;">+212 632-533159</a></p>
+          <p><strong>Email :</strong><br><a href="mailto:soattimarouane@gmail.com" style="color:#d1d5db;">soattimarouane@gmail.com</a></p>
+          <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra &amp; Partout au Maroc</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> | <a href="#">Politique de Confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Include Font Awesome JS if using JS-based icons (optional if only using CSS/SVG) -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script> -->
+
+  <!-- Site Functionality Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Mobile Menu Toggle ---
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        const navLinksMobile = mobileMenu.querySelectorAll('a'); // Get all links in mobile menu
+
+        menuToggle.addEventListener('click', () => {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Close menu when a link is clicked
+        navLinksMobile.forEach(link => {
+            link.addEventListener('click', () => {
+              // Close menu regardless of link type for simplicity on mobile
+              if (mobileMenu.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+              }
+            });
+        });
+
+        // Optional: Close menu if clicked outside
+        document.addEventListener('click', (event) => {
+          const isClickInsideNav = menuToggle.contains(event.target) || mobileMenu.contains(event.target) || (event.target.closest && event.target.closest('header'));
+          if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // --- Update Footer Year ---
+      const yearSpan = document.getElementById('currentYear');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+       // --- Active Nav Link Highlighting (Simplified for Multi-Page) ---
+       function setActiveLink() {
+         const currentPage = window.location.pathname.split('/').pop() || 'index.html'; // Default if path is '/'
+         let activePageName = currentPage;
+
+         // Handle common index file names or root path
+         // Updated to handle 'contact.html' specifically as well
+         if (currentPage === 'index.html' || currentPage === '' || currentPage === 'mve_accueil.html') {
+             activePageName = 'mve_accueil.html'; // Treat all these as the target for accueil link
+         } else if (currentPage === 'code (4).html') { // Check if current page is the contact page name
+             activePageName = 'contact.html'; // The link href is 'contact.html'
+         } else if (currentPage === 'services.html') {
+             activePageName = 'services.html';
+         }
+         // Add more else if blocks here if you have other pages like 'services.html' etc.
+
+
+         // Update Desktop Nav Links
+         const navLinksDesktop = document.querySelectorAll('.desktop-nav a');
+         navLinksDesktop.forEach(link => {
+             const linkHrefBase = link.getAttribute('href').split('#')[0]; // Get the base page part of the href
+             link.classList.remove('active'); // Remove active from all first
+
+             // Check if the link's base href matches the determined active page name
+             if (linkHrefBase === activePageName) {
+                 link.classList.add('active');
+             }
+             // Special check for the CTA button if it points to the current page
+             // Also ensure non-CTA links don't lose active state if they are the current page
+             if (link.classList.contains('nav-cta') && linkHrefBase === activePageName) {
+                 link.classList.add('active'); // Ensure CTA gets active if it's the current page link
+             }
+         });
+
+         // Update Mobile Nav Links (Similar logic)
+         const navLinksMobileAll = document.querySelectorAll('.mobile-menu a');
+         navLinksMobileAll.forEach(link => {
+             const linkHrefBase = link.getAttribute('href').split('#')[0];
+             link.classList.remove('active'); // Remove active from all first
+             if (linkHrefBase === activePageName) {
+                 link.classList.add('active');
+             }
+             if (link.classList.contains('nav-cta') && linkHrefBase === activePageName) {
+                 link.classList.add('active');
+             }
+         });
+       }
+
+       setActiveLink(); // Run on page load
+
+    });
+  </script>
+
+</body>
+</html>
