@@ -435,7 +435,7 @@
   <!-- Header Section -->
   <header>
     <nav>
-      <a href="mve_accueil02.html" class="logo" aria-label="MVE Service Accueil">
+      <a href="mve_accueil.html" class="logo" aria-label="MVE Service Accueil">
         <!-- Make sure the image path is correct relative to this file -->
         <img src="img/MVE_logo.png" alt="M.V.E SERVICE Logo">
       </a>
@@ -443,11 +443,11 @@
       <!-- Desktop Navigation -->
       <div class="desktop-nav">
         <!-- Add 'active' class to the current page's link -->
-        <a href="#" class="active">Accueil</a>
-        <a href="#about">À Propos</a>
+        <a href="mve_accueil.html">Accueil</a>
+        <a href="A_propose.html" class="active">À Propos</a>
         <a href="services.html">Services</a> <!-- Example link to another page -->
-        <a href="#why-choose">Pourquoi Nous</a>
-        <a href="#partners">Nos Partenaires</a>
+        <a href="mve_accueil.html#why-choose">Pourquoi Nous</a>
+        <a href="mve_accueil.html#partners">Nos Partenaires</a>
         <!-- Link to a separate contact page -->
         <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
       </div>
@@ -464,11 +464,11 @@
 
     <!-- Mobile Menu Dropdown -->
     <div class="mobile-menu" id="mobile-menu">
-      <a href="#" class="active">Accueil</a>
-      <a href="#about">À Propos</a>
+      <a href="mve_accueil.html">Accueil</a>
+      <a href="A_propose.html" class="active">À Propos</a>
       <a href="/services.html">Services</a>
-      <a href="#why-choose">Pourquoi Nous</a>
-      <a href="#partners">Nos Partenaires</a>
+      <a href="mve_accueil.html#why-choose">Pourquoi Nous</a>
+      <a href="mve_accueil.html#partners">Nos Partenaires</a>
       <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
     </div>
   </header>
@@ -577,7 +577,7 @@
   <section class="cta-section">
       <div class="container">
           <h2>Besoin d'une Intervention Professionnelle ?</h2>
-          <p>Notre équipe d'experts est prête à vous aider avec vos problèmes d'hygiène et de lutte antiparasitaire.</p>
+          <p >Notre équipe d'experts est prête à vous aider avec vos problèmes d'hygiène et de lutte antiparasitaire.</p>
           <a href="#" class="cta-button-white">Contactez-nous pour une intervention rapide !</a>
       </div>
   </section>
@@ -611,11 +611,11 @@
         <div class="footer-column">
           <h3>Liens Rapides</h3>
           <ul class="footer-links">
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#about">À Propos</a></li>
+            <li><a href="mve_accueil.html">Accueil</a></li>
+            <li><a href="A_propose.html">À Propos</a></li>
             <li><a href="services.html">Services</a></li>
-            <li><a href="#why-choose">Pourquoi Nous</a></li>
-            <li><a href="#partners">Nos Partenaires</a></li>
+            <li><a href="mve_accueil.html#why-choose">Pourquoi Nous</a></li>
+            <li><a href="mve_accueil.html#partners">Nos Partenaires</a></li>
             <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
@@ -623,19 +623,22 @@
           <h3>Nos Prestations</h3>
           <ul class="footer-links">
             <!-- Make these point to actual service details if available -->
-            <li><a href="/services.html#deratisation">Dératisation</a></li>
-            <li><a href="/services.html#desinsectisation">Désinsectisation</a></li>
-            <li><a href="/services.html#desinfection">Désinfection</a></li>
-            <li><a href="/services.html#punaises">Punaises de lit</a></li>
-            <li><a href="/services.html#bois">Traitement Bois</a></li>
-            <li><a href="/services.html#depigeonnage">Dépigeonnage</a></li>
+            <li><a href="nos_services.html#deratisation">Dératisation</a></li>
+            <li><a href="nos_services.html#punaises-de-lit">Punaises de lit</a></li>
+            <li><a href="nos_services.html#desinfection">Désinfection</a></li>
+            <li><a href="nos_services.html#traitement-du-bois">Traitement Bois</a></li>
+            <li><a href="nos_services.html#depigeonnage">Dépigeonnisation</a></li>
+             <li><a href="nos_services.html#nettoyage-professionnel">Nettoyage Pro</a></li>
+            <li><a href="nos_services.html#entretien-espaces-verts">Entretien Espaces Verts</a></li>
+            <li><a href="nos_services.html#jardinage-amenagement">Jardinage</a></li>
+            <li><a href="nos_services.html#nettoyage-haute-pression">Nettoyage HP</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h3>Contact Info</h3>
           <p><strong>Adresse :</strong><br>Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p>
           <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a></p>
-          <p><strong>Email :</strong><br><a href="mailto:soattimarouane@gmail.com" style="color:#d1d5db;">soattimarouane@gmail.com</a></p>
+          <p><strong>Email :</strong><br><a href="mailto:contact.mveservice@gmail.com" style="color:#d1d5db;">contact.mveservice@gmail.com</a></p>
           <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra & partout au Maroc</p>
         </div>
       </div>
@@ -984,6 +987,7 @@
       max-width: 700px;
       margin: 0 auto 30px;
       font-size: 18px;
+      color: #eee;
   }
   
   .cta-button-white {
