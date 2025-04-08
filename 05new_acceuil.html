@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/MVE_logo.png">
+  <title>MVE Service - Hygiène et Lutte Antiparasitaire</title>
+  <!-- Font Awesome for new hero section icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+       /* Using Montserrat from the new hero section as primary, with Segoe UI as fallback */
+      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Import Montserrat font for the new hero section */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+    body {
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #dfdfdf;
+    }
+
+     h3 {
+        color: #374151;
+        margin-bottom: 1rem;
+     }
+
+    p {
+      margin-bottom: 1rem;
+      color: #6b7280;
+    }
+
+    .container { /* General container for sections OTHER than hero */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* --- START: UPDATED HERO SECTION STYLES --- */
+
+    #home-new { /* Style the wrapper for the new hero */
+        color: white;
+        min-height: 95vh; /* Ensure enough height */
+        display: flex;
+        align-items: center; /* Vertically center the container */
+        justify-content: center;
+        position: relative;
+        background-color: #202020; /* Fallback color */
+        /* CRUCIAL: Padding top offsets the sticky header */
+        padding: 11rem 0 5rem 0; /* ~96px header + existing padding */
+        overflow: hidden; /* Contain video and overlay */
+    }
+
+    /* Video Background Styles (Reinstated) */
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Cover the entire area */
+      z-index: 0; /* Behind overlay and content */
+    }
+
+    /* Overlay Styles (Reinstated & Modified Opacity) */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* MODIFIED: Reduced alpha value for less intense overlay */
+      background-color: rgba(0, 0, 0, 0.5); /* Was 0.65 */
+      z-index: 1; /* Above video, behind content */
+    }
+
+    #home-new .container { /* Specific container styles for the new hero */
+        width: 92%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: row; /* Side-by-side layout */
+        justify-content: space-between;
+        align-items: center;
+        /* No vertical padding needed here, section handles it */
+        position: relative; /* Ensure content is above the overlay */
+        z-index: 2; /* Above video and overlay */
+    }
+
+    #home-new .content-left {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 30px;
+        animation: fadeInLeft 1s ease-out;
+        color: white;
+    }
+
+    #home-new .content-right { /* Form Container */
+        width: 40%;
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 12px;
+        padding: 25px; /* MODIFIED: Reduced padding */
+        margin: auto;
+        max-width: 360px; /* MODIFIED: Slightly smaller max-width */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(98, 209, 109, 0.2);
+        animation: fadeInRight 1s ease-out;
+         color: white;
+    }
+
+    @keyframes fadeInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    #home-new h1 {
+        font-size: 2.6rem; /* Slightly adjusted */
+        font-weight: 700;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); /* Slightly stronger shadow */
+        color: white;
+    }
+
+    #home-new p { /* Left content paragraph */
+        font-size: 1.2rem; /* Slightly adjusted */
+        margin-bottom: 35px; /* Slightly adjusted */
+        line-height: 1.6;
+        max-width: 600px;
+        color: rgba(255, 255, 255, 0.95); /* Brighter white */
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* ADDED shadow for readability */
+    }
+
+    #home-new .highlight {
+        color: #68E575;
+        font-weight: 600;
+    }
+
+    #home-new .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+    }
+
+    #home-new .btn { /* Buttons in hero */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #62D16D;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 85%;
+        max-width: 320px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 15px rgba(98, 209, 109, 0.3);
+    }
+
+    #home-new .btn:hover {
+        background-color: #53C25E;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(98, 209, 109, 0.4);
+    }
+
+     #home-new .btn:active {
+        transform: translateY(1px);
+    }
+
+    #home-new .btn-outline {
+        background-color: transparent;
+        border: 2px solid #62D16D;
+        box-shadow: 0 4px 15px rgba(98, 209, 109, 0.15);
+        color: white;
+    }
+
+    #home-new .btn-outline:hover {
+        background-color: rgba(98, 209, 109, 0.1);
+        box-shadow: 0 6px 18px rgba(98, 209, 109, 0.25);
+        color: white;
+    }
+
+    #home-new .icon {
+        margin-right: 10px;
+        font-size: 1.1em;
+    }
+
+    /* Form Styles Modification for Smaller Look */
+    #home-new .form-group {
+        margin-bottom: 14px; /* MODIFIED: Reduced margin */
+        position: relative;
+    }
+
+    #home-new .form-header {
+        color: #68E575;
+        margin-bottom: 20px; /* MODIFIED */
+        text-align: center;
+        font-size: 1.3rem; /* MODIFIED: Reduced size */
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    #home-new .form-subheader {
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        font-size: 0.85rem; /* MODIFIED: Reduced size */
+        margin-top: -10px; /* MODIFIED */
+        margin-bottom: 20px; /* MODIFIED */
+    }
+
+    #home-new label {
+        display: block;
+        margin-bottom: 5px; /* MODIFIED */
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.85rem; /* MODIFIED: Reduced size */
+        font-weight: 500;
+    }
+
+    #home-new input,
+    #home-new textarea {
+        width: 100%;
+        padding: 10px; /* MODIFIED: Reduced padding */
+        border-radius: 6px; /* MODIFIED: Slightly less rounded */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.07);
+        color: white;
+        transition: all 0.3s;
+        font-size: 0.9rem; /* MODIFIED: Reduced size */
+    }
+
+    #home-new input:focus,
+    #home-new textarea:focus {
+        outline: none;
+        border-color: #62D16D;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(98, 209, 109, 0.2);
+    }
+
+    #home-new input::placeholder,
+    #home-new textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    #home-new textarea {
+        min-height: 80px; /* MODIFIED: Reduced height */
+        resize: vertical;
+    }
+
+    #home-new .form-btn {
+        text-align: center;
+        margin-top: 18px; /* MODIFIED */
+    }
+
+    #home-new .submit-btn {
+        background-color: #62D16D;
+        color: white;
+        padding: 11px 30px; /* MODIFIED: Slightly smaller button */
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(98, 209, 109, 0.3);
+        letter-spacing: 0.5px;
+         font-size: 0.95rem; /* Ensure font size consistency */
+    }
+
+    #home-new .submit-btn:hover {
+        background-color: #53C25E;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(98, 209, 109, 0.4);
+    }
+
+    #home-new .submit-btn:active {
+         transform: translateY(1px);
+    }
+
+     /* Responsive adjustments for the new hero */
+    @media (max-width: 900px) {
+        #home-new .container {
+            flex-direction: column;
+            padding-left: 20px;
+            padding-right: 20px;
+            align-items: stretch; /* Allow items to stretch full width */
+        }
+         #home-new {
+            padding-top: 9rem; /* Adjust padding for header */
+            padding-bottom: 4rem;
+         }
+
+        #home-new .content-left,
+        #home-new .content-right {
+            width: 100%;
+            max-width: 500px; /* Limit max width for centered feel */
+            margin-left: auto;  /* Center the blocks when stacked */
+            margin-right: auto;
+        }
+
+        #home-new .content-left {
+            margin-bottom: 40px;
+            padding: 0; /* Container padding handles horizontal space */
+        }
+         #home-new .content-right {
+             max-width: 450px; /* Allow form to be slightly wider on tablet */
+         }
+
+        #home-new h1 { font-size: 2.2rem; }
+        #home-new p { font-size: 1.1rem; margin-bottom: 30px; }
+    }
+    /* --- END: UPDATED HERO SECTION STYLES --- */
+
+
+    /* --- Start: Styles for the rest of the page (Unchanged unless needed) --- */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-heading h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      color: #1f2937;
+    }
+
+    .section-heading h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: #4CAF50;
+    }
+
+    .section-heading p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 1rem auto 0;
+      color: #6b7280;
+    }
+
+    section:not(#home-new) {
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+
+    /* General Button Styles */
+    .btn {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .btn:hover {
+      background-color: #3e8e41;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #4CAF50;
+      color: #4CAF50;
+    }
+    .btn-outline:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Header and Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 100%;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; flex-shrink: 0; }
+    .logo img { height: 50px; max-width: 100%; }
+    .desktop-nav { display: flex; gap: 2rem; align-items: center; }
+    .desktop-nav a { text-decoration: none; color: #333; font-weight: 500; position: relative; transition: color 0.3s ease; white-space: nowrap; }
+    .desktop-nav a:hover { color: #4CAF50; }
+    .desktop-nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: #4CAF50; transition: width 0.3s ease; }
+    .desktop-nav a:hover::after, .desktop-nav a.active::after { width: 100%; }
+    .desktop-nav a.active { color: #4CAF50; }
+    .desktop-nav a.nav-cta { background-color: #4CAF50; color: white !important; padding: 0.75rem 1.5rem; border-radius: 30px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3); white-space: nowrap; text-align: center; }
+    .desktop-nav a.nav-cta:hover { background-color: #3e8e41; box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5); transform: translateY(-2px); }
+    .desktop-nav a.nav-cta::after { display: none; }
+    .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; color: #333; padding: 0.5rem; width: 40px; height: 40px; position: relative; z-index: 1001; }
+    .hamburger-icon { position: relative; width: 24px; height: 18px; }
+    .hamburger-icon span { position: absolute; height: 2px; width: 100%; background-color: #333; left: 0; transition: all 0.3s ease; }
+    .hamburger-icon span:nth-child(1) { top: 0; }
+    .hamburger-icon span:nth-child(2) { top: 8px; }
+    .hamburger-icon span:nth-child(3) { top: 16px; }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: white; border-top: 1px solid #eee; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, padding 0.5s ease-out; padding: 0 1rem; }
+    .mobile-menu.active { display: block; max-height: 500px; padding: 1rem; }
+    .mobile-menu a { display: block; padding: 1rem; text-decoration: none; color: #333; font-weight: 500; border-bottom: 1px solid #eee; transition: background-color 0.3s ease, color 0.3s ease; text-align: center; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { background-color: #f9f9f9; color: #4CAF50; }
+    .mobile-menu a.active { color: #4CAF50; background-color: #f0f9f0; }
+    .mobile-menu a.nav-cta { background-color: #4CAF50; color: white !important; margin: 1rem 0; padding: 1rem; border-radius: 30px; text-align: center; white-space: nowrap; }
+    .mobile-menu a.nav-cta:hover { background-color: #3e8e41; }
+
+    /* About Section */
+    .about-section { background-color: #f9f9f9; }
+    .about-content { display: flex; align-items: center; gap: 3rem; }
+    .about-text { flex: 1; }
+    .about-image { flex: 1; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
+    .about-image img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+    .about-image:hover img { transform: scale(1.05); }
+    .stats-row { display: flex; justify-content: space-around; margin-top: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+    .stat-item { text-align: center; flex-basis: 150px; flex-grow: 1; }
+    .stat-number { font-size: 2.5rem; font-weight: bold; color: #4CAF50; margin-bottom: 0.5rem; line-height: 1; }
+    .stat-label { font-size: 1rem; color: #6b7280; }
+
+    /* Services Section */
+    #services { background-color: #ffffff; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .service-card { background-color: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); }
+    .service-image { height: 220px; overflow: hidden; }
+    .service-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .service-card:hover .service-image img { transform: scale(1.1); }
+    .service-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .service-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; color: #1f2937; }
+    .service-card p { color: #6b7280; margin-bottom: 1.5rem; flex-grow: 1; }
+    .service-card .btn { margin-top: auto; align-self: flex-start; }
+
+    /* Why Choose Us Section */
+    .why-choose-section { background-color: #f0fdf4; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .feature-card { background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .feature-card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); }
+    .feature-icon { width: 65px; height: 65px; background-color: rgba(76, 175, 80, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border-radius: 50%; color: #4CAF50; font-size: 1.8rem; font-weight: bold; }
+    .feature-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: #1f2937; }
+    .feature-card p { color: #6b7280; font-size: 0.95rem; }
+
+    /* Partners Carousel Section */
+    .partners-section { background-color: #f0f2f5; }
+    .carousel-viewport { max-width: 1000px; width: 95%; margin: 0 auto 50px auto; position: relative; }
+    .carousel-container { overflow: hidden; position: relative; padding: 35px 0 15px 0; }
+    .carousel-track { display: flex; position: relative; align-items: center; }
+    .carousel-card { flex: 0 0 230px; height: 150px; margin: 0 15px; background-color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; padding: 20px; transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s ease; opacity: 0.7; transform: scale(0.95); overflow: hidden; }
+    .carousel-card.active { opacity: 1; transform: translateY(-18px) scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.15); z-index: 2; }
+    .carousel-card img { display: block; max-width: 100%; max-height: 100%; height: auto; width: auto; object-fit: contain; }
+    .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background-color: rgba(255, 255, 255, 0.8); border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: background-color 0.3s ease, box-shadow 0.3s ease; }
+    .carousel-button:hover { background-color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    .carousel-button.prev { left: -35px; }
+    .carousel-button.next { right: -35px; }
+    .carousel-button svg { width: 20px; height: 20px; fill: #333; }
+
+    /* Call to Action Section */
+    .cta-section { background: linear-gradient(45deg, #4CAF50, #3e8e41); color: white; text-align: center; padding: 5rem 0; }
+    .cta-content { max-width: 800px; margin: 0 auto; padding: 0 5%; }
+    .cta-content h2 { color: white; font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 600; }
+    .cta-content p { margin-bottom: 2.5rem; font-size: 1.1rem; opacity: 0.95; color: #f0fdf4; }
+    .cta-buttons { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .btn-white { background-color: white; color: #4CAF50; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+    .btn-white:hover { background-color: #f1f1f1; color: #3e8e41; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); }
+    .btn-outline-white { background-color: transparent; border: 2px solid white; color: white; box-shadow: none; }
+    .btn-outline-white:hover { background-color: white; color: #4CAF50; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); }
+
+    /* Footer */
+    footer { background-color: #1f2937; color: #d1d5db; padding: 4rem 0 2rem; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 3rem; max-width: 1200px; margin-left: auto; margin-right: auto; padding: 0 5%; }
+    .footer-column h3 { color: white; font-size: 1.2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem; }
+    .footer-column h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: #4CAF50; }
+    .footer-column p { color: #9ca3af; margin-bottom: 1rem; font-size: 0.95rem; }
+    .footer-logo img { max-width: 150px; margin-bottom: 1rem; }
+    .footer-links { list-style: none; padding-left: 0; }
+    .footer-links li { margin-bottom: 0.8rem; }
+    .footer-links a { color: #d1d5db; text-decoration: none; transition: all 0.3s ease; position: relative; display: inline-block; }
+    .footer-links a::before { content: '→'; display: inline-block; margin-right: 8px; transition: transform 0.3s ease; color: #4CAF50; }
+    .footer-links a:hover { color: #ffffff; transform: translateX(5px); }
+    .footer-links a:hover::before { transform: translateX(5px); color: #ffffff; }
+    .social-links { display: flex; gap: 15px; }
+    .social-link { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: white; text-decoration: none; transition: all 0.3s ease; background-color: #363f4b; }
+    .social-link svg { width: 20px; height: 20px; fill: white; }
+    .social-link.fb:hover { background-color: #3b5998; transform: scale(1.1); }
+    .social-link.wa:hover { background-color: #25d366; transform: scale(1.1); }
+    .social-link.ig:hover { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); transform: scale(1.1); }
+    .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #9ca3af; font-size: 0.9rem; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 5%; padding-right: 5%; }
+    .footer-bottom a { color: #4CAF50; text-decoration: none; }
+    .footer-bottom a:hover { text-decoration: underline; }
+
+    /* Media Queries */
+    @media (max-width: 992px) {
+      .container { padding: 0 4%; }
+      .desktop-nav { gap: 1.2rem; }
+      .desktop-nav a.nav-cta { padding: 0.6rem 1.2rem; }
+      .about-content { flex-direction: column; gap: 2rem; }
+      .footer-content, .footer-bottom { padding-left: 4%; padding-right: 4%; }
+    }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+      nav { padding: 0.8rem 5%; }
+      .logo img { height: 45px; }
+      section:not(#home-new) { padding: 4rem 0; }
+      .section-heading h2 { font-size: 2rem; }
+      .stats-row { justify-content: center; }
+      .stat-item { flex-basis: 120px; margin-bottom: 1rem; }
+      .feature-card { padding: 1.5rem; }
+      .cta-content h2 { font-size: 2rem; }
+      .footer-content { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+      .footer-content, .footer-bottom { padding-left: 5%; padding-right: 5%; }
+       #home-new { padding-top: 9rem; } /* Adjust hero top padding */
+       .carousel-card { flex-basis: 190px; height: 125px; margin: 0 10px; padding: 15px; }
+       .carousel-card.active { transform: translateY(-15px) scale(1.03); }
+       .carousel-button { width: 40px; height: 40px; }
+       .carousel-button svg { width: 18px; height: 18px; }
+       .carousel-button.prev { left: 10px; } /* Move inside viewport */
+       .carousel-button.next { right: 10px; }
+    }
+    @media (max-width: 576px) {
+       .container { padding: 0 5%; }
+       section:not(#home-new) { padding: 3rem 0; }
+       .section-heading h2 { font-size: 1.8rem; }
+       .section-heading p { font-size: 1rem; }
+       .cta-buttons { flex-direction: column; gap: 1rem; align-items: center; }
+       .cta-buttons .btn { width: 80%; max-width: 300px; }
+       .services-grid, .features-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+       .footer-content { text-align: center; }
+       .footer-column h3::after { left: 50%; transform: translateX(-50%); }
+       .footer-links { padding-left: 0; }
+       .footer-links a::before { margin-right: 5px; }
+       .footer-links a:hover { transform: none; }
+       .social-links { justify-content: center; }
+       .footer-content, .footer-bottom { padding-left: 5%; padding-right: 5%; }
+       #home-new { padding-top: 8rem; } /* Adjust hero top padding */
+    }
+     @media (max-width: 480px) {
+        #home-new .content-right { padding: 20px; } /* Form padding */
+        #home-new h1 { font-size: 1.8rem; }
+        #home-new p { font-size: 1rem; }
+        #home-new .form-header { font-size: 1.2rem; }
+        .carousel-viewport { width: 100%; }
+        .carousel-container { padding-left: 5px; padding-right: 5px; }
+        .carousel-card { flex-basis: 150px; height: 100px; margin: 0 8px; padding: 10px; }
+        .carousel-card.active { transform: translateY(-12px) scale(1.02); }
+        .carousel-button { width: 35px; height: 35px; }
+        .carousel-button.prev { left: 5px; }
+        .carousel-button.next { right: 5px; }
+        .carousel-button svg { width: 16px; height: 16px; }
+     }
+    @media (max-width: 400px) {
+      nav { padding: 0.8rem 3%; }
+      .logo img { height: 40px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="mve_accueil.html" class="logo" aria-label="MVE Service Accueil">
+        <img src="img/MVE_logo.png" alt="M.V.E SERVICE Logo">
+      </a>
+      <div class="desktop-nav">
+        <a href="#" class="active">Accueil</a>
+        <a href="#about">À Propos</a>
+        <a href="nos_services.html">Services</a>
+        <a href="#why-choose">Pourquoi Nous</a>
+        <a href="#partners">Nos Partenaires</a>
+        <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+        <div class="hamburger-icon"><span></span><span></span><span></span></div>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#" class="active">Accueil</a>
+      <a href="#about">À Propos</a>
+      <a href="nos_services.html">Services</a>
+      <a href="#why-choose">Pourquoi Nous</a>
+      <a href="#partners">Nos Partenaires</a>
+      <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO SECTION WITH VIDEO BACKGROUND -->
+    <section id="home-new">
+        <!-- Video Background -->
+        <video class="video-background" autoplay loop muted playsinline preload="auto" poster="img/first_frame_vid.png">
+            <!-- Make sure video path is correct -->
+            <source src="bg_video/MVE_vid.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Hero Content Container -->
+        <div class="container">
+            <!-- Left Content -->
+            <div class="content-left">
+                <h1>Votre expert en hygiène et lutte antiparasitaire</h1>
+                <p>Solutions professionnelles pour <span class="highlight">un environnement propre</span>, sain et sécurisé, adaptées à tous vos besoins.</p>
+                <div class="buttons">
+                    <a href="/contact.html" class="btn">
+                        <i class="fas fa-file-invoice icon"></i> Demandez votre Devis Gratuit
+                    </a>
+                    <a href="tel:+212632533159" class="btn btn-outline">
+                        <i class="fas fa-phone-alt icon"></i> +212 632-533-159
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Content - Smaller Form -->
+            <div class="content-right">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" name="name" placeholder="Votre nom et prénom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Numéro de téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Votre numéro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" name="message" placeholder="Comment pouvons-nous vous aider?" required></textarea>
+                    </div>
+                    <div class="form-btn">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Envoyer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!--END: HERO SECTION-->
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>À Propos de MVE Service</h2>
+          <p>Votre partenaire de confiance pour garantir un environnement sain et sans nuisibles depuis plus de 5 ans.</p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Notre Engagement : Expertise & Confiance</h3>
+            <p>Forts d'une solide expérience dans le domaine de l'hygiène et de la lutte antiparasitaire, <strong>MVE Service</strong> s'engage à fournir des solutions efficaces, durables et respectueuses de l'environnement. Nous protégeons votre santé, votre propriété et votre tranquillité d'esprit.</p>
+            <p>Notre équipe qualifiée et certifiée utilise des méthodes de pointe et des produits homologués pour éliminer tous types de nuisibles (rongeurs, insectes, volatiles) tout en préservant votre environnement et celui de vos proches.</p>
+            <div class="stats-row">
+              <div class="stat-item"><div class="stat-number">5+</div><div class="stat-label">Années d'expérience</div></div>
+              <div class="stat-item"><div class="stat-number">1000+</div><div class="stat-label">Clients Satisfaits</div></div>
+              <div class="stat-item"><div class="stat-number">Certifié</div><div class="stat-label">CertiBiocide</div></div>
+              <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Intervention Rapide</div></div>
+            </div>
+            <a href="/contact.html" class="btn" style="margin-top: 2rem;">En Savoir Plus</a>
+          </div>
+          <div class="about-image"><img src="img/image-asset.jpeg" alt="Équipe MVE Service en intervention d'hygiène"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Nos Services Professionnels</h2>
+          <p>Des solutions expertes en dératisation, nettoyage et entretien des espaces verts pour un environnement propre et sain.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-image"><img src="service-img/deratisation.jpg" alt="Service de Dératisation"></div>
+            <div class="service-content"><h3>Dératisation</h3><p>Élimination efficace et durable des rats, souris et autres rongeurs grâce à des solutions adaptées aux particuliers et aux professionnels. Sécurité et prévention garanties.</p></div>
+          </div>
+          <div class="service-card">
+            <div class="service-image"><img src="service-img/nettoyage2.jpg" alt="Nettoyage Professionnel"></div>
+            <div class="service-content"><h3>Nettoyage</h3><p>Services de nettoyage professionnels pour bureaux, commerces et habitations. Des solutions sur mesure pour un environnement propre, sain et agréable.</p></div>
+          </div>
+          <div class="service-card">
+            <div class="service-image"><img src="service-img/Entretien&nettoyage-des-espaces-verts.jpg" alt="Entretien Jardin"></div>
+            <div class="service-content"><h3>Jardinage</h3><p>Entretien et aménagement des espaces verts : tonte, taille, arrosage et plantation. Offrez à vos jardins une beauté durable avec des soins adaptés.</p></div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;"><a href="nos_services.html" class="btn">Voir toutes nos prestations</a></div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose" class="why-choose-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Pourquoi Choisir MVE Service ?</h2>
+          <p>Nous nous engageons à fournir un service exceptionnel, rapide et discret.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon">✔</div><h3>Intervention Rapide</h3><p>Nous intervenons rapidement au Maroc, souvent dans la journée, en utilisant des produits biocides respectueux de l'environnement et sans danger pour les occupants.</p></div>
+          <div class="feature-card"><div class="feature-icon">⭐</div><h3>Techniciens Qualifiés & Certifiés</h3><p>Nos techniciens, formés et certifiés (CertiBiocide), vous garantissent des interventions professionnelles, efficaces et sécurisées</p></div>
+          <div class="feature-card"><div class="feature-icon">💲</div><h3>Devis Gratuit & Prix Justes</h3><p>Nous offrons des devis clairs et détaillés sans engagement, avec des tarifs compétitifs.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos Partenaires Section -->
+    <section id="partners" class="partners-section">
+        <div class="container">
+            <div class="section-heading"><h2>Nos Partenaires</h2><p>Les entreprises et organisations qui nous ont fait confiance.</p></div>
+            <div class="carousel-viewport">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-card"><img src="img/amdie-logo-2.png" alt="AMDIE Logo"></div>
+                        <div class="carousel-card"><img src="img/mines-rabat-logo.png" alt="Mines Rabat Logo"></div>
+                        <div class="carousel-card"><img src="img/10ampmaplantema.png" alt="MAP Logo"></div>
+                        <div class="carousel-card"><img src="img/72438498_1073826382961051_4022793410271248384_n.jpg" alt="Club Genie Civil Logo"></div>
+                        <div class="carousel-card"><img src="img/Logo_de_la_DGAPR.svg.png" alt="DGAPR Logo"></div>
+                        <div class="carousel-card"><img src="img/Marsa-Maroc.webp" alt="Marsa Maroc Logo"></div>
+                        <div class="carousel-card"><img src="img/centreregional de transfusion Sanguine.jpg" alt="Centre Regional de Transfusion Sanguine Logo"></div>
+                        <div class="carousel-card"><img src="img/300780276_473311121471238_441732540215848638_n.png" alt="Faculte de Medecine Logo"></div>
+                        <div class="carousel-card"><img src="img/logo-ministere-sante.png" alt="Ministere Sante Logo"></div>
+                    </div>
+                </div>
+                <button class="carousel-button prev" id="prevBtn" aria-label="Previous Slide"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                <button class="carousel-button next" id="nextBtn" aria-label="Next Slide"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Prêt à retrouver un environnement sain ?</h2>
+          <p>Contactez <strong>MVE Service</strong> dès aujourd'hui pour une évaluation gratuite de vos besoins et un devis personnalisé sans engagement.</p>
+          <div class="cta-buttons">
+             <a href="/contact.html" class="btn btn-white">Demander un Devis Gratuit</a>
+            <a href="tel:+212650649109" class="btn btn-outline-white">Appelez-nous : +212 650-649109</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="footer-logo"><img src="img/MVE_logo.png" alt="MVE Service Logo Footer"></div>
+          <p>Expert en hygiène et lutte antiparasitaire au Maroc. MVE Service vous propose des solutions rapides, efficaces et respectueuses de l'environnement.</p>
+          <div class="social-links">
+            <a href="#" class="social-link fb" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg></a>
+            <a href="https://wa.me/212650649109" class="social-link wa" aria-label="WhatsApp" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" /></svg></a>
+            <a href="#" class="social-link ig" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" /></svg></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liens Rapides</h3>
+          <ul class="footer-links">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#about">À Propos</a></li>
+            <li><a href="nos_services.html">Services</a></li>
+            <li><a href="#why-choose">Pourquoi Nous</a></li>
+            <li><a href="#partners">Nos Partenaires</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Nos Prestations</h3>
+          <ul class="footer-links">
+             <li><a href="nos_services.html#deratisation">Dératisation</a></li>
+            <li><a href="nos_services.html#punaises-de-lit">Punaises de lit</a></li>
+            <li><a href="nos_services.html#desinfection">Désinfection</a></li>
+            <li><a href="nos_services.html#traitement-du-bois">Traitement Bois</a></li>
+            <li><a href="nos_services.html#depigeonnage">Dépigeonnisation</a></li>
+             <li><a href="nos_services.html#nettoyage-professionnel">Nettoyage Pro</a></li>
+            <li><a href="nos_services.html#entretien-espaces-verts">Entretien Espaces Verts</a></li>
+            <li><a href="nos_services.html#jardinage-amenagement">Jardinage</a></li>
+            <li><a href="nos_services.html#nettoyage-haute-pression">Nettoyage HP</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <p><strong>Adresse :</strong><br>Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p>
+          <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a></p>
+          <p><strong>Email :</strong><br><a href="mailto:contact.mveservice@gmail.com" style="color:#d1d5db;">contact.mveservice@gmail.com</a></p>
+          <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra & partout au Maroc</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> | <a href="#">Politique de Confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Existing JS should still work
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Mobile Menu Toggle ---
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const navLinksMobile = mobileMenu.querySelectorAll('a');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          menuToggle.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+        navLinksMobile.forEach(link => {
+          if (link.getAttribute('href').startsWith('#')) {
+              link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                  menuToggle.classList.remove('active');
+                  mobileMenu.classList.remove('active');
+                  menuToggle.setAttribute('aria-expanded', 'false');
+                }
+              });
+          }
+        });
+        document.addEventListener('click', (event) => {
+          const isClickInsideNav = menuToggle.contains(event.target) || mobileMenu.contains(event.target);
+          if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // --- Carousel JavaScript ---
+      const track = document.getElementById('carouselTrack');
+      if (track) {
+          const prevBtn = document.getElementById('prevBtn');
+          const nextBtn = document.getElementById('nextBtn');
+          const cards = Array.from(track.children).filter(node => node.classList.contains('carousel-card'));
+          const cardCount = cards.length;
+          if (cardCount > 0 && prevBtn && nextBtn) {
+              const transitionDuration = 500;
+              const autoScrollInterval = 1500;
+              const clonesToUse = Math.min(cardCount, 3);
+              let currentIndex = 0;
+              let cardWidth = 0;
+              let isTransitioning = false;
+              let autoScrollTimer = null;
+              const clonesStart = cards.slice(-clonesToUse).map(card => card.cloneNode(true));
+              const clonesEnd = cards.slice(0, clonesToUse).map(card => card.cloneNode(true));
+              clonesStart.reverse().forEach(clone => track.insertBefore(clone, track.firstChild));
+              clonesEnd.forEach(clone => track.appendChild(clone));
+              const allCards = track.querySelectorAll('.carousel-card');
+              const clonesStartCount = clonesStart.length;
+              function calculateCardWidthAndOffset() {
+                  if (cards.length === 0) return;
+                  const firstOriginalCard = track.children[clonesStartCount];
+                  if (!firstOriginalCard) return;
+                  const cardStyle = window.getComputedStyle(firstOriginalCard);
+                  const cardMargin = parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
+                  cardWidth = firstOriginalCard.getBoundingClientRect().width + cardMargin;
+                  if(cardWidth <= 0) cardWidth = 230 + 30;
+              }
+              function updateCarousel(instant = false) {
+                  if (isTransitioning && !instant) return;
+                  isTransitioning = !instant;
+                  const targetDomIndex = currentIndex + clonesStartCount;
+                  const viewportWidth = track.parentElement.offsetWidth;
+                  if (cardWidth === 0) calculateCardWidthAndOffset();
+                  const centeringAdjustment = (viewportWidth / 2) - (cardWidth / 2);
+                  const targetTranslateX = -(targetDomIndex * cardWidth) + centeringAdjustment;
+                  track.style.transition = instant ? 'none' : `transform ${transitionDuration}ms ease-in-out`;
+                  track.style.transform = `translateX(${targetTranslateX}px)`;
+                  allCards.forEach((card, index) => {
+                      card.classList.toggle('active', index === targetDomIndex);
+                  });
+                  if (!instant) {
+                      setTimeout(() => {
+                          isTransitioning = false;
+                          checkInfiniteLoopJump();
+                      }, transitionDuration);
+                  } else {
+                      isTransitioning = false;
+                      checkInfiniteLoopJump();
+                  }
+              }
+              function checkInfiniteLoopJump() {
+                   if (currentIndex <= -1) { currentIndex = cardCount - 1; updateCarousel(true); }
+                   else if (currentIndex >= cardCount) { currentIndex = 0; updateCarousel(true); }
+              }
+              function moveToNext() { if (isTransitioning) return; currentIndex++; updateCarousel(); }
+              function moveToPrev() { if (isTransitioning) return; currentIndex--; updateCarousel(); }
+              function startAutoScroll() { stopAutoScroll(); autoScrollTimer = setInterval(moveToNext, autoScrollInterval); }
+              function stopAutoScroll() { clearInterval(autoScrollTimer); }
+              nextBtn.addEventListener('click', () => { moveToNext(); stopAutoScroll(); });
+              prevBtn.addEventListener('click', () => { moveToPrev(); stopAutoScroll(); });
+              const viewport = document.querySelector('.carousel-viewport');
+               if (viewport) {
+                  viewport.addEventListener('mouseenter', stopAutoScroll);
+                  viewport.addEventListener('mouseleave', startAutoScroll);
+               }
+               let resizeTimeout;
+               window.addEventListener('resize', () => {
+                   clearTimeout(resizeTimeout);
+                   resizeTimeout = setTimeout(() => { calculateCardWidthAndOffset(); updateCarousel(true); }, 150);
+               });
+              calculateCardWidthAndOffset();
+              updateCarousel(true);
+              startAutoScroll();
+          }
+      }
+
+      // --- Update Footer Year ---
+      const yearSpan = document.getElementById('currentYear');
+      if (yearSpan) { yearSpan.textContent = new Date().getFullYear(); }
+
+      // --- Active Nav Link Highlighting on Scroll ---
+      const sections = document.querySelectorAll('main section[id]');
+      const navLinksDesktop = document.querySelectorAll('.desktop-nav a[href^="#"]');
+      const navLinksMobileAll = document.querySelectorAll('.mobile-menu a[href^="#"]');
+      function setActiveLink() {
+        let currentSectionId = '';
+        const headerHeight = (document.querySelector('header')?.offsetHeight || 70) + 20;
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - headerHeight;
+          if (window.scrollY >= sectionTop) { currentSectionId = section.getAttribute('id'); }
+        });
+        if (window.scrollY < (document.getElementById('about')?.offsetTop - headerHeight || 300)) {
+             currentSectionId = ''; // Represents top ('#')
+         }
+        const activeHref = currentSectionId ? `#${currentSectionId}` : '#';
+        navLinksDesktop.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === activeHref); });
+        navLinksMobileAll.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === activeHref); });
+      }
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+          if (!scrollTimeout) {
+              scrollTimeout = setTimeout(() => { setActiveLink(); scrollTimeout = null; }, 100);
+          }
+      });
+      setActiveLink(); // Initial check
+    });
+  </script>
+
+</body>
+</html>
