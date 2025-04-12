@@ -1,1036 +1,1104 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="img/MVE_logo.png"> <!-- Ensure this path is correct -->
-  <title>Navbar & Footer Example</title>
-  <!-- Add Font Awesome if you use icons in the footer/header, otherwise remove -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
-  <style>
-    /* Reset and basic styles needed for header/footer */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      line-height: 1.6;
-      overflow-x: hidden; /* Prevent horizontal scroll */
-      /* Added to demonstrate footer positioning */
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    main {
-      flex-grow: 1; /* Pushes footer down */
-      /* Add some padding so content doesn't hide behind sticky header */
-      padding-top: 80px; /* Adjust based on your header height */
-    }
-
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-     h3 { /* Needed for footer headings */
-        color: #374151;
-        margin-bottom: 1rem;
-     }
-
-    p { /* Needed for footer text */
-      margin-bottom: 1rem;
-      color: #6b7280;
-    }
-
-    .container { /* Used in footer */
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 5%;
-    }
-
-    /* Button Styles (if used in header CTA) */
-    .btn {
-      display: inline-block;
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .btn:hover {
-      background-color: #3e8e41;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Header and Navigation */
-    header {
-      position: sticky; /* Make header sticky */
-      top: 0;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      width: 100%;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 5%;
-      max-width: 1400px; /* Max width for nav content */
-      margin: 0 auto;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .logo img {
-      height: 50px;
-      max-width: 100%;
-    }
-
-    /* Desktop Navigation */
-    .desktop-nav {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .desktop-nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      position: relative;
-      transition: color 0.3s ease;
-      white-space: nowrap;
-    }
-
-    .desktop-nav a:hover {
-      color: #4CAF50;
-    }
-
-    .desktop-nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: #4CAF50;
-      transition: width 0.3s ease;
-    }
-
-    .desktop-nav a:hover::after,
-    .desktop-nav a.active::after {
-      width: 100%;
-    }
-
-    .desktop-nav a.active {
-      color: #4CAF50;
-    }
-
-    .desktop-nav a.nav-cta {
-      background-color: #4CAF50;
-      color: white !important;
-      padding: 0.75rem 1.5rem;
-      border-radius: 30px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
-      white-space: nowrap;
-      text-align: center;
-    }
-
-    .desktop-nav a.nav-cta:hover {
-      background-color: #3e8e41;
-      box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
-      transform: translateY(-2px);
-    }
-
-    .desktop-nav a.nav-cta::after {
-      display: none; /* No underline for CTA */
-    }
-
-    /* Mobile Menu Button */
-    .mobile-menu-btn {
-      display: none; /* Hidden by default */
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #333;
-      padding: 0.5rem;
-      width: 40px;
-      height: 40px;
-      position: relative;
-      z-index: 1001; /* Above mobile menu background */
-    }
-
-    /* Hamburger Icon Styles */
-    .hamburger-icon {
-      position: relative;
-      width: 24px;
-      height: 18px;
-    }
-
-    .hamburger-icon span {
-      position: absolute;
-      height: 2px;
-      width: 100%;
-      background-color: #333;
-      left: 0;
-      transition: all 0.3s ease;
-    }
-
-    .hamburger-icon span:nth-child(1) { top: 0; }
-    .hamburger-icon span:nth-child(2) { top: 8px; }
-    .hamburger-icon span:nth-child(3) { top: 16px; }
-
-    /* X Animation when active */
-    .mobile-menu-btn.active .hamburger-icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .mobile-menu-btn.active .hamburger-icon span:nth-child(2) { opacity: 0; }
-    .mobile-menu-btn.active .hamburger-icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: white;
-      border-top: 1px solid #eee;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-      padding: 0 1rem;
-    }
-
-    .mobile-menu.active {
-      display: block;
-      max-height: 500px;
-      padding: 1rem;
-    }
-
-    .mobile-menu a {
-      display: block;
-      padding: 1rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      border-bottom: 1px solid #eee;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      text-align: center;
-    }
-
-    .mobile-menu a:last-child { border-bottom: none; }
-
-    .mobile-menu a:hover {
-      background-color: #f9f9f9;
-      color: #4CAF50;
-    }
-
-    .mobile-menu a.active {
-      color: #4CAF50;
-      background-color: #f0f9f0;
-    }
-
-    .mobile-menu a.nav-cta {
-      background-color: #4CAF50;
-      color: white !important;
-      margin: 1rem 0;
-      padding: 1rem;
-      border-radius: 30px;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .mobile-menu a.nav-cta:hover {
-      background-color: #3e8e41;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #1f2937;
-      color: #d1d5db;
-      padding: 4rem 0 2rem;
-      margin-top: auto; /* Ensures footer is at the bottom if content is short */
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-column h3 {
-      color: white;
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-
-    .footer-column h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background-color: #4CAF50;
-    }
-
-    .footer-column p {
-      color: #9ca3af;
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
-    }
-
-    .footer-logo img {
-      max-width: 150px;
-      margin-bottom: 1rem;
-    }
-
-    .footer-links {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-links a {
-      color: #d1d5db;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      position: relative;
-      display: inline-block;
-    }
-
-    .footer-links a::before {
-      content: '→';
-      display: inline-block;
-      margin-right: 8px;
-      transition: transform 0.3s ease;
-      color: #4CAF50;
-    }
-
-    .footer-links a:hover {
-      color: #ffffff;
-      transform: translateX(5px);
-    }
-
-    .footer-links a:hover::before {
-      transform: translateX(5px);
-      color: #ffffff;
-    }
-
-    /* Base styles for all social links */
-    .social-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      background-color: #363f4b; /* Default color */
-    }
-
-    /* Set icon size */
-    .social-link svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-
-    /* Hover effects */
-    .social-link.fb:hover { background-color: #3b5998; transform: scale(1.1); }
-    .social-link.wa:hover { background-color: #25d366; transform: scale(1.1); }
-    .social-link.ig:hover { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); transform: scale(1.1); }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      margin-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: #9ca3af;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom a {
-      color: #4CAF50;
-      text-decoration: none;
-    }
-
-    .footer-bottom a:hover {
-      text-decoration: underline;
-    }
-
-    /* Media Queries for Responsive Header/Footer */
-    @media (max-width: 992px) {
-      .container { padding: 0 4%; }
-      .desktop-nav { gap: 1.2rem; }
-      .desktop-nav a.nav-cta { padding: 0.6rem 1.2rem; }
-      .footer-content { gap: 2rem; }
-    }
-
-    @media (max-width: 768px) {
-      .desktop-nav { display: none; }
-      .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
-      nav { padding: 0.8rem 5%; }
-      .logo img { height: 45px; }
-      .footer-content { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-      main { padding-top: 70px; } /* Adjust padding for smaller header */
-    }
-
-    @media (max-width: 576px) {
-       .container { padding: 0 5%; }
-       .footer-content { text-align: center; }
-       .footer-column h3::after { left: 50%; transform: translateX(-50%); }
-       .footer-links { padding-left: 0; }
-       .footer-links a::before { margin-right: 5px; }
-       .footer-links a:hover { transform: none; }
-       .social-links { justify-content: center; }
-       main { padding-top: 65px; } /* Adjust padding for smaller header */
-    }
-
-     @media (max-width: 400px) {
-       nav { padding: 0.8rem 3%; }
-       .logo img { height: 40px; }
-       main { padding-top: 60px; } /* Adjust padding for smaller header */
-     }
-
-  </style>
-</head>
-
-<body>
-
-  <!-- Header Section -->
-  <header>
-    <nav>
-      <a href="mve_accueil.html" class="logo" aria-label="MVE Service Accueil">
-        <!-- Make sure the image path is correct relative to this file -->
-        <img src="img/MVE_logo.png" alt="M.V.E SERVICE Logo">
-      </a>
-
-      <!-- Desktop Navigation -->
-      <div class="desktop-nav">
-        <!-- Add 'active' class to the current page's link -->
-        <a href="mve_accueil.html">Accueil</a>
-        <a href="A_propose.html" class="active">À Propos</a>
-        <a href="services.html">Services</a> <!-- Example link to another page -->
-        <a href="mve_accueil.html#why-choose">Pourquoi Nous</a>
-        <a href="mve_accueil.html#partners">Nos Partenaires</a>
-        <!-- Link to a separate contact page -->
-        <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
-      </div>
-
-      <!-- Mobile Menu Toggle with Animated Burger Icon -->
-      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
-        <div class="hamburger-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-    </nav>
-
-    <!-- Mobile Menu Dropdown -->
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="mve_accueil.html">Accueil</a>
-      <a href="A_propose.html" class="active">À Propos</a>
-      <a href="/services.html">Services</a>
-      <a href="mve_accueil.html#why-choose">Pourquoi Nous</a>
-      <a href="mve_accueil.html#partners">Nos Partenaires</a>
-      <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-      <div class="container">
-          <div class="hero-content">
-              <div class="hero-text">
-                  <h1>À Propos de MVE Service</h1>
-                  <p>Depuis plus de 5 ans, notre équipe d'experts qualifiés s'engage à fournir des solutions efficaces, durables et respectueuses de l'environnement dans le domaine de l'hygiène et de la lutte antiparasitaire.</p>
-                  <p>Notre mission est de protéger votre santé, votre propriété et votre tranquillité d'esprit grâce à des méthodes innovantes et éco-responsables.</p>
-                  <a href="nos_services.html" class="cta-button">Découvrir nos services</a>
-              </div>
-              <div class="hero-image">
-                  <img src="/api/placeholder/500/350" alt="Professionnel MVE Service en équipement de protection" />
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- About Us Section -->
-  <section class="about-section">
-      <div class="container">
-          <div class="about-content">
-              <div class="about-text">
-                  <h2>Notre Engagement</h2>
-                  <p>Forts d'une solide expérience dans le domaine de l'hygiène et de la lutte antiparasitaire, MVE Service s'engage à fournir des solutions efficaces, durables et respectueuses de l'environnement. Nous protégeons votre santé, votre propriété et votre tranquillité d'esprit.</p>
-                  <p>Notre équipe qualifiée et certifiée utilise des méthodes de pointe et des produits homologués pour éliminer tous types de nuisibles (rongeurs, insectes, volatiles) tout en préservant votre environnement et celui de vos proches.</p>
-                  <p>Notre approche combine expertise technique, respect de l'environnement et satisfaction client pour vous offrir un service complet et personnalisé adapté à vos besoins spécifiques.</p>
-              </div>
-              <div class="about-image">
-                  <img src="/api/placeholder/500/350" alt="Équipe MVE Service en action" />
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-      <div class="container">
-          <div class="section-title">
-              <h2>Pourquoi Choisir MVE Service ?</h2>
-              <p>Nous nous distinguons par notre expertise, notre réactivité et notre engagement envers l'environnement et la satisfaction client.</p>
-          </div>
-          <div class="features-grid">
-              <div class="feature-card">
-                  <div class="feature-icon">★</div>
-                  <h3>Expertise Certifiée</h3>
-                  <p>Notre équipe est composée de professionnels certifiés CertiBiocide, formés aux dernières techniques et réglementations en matière d'hygiène et de lutte antiparasitaire.</p>
-              </div>
-              <div class="feature-card">
-                  <div class="feature-icon">♻️</div>
-                  <h3>Solutions Écologiques</h3>
-                  <p>Nous privilégions des méthodes respectueuses de l'environnement et utilisons des produits homologués qui minimisent l'impact sur les écosystèmes.</p>
-              </div>
-              <div class="feature-card">
-                  <div class="feature-icon">🔍</div>
-                  <h3>Diagnostic Précis</h3>
-                  <p>Chaque intervention débute par un diagnostic complet pour identifier précisément la source du problème et proposer la solution la plus adaptée.</p>
-              </div>
-              <div class="feature-card">
-                  <div class="feature-icon">⏱️</div>
-                  <h3>Intervention Rapide</h3>
-                  <p>Notre équipe est disponible 24/7 pour répondre rapidement à vos urgences et intervenir dans les plus brefs délais.</p>
-              </div>
-              <div class="feature-card">
-                  <div class="feature-icon">💶</div>
-                  <h3>Tarification Transparente</h3>
-                  <p>Nous proposons des devis détaillés et transparents, sans frais cachés, adaptés à votre budget et à vos besoins spécifiques.</p>
-              </div>
-              <div class="feature-card">
-                  <div class="feature-icon">👥</div>
-                  <h3>Service Personnalisé</h3>
-                  <p>Chaque client bénéficie d'un accompagnement personnalisé et de conseils adaptés pour prévenir la réapparition des nuisibles.</p>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="stats">
-      <div class="container">
-          <div class="trust-badges">
-              <div class="badge">
-                  <div class="badge-icon">5+</div>
-                  <h3>Années d'expérience</h3>
-              </div>
-              <div class="badge">
-                  <div class="badge-icon">1000+</div>
-                  <h3>Clients Satisfaits</h3>
-              </div>
-              <div class="badge">
-                  <div class="badge-icon">✓</div>
-                  <h3>CertiBiocide</h3>
-              </div>
-              <div class="badge">
-                  <div class="badge-icon">24/7</div>
-                  <h3>Intervention Rapide</h3>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-      <div class="container">
-          <h2>Besoin d'une Intervention Professionnelle ?</h2>
-          <p >Notre équipe d'experts est prête à vous aider avec vos problèmes d'hygiène et de lutte antiparasitaire.</p>
-          <a href="contact.html" class="cta-button-white">Contactez-nous pour une intervention rapide !</a>
-      </div>
-  </section>
-
-  <!-- Footer Section -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <div class="footer-logo">
-            <!-- Make sure the image path is correct relative to this file -->
-            <img src="img/MVE_logo.png" alt="MVE Service Logo Footer">
-          </div>
-          <p>Expert en hygiène et lutte antiparasitaire au Maroc. MVE Service vous propose des solutions rapides,
-            efficaces et respectueuses de l'environnement.</p>
-          <div class="social-links">
-            <!-- Facebook -->
-            <a href="#" class="social-link fb" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg>
-            </a>
-            <!-- WhatsApp -->
-            <a href="https://wa.me/212650649109" class="social-link wa" aria-label="WhatsApp" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" /></svg>
-            </a>
-            <!-- Instagram -->
-            <a href="#" class="social-link ig" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" /></svg>
-            </a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h3>Liens Rapides</h3>
-          <ul class="footer-links">
-            <li><a href="mve_accueil.html">Accueil</a></li>
-            <li><a href="A_propose.html">À Propos</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="mve_accueil.html#why-choose">Pourquoi Nous</a></li>
-            <li><a href="mve_accueil.html#partners">Nos Partenaires</a></li>
-            <li><a href="/contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Nos Prestations</h3>
-          <ul class="footer-links">
-            <!-- Make these point to actual service details if available -->
-            <li><a href="nos_services.html#deratisation">Dératisation</a></li>
-            <li><a href="nos_services.html#punaises-de-lit">Punaises de lit</a></li>
-            <li><a href="nos_services.html#desinfection">Désinfection</a></li>
-            <li><a href="nos_services.html#traitement-du-bois">Traitement Bois</a></li>
-            <li><a href="nos_services.html#depigeonnage">Dépigeonnisation</a></li>
-             <li><a href="nos_services.html#nettoyage-professionnel">Nettoyage Pro</a></li>
-            <li><a href="nos_services.html#entretien-espaces-verts">Entretien Espaces Verts</a></li>
-            <li><a href="nos_services.html#jardinage-amenagement">Jardinage</a></li>
-            <li><a href="nos_services.html#nettoyage-haute-pression">Nettoyage HP</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Contact Info</h3>
-          <p><strong>Adresse :</strong><br>Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p>
-          <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a></p>
-          <p><strong>Email :</strong><br><a href="mailto:contact.mveservice@gmail.com" style="color:#d1d5db;">contact.mveservice@gmail.com</a></p>
-          <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra & partout au Maroc</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> |
-          <a href="#">Politique de Confidentialité</a></p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-      // --- Mobile Menu Toggle ---
-      const menuToggle = document.getElementById('mobile-menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const navLinksMobile = mobileMenu.querySelectorAll('a'); // Get all links in mobile menu
-
-      if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-          menuToggle.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
-          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-          menuToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-
-        // Close menu when a link is clicked (only for hash links on the same page)
-        navLinksMobile.forEach(link => {
-          if (link.getAttribute('href').startsWith('#')) {
-              link.addEventListener('click', () => {
-                if (mobileMenu.classList.contains('active')) {
-                  menuToggle.classList.remove('active');
-                  mobileMenu.classList.remove('active');
-                  menuToggle.setAttribute('aria-expanded', 'false');
-                }
-              });
-          }
-        });
-
-        // Optional: Close menu if clicked outside
-        document.addEventListener('click', (event) => {
-          const isClickInsideNav = menuToggle.contains(event.target) || mobileMenu.contains(event.target) || (event.target.closest && event.target.closest('header'));
-          if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-          }
-        });
-      }
-
-      // --- Update Footer Year ---
-      const yearSpan = document.getElementById('currentYear');
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-
-      // --- Active Nav Link Highlighting on Scroll ---
-      const sections = document.querySelectorAll('main section[id]'); // Get sections within main with an ID
-      const navLinksDesktop = document.querySelectorAll('.desktop-nav a[href^="#"]');
-      const navLinksMobileAll = document.querySelectorAll('.mobile-menu a[href^="#"]');
-      const headerElement = document.querySelector('header'); // Get the header element
-
-      function setActiveLink() {
-        let currentSectionId = '';
-        const headerHeight = (headerElement?.offsetHeight || 70) + 15; // Offset for sticky header + buffer
-
-        // Find the current section in view
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - headerHeight;
-          const sectionBottom = sectionTop + section.offsetHeight;
-          const scrollPosition = window.scrollY;
-
-          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            currentSectionId = section.getAttribute('id');
-          }
-        });
-
-        // Handle case for scrolling near the top (highlight Home)
-        if (window.scrollY < (sections[0]?.offsetTop - headerHeight || 200) || currentSectionId === '') {
-            // If scrolled above the first section or no section is actively matched, default to home/accueil
-            currentSectionId = ''; // Representing the 'Accueil' link target ('#')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVE Service - Solutions Antiparasitaires</title>
+
+    <!-- Font Awesome (CSS version recommended) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- GSAP Core and ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #388E3C;
+            --light-grey: #f5f5f5;
+            --medium-grey: #e0e0e0;
+            --dark-grey: #616161;
+            --white: #ffffff;
+            /* Swiper theme colors */
+            --swiper-theme-color: var(--white); /* Color for pagination dots */
+            --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.5);
+             --swiper-pagination-bullet-inactive-opacity: 1;
+             --swiper-pagination-bullet-size: 8px;
+             --swiper-pagination-bullet-horizontal-gap: 4px;
         }
 
-        // Update Desktop Nav Links
-        navLinksDesktop.forEach(link => {
-            link.classList.remove('active');
-            const linkHref = link.getAttribute('href');
-            // Check if the link's href matches the current section ID
-            // Or if currentSectionId is empty (top of page) and link is the home link ('#')
-            if ((linkHref === `#${currentSectionId}`) || (currentSectionId === '' && linkHref === '#')) {
-                link.classList.add('active');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--dark-grey);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/api/placeholder/1200/800');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--dark-grey);
+        }
+
+        .logo span {
+            color: var(--primary-green);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-grey);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark-grey);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            margin: 1rem;
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            color: var(--dark-grey);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* --- Service Info Section Styles --- */
+        .service-info {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 4rem auto;
+            max-width: 1200px;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .service-text {
+            flex: 1 1 55%;
+            min-width: 300px;
+            padding: 3rem;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .service-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark-grey);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .service-text h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+
+        .expertise-intro {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .expertise-categories {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        .expertise-categories:last-of-type {
+             border-bottom: none;
+        }
+
+        .expertise-categories h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-grey);
+            display: flex;
+            align-items: center;
+        }
+
+        .expertise-categories h3 i {
+            color: var(--primary-green);
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .expertise-list {
+            list-style: none;
+            padding-left: 25px;
+            margin-top: 0.8rem;
+        }
+
+        .expertise-list li {
+            position: relative;
+            padding: 4px 0;
+            padding-left: 15px;
+        }
+
+        .expertise-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .expertise-guarantee {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--primary-green);
+            border-radius: 5px;
+        }
+
+        .expertise-guarantee p {
+            display: flex;
+            align-items: center;
+            color: var(--dark-grey);
+            margin-bottom: 0;
+        }
+
+        .expertise-guarantee i {
+            color: var(--primary-green);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* --- Base FAQ Styles --- */
+        .faq-item {
+            border-bottom: 1px solid var(--medium-grey); /* Default border color */
+            margin-bottom: 1rem;
+        }
+        /* Remove margin from last item to allow link spacing */
+        .faq-item:last-of-type {
+            margin-bottom: 0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+            /* margin-bottom: 0; -> already handled above */
+        }
+
+        .faq-question {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-grey); /* Default text color */
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease-in-out;
+            color: var(--primary-green); /* Default icon color */
+            margin-left: 10px;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            padding: 0 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease-in-out;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--dark-grey); /* Default answer color */
+        }
+
+        /* Active state for FAQ */
+         .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+         }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            opacity: 1;
+            padding: 0.5rem 0 1.5rem 0;
+        }
+        /* --- End Base FAQ Styles --- */
+
+
+        /* --- SERVICE IMAGE & CONTENT WITHIN IT --- */
+        .service-image {
+            flex: 1 1 40%;
+            min-width: 300px;
+            background-color: var(--primary-green);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .image-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .service-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .experience-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 95px;
+            height: 95px;
+            background-color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--white);
+            text-align: center;
+            color: var(--white);
+            font-weight: bold;
+            z-index: 5;
+        }
+
+        .experience-badge .years {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .experience-badge .text {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* TESTIMONIAL SLIDER STYLES */
+        .testimonial-slider.swiper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 2rem 3rem 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            min-height: 200px;
+            overflow: visible;
+            flex-shrink: 0;
+        }
+
+        .testimonial-slider .swiper-wrapper {
+            align-items: center;
+        }
+
+        .testimonial-slider .swiper-slide {
+            text-align: center;
+            color: var(--white);
+            box-sizing: border-box;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .testimonial-content {
+            margin: 0 auto;
+        }
+
+        .testimonial-content i.fa-quote-left {
+            font-size: 1.5rem;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .testimonial-content p {
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .client-name {
+            margin-top: 1rem;
+            font-style: normal !important;
+            font-weight: 600;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .swiper-pagination {
+            position: absolute;
+            bottom: 15px !important;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .swiper-pagination-bullet {
+            background-color: var(--swiper-pagination-bullet-inactive-color);
+            opacity: var(--swiper-pagination-bullet-inactive-opacity);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--swiper-theme-color);
+            transform: scale(1.2);
+        }
+
+        /* --- START: FAQ Styles within .service-image --- */
+        .service-image .faq-section {
+             padding: 2.5rem 2rem 2rem 2rem;
+             margin-top: 0;
+        }
+
+        .service-image .faq-section h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .service-image .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .service-image .faq-question {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .service-image .faq-question:hover {
+             color: var(--white);
+             opacity: 0.85;
+        }
+
+        .service-image .faq-question i {
+            color: var(--white);
+        }
+
+        .service-image .faq-answer {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        /* --- END: FAQ Styles within .service-image --- */
+
+        /* --- START: Link to More FAQs --- */
+        .service-image .faq-more-link {
+            display: inline-block; /* Allows padding */
+            margin-top: 1.5rem; /* Space above the link */
+            padding: 0.5rem 0; /* Optional vertical padding */
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+            border: 1px solid transparent; /* Placeholder for potential button style */
+        }
+
+        .service-image .faq-more-link:hover {
+            opacity: 0.8;
+            /* text-decoration: underline; */ /* Alternative hover */
+        }
+
+        .service-image .faq-more-link i {
+            margin-left: 8px; /* Space before the icon */
+            font-size: 0.9em; /* Slightly smaller icon */
+            transition: transform 0.3s ease; /* Add transition for potential hover effect */
+        }
+        .service-image .faq-more-link:hover i {
+             /* transform: translateX(3px); */ /* Example icon move on hover */
+        }
+        /* --- END: Link to More FAQs --- */
+
+
+        /* Service Steps Section Styles */
+        .service-steps {
+            background-color: var(--light-grey);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-steps h2 {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: var(--dark-grey);
+            position: relative;
+            z-index: 3;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .route-map {
+            position: absolute;
+            width: 90%;
+            max-width: 1000px;
+            height: 200px;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            z-index: 1;
+            display: none;
+            pointer-events: none;
+        }
+        @media (min-width: 769px) {
+            .route-map { display: block; }
+        }
+
+        .route-path {
+            stroke: var(--primary-green);
+            stroke-width: 6;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        .step-item {
+            flex: 1;
+            min-width: 180px;
+            max-width: 220px;
+            margin: 1rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .step-emoji {
+            font-size: 3rem;
+            background-color: var(--white);
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid var(--primary-green);
+            position: relative;
+        }
+
+        .step-item:hover .step-emoji {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--white);
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-grey);
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: var(--dark-grey);
+            line-height: 1.6;
+            font-size: 1.05rem;
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-item:hover .step-description {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CTA Section Styles */
+        .cta {
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-grey);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--dark-grey);
+        }
+
+        /* General Button Styles */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-green);
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        /* Map Marker Animation */
+        .map-marker {
+            fill: var(--primary-green);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
             }
-        });
-
-        // Update Mobile Nav Links
-        navLinksMobileAll.forEach(link => {
-            link.classList.remove('active');
-            const linkHref = link.getAttribute('href');
-            if ((linkHref === `#${currentSectionId}`) || (currentSectionId === '' && linkHref === '#')) {
-                 link.classList.add('active');
+            40% {
+                transform: translateY(-10px);
             }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .stat-item { min-width: 150px; }
+
+            /* Mobile Service info section adjustments */
+            .service-text, .service-image {
+                flex: 1 1 100%;
+            }
+
+            .service-text {
+                padding: 2rem;
+            }
+
+            .service-image {
+                min-height: auto;
+            }
+
+            .image-container {
+                height: 250px;
+            }
+
+            .testimonial-slider.swiper {
+                padding: 1.5rem 1.5rem 2.5rem 1.5rem;
+                min-height: 180px;
+            }
+
+            /* Mobile FAQ Styles */
+            .service-image .faq-section {
+                padding: 2rem 1.5rem 1.5rem 1.5rem;
+            }
+            .service-image .faq-question {
+                 font-size: 1rem;
+            }
+            .service-image .faq-answer {
+                 font-size: 0.95rem;
+            }
+            .service-image .faq-more-link {
+                font-size: 0.95rem;
+                margin-top: 1rem;
+            }
+
+
+            /* Step items adjustments */
+            .step-item {
+                max-width: 80%;
+                margin-bottom: 4rem;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step-item::after {
+                content: '↓';
+                position: absolute;
+                bottom: -45px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: var(--primary-green);
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            .step-item:last-child::after {
+                display: none;
+            }
+
+            /* Button adjustments */
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                margin: 0.5rem 0;
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">MVE <span>SERVICE</span></div>
+            <h1>Solutions Antiparasitaires Professionnelles</h1>
+            <p class="subtitle">Nous protégeons votre santé, votre propriété et votre tranquillité d'esprit avec des solutions efficaces, durables et respectueuses de l'environnement.</p>
+
+            <div class="stats-container">
+                 <div class="stat-item">
+                     <div class="stat-number">5+</div>
+                     <div class="stat-text">Années d'expérience</div>
+                 </div>
+                 <div class="stat-item">
+                     <div class="stat-number">1000+</div>
+                     <div class="stat-text">Clients Satisfaits</div>
+                 </div>
+                 <div class="stat-item">
+                     <div class="stat-number">24/7</div>
+                     <div class="stat-text">Intervention Rapide</div>
+                 </div>
+                 <div class="stat-item">
+                     <div class="stat-number"><i class="fas fa-certificate"></i></div>
+                     <div class="stat-text">CertiBiocide</div>
+                 </div>
+             </div>
+
+            <div class="button-container">
+                <a href="tel:+212600000000" class="btn">📞 +212 6 00 00 00 00</a>
+                <a href="#contact" class="btn btn-outline">Nous Contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="en-savoir-plus" class="service-info">
+        <div class="service-text">
+            <h2>Notre Expertise à Votre Service</h2>
+
+            <div class="expertise-intro">
+                <p>Depuis plus de 5 ans, MVE Service s'impose comme votre partenaire de confiance dans la lutte contre les nuisibles. Notre mission : vous offrir des solutions durables et efficaces pour retrouver un environnement sain et serein.</p>
+            </div>
+
+            <div class="expertise-categories">
+                <h3><i class="fas fa-shield-alt"></i> Solutions Complètes</h3>
+                <p>Notre équipe intervient contre tous types de nuisibles qui menacent votre tranquillité :</p>
+                <ul class="expertise-list">
+                    <li><strong>Rongeurs</strong> : rats, souris, mulots</li>
+                    <li><strong>Insectes</strong> : cafards, punaises de lit, fourmis, guêpes</li>
+                    <li><strong>Volatiles</strong> : pigeons, étourneaux, mouettes</li>
+                </ul>
+            </div>
+
+            <div class="expertise-categories">
+                <h3><i class="fas fa-certificate"></i> Certifications & Méthodes</h3>
+                <p>Nous appliquons uniquement des méthodes validées et respectueuses de l'environnement :</p>
+                <ul class="expertise-list">
+                    <li>Personnel certifié CertiBiocide</li>
+                    <li>Techniques de pointe et matériel professionnel</li>
+                    <li>Produits homologués et sélectionnés pour leur efficacité</li>
+                    <li>Solutions respectueuses de votre santé et de l'environnement</li>
+                </ul>
+            </div>
+
+            <div class="expertise-categories">
+                <h3><i class="fas fa-tasks"></i> Approche Personnalisée</h3>
+                <p>Chaque situation est unique et mérite un traitement adapté :</p>
+                <ul class="expertise-list">
+                    <li><strong>Diagnostic précis</strong> de votre situation spécifique</li>
+                    <li><strong>Plan d'action sur mesure</strong> adapté à vos besoins</li>
+                    <li><strong>Intervention rapide</strong> et efficace</li>
+                    <li><strong>Suivi régulier</strong> post-traitement pour des résultats durables</li>
+                </ul>
+            </div>
+
+            <div class="expertise-guarantee">
+                <p><i class="fas fa-award"></i> <strong>Notre engagement</strong> : résultats garantis, transparence totale et satisfaction client à 100%.</p>
+            </div>
+        </div>
+
+        <!-- ==== RIGHT COLUMN ==== -->
+        <div class="service-image">
+            <div class="image-container">
+                <img src="img/full-shot-man-holding-disinfectant-tank.jpg" alt="Professionnel MVE Service en intervention">
+                <div class="experience-badge">
+                    <span class="years">5+</span>
+                    <span class="text">ans d'expertise</span>
+                </div>
+            </div>
+
+            <!-- Testimonial Slider -->
+            <div class="testimonial-slider swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>Intervention rapide et très professionnelle. Le technicien a pris le temps de tout expliquer. Problème résolu efficacement!</p>
+                            <p class="client-name">— Sophie L., Rabat</p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                         <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>Excellent service client et suivi impeccable. Je me sens enfin débarrassé des nuisibles. Je recommande MVE Service sans hésiter.</p>
+                            <p class="client-name">— Ahmed B., Casablanca</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                     <div class="swiper-slide">
+                         <div class="testimonial-content">
+                             <i class="fas fa-quote-left"></i>
+                             <p>Très satisfaite du professionnalisme et de la discrétion de l'équipe. Tarif correct et résultat parfait.</p>
+                             <p class="client-name">— Fatima K., Salé</p>
+                         </div>
+                     </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <!-- End Testimonial Slider -->
+
+            <!-- START: FAQ Section -->
+            <div class="faq-section">
+                <h3>Questions Fréquentes</h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Quels types de nuisibles traitez-vous ?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nous traitons une large gamme de nuisibles, incluant les rongeurs (rats, souris), les insectes rampants (cafards, punaises de lit, fourmis), les insectes volants (guêpes, mouches), ainsi que les problématiques liées aux volatiles (pigeons).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Vos traitements sont-ils sans danger pour les enfants et animaux ?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>La sécurité est notre priorité. Nous utilisons des produits homologués et appliquons des méthodes minimisant les risques. Nous vous fournirons toutes les consignes de sécurité nécessaires avant et après l'intervention pour protéger votre famille et vos animaux.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Combien de temps dure une intervention ?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>La durée varie selon le type de nuisible, l'étendue de l'infestation et la taille de la zone à traiter. Un diagnostic initial nous permettra de vous donner une estimation plus précise. Une intervention standard dure généralement entre 1 et 3 heures.</p>
+                    </div>
+                </div>
+
+                 <div class="faq-item">
+                    <button class="faq-question">
+                        Proposez-vous des contrats de prévention ?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oui, nous proposons des contrats annuels ou personnalisés, particulièrement recommandés pour les professionnels (restaurants, hôtels, syndics...) mais aussi pour les particuliers souhaitant une tranquillité d'esprit durable. Ces contrats incluent des visites régulières de contrôle et d'intervention préventive.</p>
+                    </div>
+                </div>
+
+                <!-- ==== START: Link to More FAQs ==== -->
+                <a href="/faq-page.html" class="faq-more-link"> <!-- !! REPLACE /faq-page.html with your actual FAQ page URL !! -->
+                    Voir plus de questions <i class="fas fa-arrow-right"></i>
+                </a>
+                <!-- ==== END: Link to More FAQs ==== -->
+
+            </div>
+            <!-- END: FAQ Section -->
+
+        </div>
+        <!-- ==== END RIGHT COLUMN ==== -->
+    </section>
+
+    <section class="service-steps">
+        <h2>Comment Nous Travaillons</h2>
+
+        <svg class="route-map" viewBox="0 0 1000 200" preserveAspectRatio="none">
+             <path class="route-path" d="M50,100 C150,30 250,170 350,100 C450,30 550,170 650,100 C750,30 850,170 950,100"></path>
+        </svg>
+
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-emoji">📞<div class="step-number">1</div></div>
+                <h3 class="step-title">Contact Initial</h3>
+                <p class="step-description">Appelez-nous ou demandez un devis en ligne pour nous décrire votre problème de nuisibles.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-emoji">🔍<div class="step-number">2</div></div>
+                <h3 class="step-title">Diagnostic</h3>
+                <p class="step-description">Notre expert se déplace pour évaluer la situation et identifier la source du problème.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-emoji">📋<div class="step-number">3</div></div>
+                <h3 class="step-title">Plan d'Action</h3>
+                <p class="step-description">Nous élaborons une stratégie sur mesure adaptée à votre situation et à vos besoins.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-emoji">🛠️<div class="step-number">4</div></div>
+                <h3 class="step-title">Intervention</h3>
+                <p class="step-description">Mise en œuvre rapide du traitement avec des produits et méthodes homologués.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-emoji">🔄<div class="step-number">5</div></div>
+                <h3 class="step-title">Suivi</h3>
+                <p class="step-description">Contrôle post-traitement et conseils préventifs pour éviter toute réinfestation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta">
+        <h2>Besoin d'une intervention rapide?</h2>
+        <p>Notre équipe d'experts est disponible 24h/24 et 7j/7 pour répondre à vos urgences. Contactez-nous dès maintenant pour un diagnostic personnalisé et un devis gratuit.</p>
+        <div class="button-container">
+            <a href="#" class="btn">Demander un Devis</a>
+             <!-- Replace with YOUR actual phone number -->
+            <a href="tel:+2126XXXXXXXX" class="btn btn-outline">Appeler Maintenant</a>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- Your Custom JS with GSAP and Swiper Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize GSAP
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero animation
+            gsap.to('.hero-content', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' });
+
+            // Stats animation
+            gsap.to('.stat-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.5 });
+
+            // --- Service Info Section Animations ---
+            gsap.to('.service-text', {
+                scrollTrigger: { trigger: '.service-info', start: 'top 80%' },
+                opacity: 1, x: 0, duration: 1, ease: 'power3.out'
+            });
+            gsap.to('.service-image', {
+                scrollTrigger: { trigger: '.service-info', start: 'top 80%' },
+                opacity: 1, x: 0, duration: 1, ease: 'power3.out', delay: 0.3
+            });
+            gsap.from('.expertise-categories', {
+                scrollTrigger: { trigger: '.service-info', start: 'top 70%' },
+                y: 30, opacity: 0, duration: 0.6, stagger: 0.2, ease: 'power2.out'
+            });
+             gsap.from('.expertise-guarantee', {
+                scrollTrigger: { trigger: '.expertise-guarantee', start: 'top 90%' },
+                scale: 0.9, opacity: 0, duration: 0.8, ease: 'back.out(1.5)'
+            });
+            // --- End Service Info Animations ---
+
+
+            // --- Steps animation ---
+            gsap.to('.step-item', {
+                scrollTrigger: { trigger: '.service-steps', start: 'top 70%' },
+                opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'back.out(1.2)'
+            });
+
+            // --- Route path animation (Desktop Only) ---
+            const routePath = document.querySelector('.route-path');
+            if (routePath && window.matchMedia("(min-width: 769px)").matches) {
+                const pathLength = routePath.getTotalLength();
+                gsap.set(routePath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+                gsap.to(routePath, {
+                    strokeDashoffset: 0,
+                    duration: 2,
+                    ease: 'power1.inOut',
+                    scrollTrigger: {
+                        trigger: '.service-steps',
+                        start: 'top 60%',
+                        end: 'bottom 80%',
+                        scrub: 1
+                    }
+                });
+            }
+
+            // --- Initialize Swiper for Testimonials ---
+            const testimonialSwiper = new Swiper('.testimonial-slider.swiper', {
+                 slidesPerView: 1,
+                 spaceBetween: 30,
+                 direction: 'horizontal',
+                 loop: true,
+                 autoplay: {
+                     delay: 6000,
+                     disableOnInteraction: false,
+                     pauseOnMouseEnter: true,
+                 },
+                 pagination: {
+                     el: '.swiper-pagination',
+                     clickable: true,
+                 },
+                 keyboard: {
+                    enabled: true,
+                  },
+            });
+
+
+            // --- FAQ Accordion Logic ---
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const questionButton = item.querySelector('.faq-question');
+
+                questionButton.addEventListener('click', () => {
+                    const currentlyActive = item.parentElement.querySelector('.faq-item.active');
+
+                    if (currentlyActive && currentlyActive !== item) {
+                        currentlyActive.classList.remove('active');
+                    }
+                    item.classList.toggle('active');
+                });
+            });
+            // --- END: FAQ Accordion Logic ---
+
         });
-      }
-
-      // Throttle scroll event listener
-      let scrollTimeout;
-      window.addEventListener('scroll', () => {
-          if (!scrollTimeout) {
-              scrollTimeout = setTimeout(() => {
-                  setActiveLink();
-                  scrollTimeout = null;
-              }, 100); // Throttle delay in ms
-          }
-      });
-
-      setActiveLink(); // Initial check on page load
-
-    });
-  </script>
-
-<style>
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Open Sans', sans-serif;
-  }
-  
-  body {
-      background-color: #ffffff;
-      color: #333333;
-      line-height: 1.6;
-  }
-  
-  .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-  }
-  
-  /* Hero section */
-  .hero {
-      padding: 80px 0;
-      position: relative;
-      background-color: #f9f9f9;
-  }
-  
-  .hero-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  }
-  
-  .hero-text {
-      width: 50%;
-      padding-right: 30px;
-  }
-  
-  .hero-text h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
-      color: #28A745;
-      font-weight: 700;
-  }
-  
-  .hero-text p {
-      margin-bottom: 20px;
-      font-size: 16px;
-  }
-  
-  .hero-image {
-      width: 50%;
-      text-align: right;
-  }
-  
-  .hero-image img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  }
-  
-  .cta-button {
-      background-color: #28A745;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      display: inline-block;
-  }
-  
-  .cta-button:hover {
-      background-color: #218838;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  /* About Us section */
-  .about-section {
-      padding: 60px 0;
-  }
-  
-  .about-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-  }
-  
-  .about-text {
-      width: 48%;
-  }
-  
-  .about-text h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #28A745;
-  }
-  
-  .about-text p {
-      margin-bottom: 15px;
-  }
-  
-  .about-image {
-      width: 48%;
-  }
-  
-  .about-image img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  }
-  
-  /* Features section */
-  .features {
-      padding: 60px 0;
-      background-color: #f9f9f9;
-  }
-  
-  .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-  }
-  
-  .section-title h2 {
-      font-size: 32px;
-      color: #28A745;
-      margin-bottom: 15px;
-  }
-  
-  .section-title p {
-      max-width: 700px;
-      margin: 0 auto;
-  }
-  
-  .features-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-  }
-  
-  .feature-card {
-      width: 30%;
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-      transition: all 0.3s ease;
-  }
-  
-  .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  }
-  
-  .feature-icon {
-      font-size: 40px;
-      color: #28A745;
-      margin-bottom: 20px;
-  }
-  
-  .feature-card h3 {
-      font-size: 20px;
-      margin-bottom: 15px;
-  }
-  
-  /* Stats section */
-  .stats {
-      padding: 60px 0;
-      text-align: center;
-  }
-  
-  /* Trust badges */
-  .trust-badges {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin: 40px 0;
-  }
-  
-  .badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-  }
-  
-  .badge-icon {
-      width: 80px;
-      height: 80px;
-      background-color: rgba(40, 167, 69, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 15px;
-      color: #28A745;
-      font-size: 30px;
-  }
-  
-  .badge h3 {
-      font-size: 24px;
-      color: #28A745;
-      margin-bottom: 5px;
-  }
-  
-  /* CTA Section */
-  .cta-section {
-      padding: 80px 0;
-      text-align: center;
-      background-color: #28A745;
-      color: white;
-  }
-  
-  .cta-section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-  }
-  
-  .cta-section p {
-      max-width: 700px;
-      margin: 0 auto 30px;
-      font-size: 18px;
-      color: #eee;
-  }
-  
-  .cta-button-white {
-      background-color: white;
-      color: #28A745;
-      padding: 12px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-block;
-  }
-  
-  .cta-button-white:hover {
-      background-color: #f1f1f1;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  /* Responsive */
-  @media (max-width: 992px) {
-      .hero-content, .about-content {
-          flex-direction: column;
-      }
-      
-      .hero-text, .hero-image, .about-text, .about-image {
-          width: 100%;
-          padding-right: 0;
-          margin-bottom: 30px;
-          text-align: center;
-      }
-      
-      .feature-card {
-          width: 48%;
-      }
-  }
-  
-  @media (max-width: 768px) {
-      .feature-card {
-          width: 100%;
-      }
-  }
-</style>
+    </script>
 </body>
-
 </html>
