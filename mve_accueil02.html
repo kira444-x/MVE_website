@@ -6,22 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="img/MVE_logo.png">
   <title>MVE Service - Hygiène et Lutte Antiparasitaire</title>
-  <!-- Consider linking Font Awesome or another icon library if you want richer icons -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+  <!-- Font Awesome for new hero section icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     /* Reset and basic styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+       /* Using Montserrat from the new hero section as primary, with Segoe UI as fallback */
+      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    /* Import Montserrat font for the new hero section */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Removed styles specific to the standalone new hero demo (like height: 100vh, display:flex) */
       color: #333;
       line-height: 1.6;
       overflow-x: hidden;
       /* Prevent horizontal scroll */
+      background-color: #ffffff; /* Default background for the rest of the page */
     }
 
     html {
@@ -44,13 +51,285 @@
       /* Slightly lighter default paragraph color */
     }
 
-    .container {
+    .container { /* Keeping the general container style, new hero uses its own */
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 5%;
       /* Use percentage padding for better fluidity */
     }
 
+    /* --- START: NEW HERO SECTION STYLES --- */
+
+    #home-new { /* Style the wrapper for the new hero */
+        color: white;
+        min-height: 90vh; /* Adjust height as needed, not full 100vh to allow scrolling */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-color: #202020; /* Fallback color */
+        padding: 5rem 0; /* Add some padding */
+        overflow: hidden; /* Prevent content overflow */
+    }
+
+    #home-new::before { /* Background image for the new hero */
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Make sure this path is correct relative to your CSS or HTML file */
+        background-image: url('img/first_frame_vid.png'); /* USING THE IMAGE FROM THE SCREENSHOT */
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.5); /* Adjust brightness */
+        z-index: 1; /* Behind content */
+    }
+
+    #home-new .container { /* Specific container styles for the new hero */
+        width: 92%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: row; /* Side-by-side layout */
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 0;
+        position: relative; /* Ensure content is above the ::before pseudo-element */
+        z-index: 2; /* Above background */
+    }
+
+    #home-new .content-left {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align text and buttons */
+        text-align: center;
+        padding: 0 30px;
+        animation: fadeInLeft 1s ease-out;
+        color: white; /* Ensure text is white */
+    }
+
+    #home-new .content-right {
+        width: 40%;
+        background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background for the form */
+        border-radius: 12px;
+        padding: 30px;
+        margin: auto;
+        max-width: 380px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(98, 209, 109, 0.2);
+        animation: fadeInRight 1s ease-out;
+         color: white; /* Ensure text is white */
+    }
+
+    @keyframes fadeInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    #home-new h1 { /* Target h1 specifically within the new hero */
+        font-size: 2.7rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        color: white; /* Explicitly white */
+    }
+
+    #home-new p { /* Target p specifically within the new hero's left content */
+        font-size: 1.25rem;
+        margin-bottom: 40px;
+        line-height: 1.6;
+        max-width: 600px;
+        color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    }
+
+    #home-new .highlight { /* Highlight class from new hero */
+        color: #68E575;
+        font-weight: 600;
+    }
+
+    #home-new .buttons { /* Button container */
+        display: flex;
+        flex-direction: column; /* Stack buttons */
+        align-items: center; /* Center buttons horizontally */
+        width: 100%;
+        gap: 15px;
+    }
+
+    #home-new .btn { /* Button styles from new hero */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #62D16D;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 85%; /* Adjust width as needed */
+        max-width: 320px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 15px rgba(98, 209, 109, 0.3);
+    }
+
+    #home-new .btn:hover {
+        background-color: #53C25E;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(98, 209, 109, 0.4);
+    }
+
+     #home-new .btn:active {
+        transform: translateY(1px);
+    }
+
+    #home-new .btn-outline { /* Outline button style */
+        background-color: transparent;
+        border: 2px solid #62D16D;
+        box-shadow: 0 4px 15px rgba(98, 209, 109, 0.15);
+        color: white; /* Ensure text is white */
+    }
+
+    #home-new .btn-outline:hover {
+        background-color: rgba(98, 209, 109, 0.1);
+        box-shadow: 0 6px 18px rgba(98, 209, 109, 0.25);
+        color: white; /* Keep text white on hover */
+    }
+
+    #home-new .icon { /* Icon style */
+        margin-right: 10px;
+        font-size: 1.1em;
+    }
+
+    /* Form Styles from new hero */
+    #home-new .form-group {
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    #home-new .form-header {
+        color: #68E575; /* Green header */
+        margin-bottom: 25px;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    #home-new .form-subheader {
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: -15px;
+        margin-bottom: 25px;
+    }
+
+    #home-new label { /* Form label */
+        display: block;
+        margin-bottom: 6px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    #home-new input,
+    #home-new textarea { /* Form input/textarea */
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.07);
+        color: white; /* Text color inside input */
+        transition: all 0.3s;
+        font-size: 0.95rem;
+    }
+
+    #home-new input:focus,
+    #home-new textarea:focus {
+        outline: none;
+        border-color: #62D16D; /* Green border on focus */
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(98, 209, 109, 0.2);
+    }
+
+    #home-new input::placeholder,
+    #home-new textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5); /* Placeholder text color */
+    }
+
+    #home-new textarea {
+        min-height: 90px;
+        resize: vertical;
+    }
+
+    #home-new .form-btn { /* Form button container */
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #home-new .submit-btn { /* Form submit button */
+        background-color: #62D16D;
+        color: white;
+        padding: 12px 32px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(98, 209, 109, 0.3);
+        letter-spacing: 0.5px;
+    }
+
+    #home-new .submit-btn:hover {
+        background-color: #53C25E;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(98, 209, 109, 0.4);
+    }
+
+    #home-new .submit-btn:active {
+         transform: translateY(1px);
+    }
+
+     /* Responsive adjustments for the new hero */
+    @media (max-width: 900px) {
+        #home-new .container {
+            flex-direction: column; /* Stack vertically */
+            padding: 30px 20px;
+        }
+
+        #home-new .content-left,
+        #home-new .content-right {
+            width: 100%; /* Full width when stacked */
+            max-width: 500px; /* Limit max width */
+        }
+
+        #home-new .content-left {
+            margin-bottom: 40px; /* Space between left and right content */
+            padding: 0 20px;
+        }
+
+        #home-new h1 {
+            font-size: 2.2rem; /* Adjust heading size */
+        }
+
+        #home-new p {
+            font-size: 1.1rem; /* Adjust paragraph size */
+            margin-bottom: 30px;
+        }
+    }
+    /* --- END: NEW HERO SECTION STYLES --- */
+
+
+    /* --- Start: Styles for the rest of the page (Mostly unchanged) --- */
     .section-heading {
       text-align: center;
       margin-bottom: 3rem;
@@ -86,41 +365,13 @@
       color: #6b7280;
     }
 
-    section {
+    section:not(#home-new) { /* Apply padding to sections *other than* the new hero */
       padding: 5rem 0;
       overflow: hidden;
       /* Prevent content overflow issues */
     }
 
-    .hero-title {
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    color: white; /* Adjust based on your background */
-  }
-
-  .glow-text {
-    color: #68d16c;
-    font-weight: bold;
-    text-shadow: 0 0 5px rgba(76, 175, 80, 0.7), 
-                 0 0 10px rgba(255, 255, 255, 0.5);
-    animation: subtle-glow 2s infinite alternate;
-  }
-
-  @keyframes subtle-glow {
-    0% {
-      text-shadow: 0 0 5px rgba(76, 175, 80, 0.7), 
-                   0 0 10px rgba(255, 255, 255, 0.3);
-      transform: scale(1);
-    }
-    100% {
-      text-shadow: 0 0 8px rgba(76, 175, 80, 0.8), 
-                   0 0 15px rgba(255, 255, 255, 0.5);
-      transform: scale(1.05);
-    }
-  }
-  
-    /* Button Styles */
+    /* Button Styles (General - might conflict/overlap with new hero btn, check usage) */
     .btn {
       display: inline-block;
       background-color: #4CAF50;
@@ -392,128 +643,9 @@
       background-color: #3e8e41;
     }
 
+    /* REMOVED OLD HERO STYLES: .hero-container, .video-background, .overlay, .main-heading, .sub-heading, .cta-button specific to old hero */
+    /* REMOVED Keyframe Animations for old hero */
 
-    /* Hero Section */
-
-    .hero-container {
-      height: 100vh;
-      /* Full viewport height */
-      min-height: 600px;
-      /* Minimum height for content visibility */
-      width: 100%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #ffffff;
-      text-align: center;
-      padding: 20px 5%;
-      /* Add padding */
-      overflow: hidden;
-      /* Ensure video doesn't spill out */
-    }
-
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      /* Same opacity as your original gradient */
-      z-index: 0;
-    }
-
-    .content-wrapper {
-      max-width: 1200px;
-      width: 100%;
-      position: relative;
-      z-index: 1;
-      /* Place content above video and overlay */
-    }
-
-    .main-heading {
-      font-size: 3.2rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      /* Animation setup */
-      transform: translateX(-100%);
-      opacity: 0;
-      animation: slideFromLeft 1s ease-out forwards;
-    }
-
-    .sub-heading {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 40px;
-      max-width: 800px;
-      /* Limit width */
-      margin-left: auto;
-      margin-right: auto;
-      /* Animation setup */
-      transform: translateX(100%);
-      opacity: 0;
-      animation: slideFromRight 1s ease-out forwards 0.3s;
-      /* Delay */
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: #4CAF50;
-      color: white;
-      font-size: 1.1rem;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      /* Animation setup */
-      opacity: 0;
-      animation: fadeIn 1s ease-in forwards 0.6s;
-      /* Delay */
-    }
-
-    .cta-button:hover {
-      background-color: #3e8e41;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Keyframe Animations */
-    @keyframes slideFromLeft {
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideFromRight {
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
 
     /* About Section */
     .about-section {
@@ -655,6 +787,7 @@
       /* Push button to the bottom */
       align-self: flex-start;
       /* Align button to the left */
+       /* Use general .btn styles, or define specific ones if needed */
     }
 
     /* Why Choose Us Section */
@@ -715,7 +848,7 @@
     }
 
 
-    /* --- START: NEW CAROUSEL STYLES --- */
+    /* --- START: CAROUSEL STYLES --- */
      .partners-section { /* Optional: Style the section wrapper */
         background-color: #f0f2f5; /* Match carousel background */
      }
@@ -848,7 +981,7 @@
          .carousel-button.next { right: 5px; }
          .carousel-button svg { width: 16px; height: 16px; }
     }
-     /* --- END: NEW CAROUSEL STYLES --- */
+     /* --- END: CAROUSEL STYLES --- */
 
 
     /* Call to Action Section */
@@ -894,7 +1027,7 @@
       flex-wrap: wrap;
     }
 
-    .btn-white {
+    .btn-white { /* General btn styles apply, this overrides colors */
       background-color: white;
       color: #4CAF50;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -908,7 +1041,7 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     }
 
-    .btn-outline-white {
+    .btn-outline-white { /* General btn-outline styles apply, this overrides colors/border */
       background-color: transparent;
       border: 2px solid white;
       color: white;
@@ -941,6 +1074,10 @@
       /* Increased gap */
       margin-bottom: 3rem;
       /* Increased margin */
+       max-width: 1200px; /* Align with general container */
+       margin-left: auto;
+       margin-right: auto;
+       padding: 0 5%; /* Match container padding */
     }
 
     .footer-column h3 {
@@ -1073,6 +1210,11 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: #9ca3af;
       font-size: 0.9rem;
+       max-width: 1200px; /* Align with general container */
+       margin-left: auto;
+       margin-right: auto;
+       padding-left: 5%; /* Match container padding */
+       padding-right: 5%;
     }
 
     .footer-bottom a {
@@ -1085,11 +1227,10 @@
     }
 
 
-    /* Media Queries for Responsive Design */
+    /* Media Queries for Responsive Design (Keep existing ones, they should mostly work) */
     @media (max-width: 992px) {
-      .container {
+      .container { /* General container adjustment */
         padding: 0 4%;
-        /* Adjust padding */
       }
 
       .desktop-nav {
@@ -1103,204 +1244,81 @@
       .about-content {
         flex-direction: column;
         gap: 2rem;
-        /* Adjust gap for column layout */
       }
 
-      /* Removed contact section responsive styles */
-
-      .main-heading {
-        font-size: 2.8rem;
-      }
-
-      .sub-heading {
-        font-size: 1.4rem;
-      }
-
-      .footer-content {
-        gap: 2rem;
+      .footer-content, .footer-bottom { /* Adjust footer padding */
+         padding-left: 4%;
+         padding-right: 4%;
       }
     }
 
     @media (max-width: 768px) {
       .desktop-nav {
         display: none;
-        /* Hide desktop nav */
       }
-
       .mobile-menu-btn {
         display: flex;
-        /* Show mobile menu button */
         align-items: center;
         justify-content: center;
       }
-
-      nav {
-        padding: 0.8rem 5%;
-        /* Adjust nav padding */
-      }
-
-      .logo img {
-        height: 45px;
-        /* Slightly smaller logo */
-      }
-
-      section {
-        padding: 4rem 0;
-        /* Reduce section padding */
-      }
-
-      .main-heading {
-        font-size: 2.2rem;
-      }
-
-      .sub-heading {
-        font-size: 1.2rem;
-      }
-
-      .section-heading h2 {
-        font-size: 2rem;
-      }
-
-      .stats-row {
-        justify-content: center;
-        /* Center stats when wrapping */
-      }
-
-      .stat-item {
-        flex-basis: 120px;
-        /* Adjust base width */
-        margin-bottom: 1rem;
-        /* Add margin when stacking */
-      }
-
-      .feature-card {
-        padding: 1.5rem;
-      }
-
-      /* Removed testimonials responsive styles */
-
-      .cta-content h2 {
-        font-size: 2rem;
-      }
-
-      .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        /* Allow more flexible wrapping */
+      nav { padding: 0.8rem 5%; }
+      .logo img { height: 45px; }
+      section:not(#home-new) { padding: 4rem 0; } /* Adjust padding for non-hero sections */
+      .section-heading h2 { font-size: 2rem; }
+      .stats-row { justify-content: center; }
+      .stat-item { flex-basis: 120px; margin-bottom: 1rem; }
+      .feature-card { padding: 1.5rem; }
+      .cta-content h2 { font-size: 2rem; }
+      .footer-content { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+      .footer-content, .footer-bottom { /* Adjust footer padding */
+         padding-left: 5%;
+         padding-right: 5%;
       }
     }
 
     @media (max-width: 576px) {
-      .container {
-        padding: 0 5%;
-        /* Standard padding for smallest screens */
-      }
-
-      .main-heading {
-        font-size: 1.8rem;
-        line-height: 1.3;
-        /* Improve line height */
-      }
-
-      .sub-heading {
-        font-size: 1.1rem;
-        /* Adjusted size */
-        line-height: 1.4;
-      }
-
-      .cta-button {
-        padding: 12px 28px;
-        /* Adjusted padding */
-        font-size: 1rem;
-      }
-
-      .section-heading h2 {
-        font-size: 1.8rem;
-      }
-
-      .section-heading p {
-        font-size: 1rem;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-        /* Center buttons when stacked */
-      }
-
-      .cta-buttons .btn {
-        width: 80%;
-        /* Limit button width */
-        max-width: 300px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-        /* Stack service cards */
-        gap: 1.5rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-        /* Stack feature cards */
-        gap: 1.5rem;
-      }
-
-      /* Removed testimonials responsive styles */
-
-      /* Removed contact form responsive styles */
-
-      .footer-content {
-        text-align: center;
-        /* Center footer columns */
-      }
-
-      .footer-column h3::after {
-        left: 50%;
-        /* Center underline */
-        transform: translateX(-50%);
-      }
-
-      .footer-links {
-        padding-left: 0;
-        /* Remove padding for centered text */
-      }
-
-      .footer-links a::before {
-        margin-right: 5px;
-      }
-
-      .footer-links a:hover {
-        transform: none;
-        /* Disable hover transform */
-      }
-
-      .social-links {
-        justify-content: center;
-        /* Center social links */
+       /* General container adjustment */
+      .container { padding: 0 5%; }
+      section:not(#home-new) { padding: 3rem 0; } /* Further reduce padding */
+      .section-heading h2 { font-size: 1.8rem; }
+      .section-heading p { font-size: 1rem; }
+      .cta-buttons { flex-direction: column; gap: 1rem; align-items: center; }
+      .cta-buttons .btn { width: 80%; max-width: 300px; }
+      .services-grid, .features-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-content { text-align: center; }
+      .footer-column h3::after { left: 50%; transform: translateX(-50%); }
+      .footer-links { padding-left: 0; }
+      .footer-links a::before { margin-right: 5px; }
+      .footer-links a:hover { transform: none; }
+      .social-links { justify-content: center; }
+       .footer-content, .footer-bottom { /* Adjust footer padding */
+         padding-left: 5%;
+         padding-right: 5%;
       }
     }
 
-    /* Fix for very small screens to ensure buttons/nav don't wrap awkwardly */
     @media (max-width: 400px) {
-      nav {
-        padding: 0.8rem 3%;
-        /* Further reduce nav padding */
-      }
-
-      .logo img {
-        height: 40px;
-        /* Smaller logo */
-      }
-
-      .main-heading {
-        font-size: 1.6rem;
-      }
-
-      .sub-heading {
-        font-size: 1rem;
-      }
+      nav { padding: 0.8rem 3%; }
+      .logo img { height: 40px; }
+      /* New hero adjustments already handled in its own media queries */
     }
+
+     /* Additional fix if new hero form feels too cramped on mobile */
+    @media (max-width: 480px) {
+        #home-new .content-right {
+            padding: 20px; /* Reduce padding slightly */
+        }
+        #home-new h1 {
+            font-size: 1.8rem; /* Adjust heading size */
+        }
+         #home-new p {
+            font-size: 1rem; /* Adjust paragraph size */
+        }
+         #home-new .form-header {
+            font-size: 1.2rem;
+         }
+    }
+
   </style>
 </head>
 
@@ -1308,18 +1326,19 @@
 
   <header>
     <nav>
-      <a href="#" class="logo" aria-label="MVE Service Accueil">
+      <a href="mve_accueil.html" class="logo" aria-label="MVE Service Accueil">
         <img src="img/MVE_logo.png" alt="M.V.E SERVICE Logo">
       </a>
 
       <!-- Desktop Navigation -->
       <div class="desktop-nav">
-        <a href="#" class="active">Accueil</a> <!-- Add 'active' class to current page -->
+         <!-- Make sure the 'href' for Accueil points to the correct section ID if needed, or remains '#' if it's the current page -->
+        <a href="#" class="active">Accueil</a>
         <a href="#about">À Propos</a>
-        <a href="#services">Services</a>
+        <a href="nos_services.html">Services</a>
         <a href="#why-choose">Pourquoi Nous</a>
-        <a href="#partners">Nos Partenaires</a> <!-- CHANGED: Link text and target -->
-        <a href="/contact.html" class="nav-cta">Obtenir un Devis</a> <!-- CHANGED: Point to separate contact page -->
+        <a href="#partners">Nos Partenaires</a>
+        <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
       </div>
 
       <!-- Mobile Menu Toggle with Animated Burger Icon -->
@@ -1336,38 +1355,81 @@
     <div class="mobile-menu" id="mobile-menu">
       <a href="#" class="active">Accueil</a>
       <a href="#about">À Propos</a>
-      <a href="#services">Services</a>
+      <a href="nos_services.html">Services</a>
       <a href="#why-choose">Pourquoi Nous</a>
-      <a href="#partners">Nos Partenaires</a> <!-- CHANGED: Link text and target -->
-      <a href="/contact.html" class="nav-cta">Obtenir un Devis</a> <!-- CHANGED: Point to separate contact page -->
+      <a href="#partners">Nos Partenaires</a>
+      <a href="/contact.html" class="nav-cta">Obtenir un Devis</a>
     </div>
   </header>
 
   <main> <!-- Wrap main content in <main> tag -->
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-container">
-      <!-- Video Background -->
-      <video class="video-background" autoplay muted playsinline preload="auto" poster="img/first_frame_vid.png"> <!-- Added loop | playsinline -->
-        <!-- video path -->
-        <source src="MVE_vid.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <!-- Overlay to darken video -->
-      <div class="overlay"></div>
+    <!-- ====================================================== -->
+    <!-- ========= START: NEW HERO SECTION REPLACEMENT ======== -->
+    <!-- ====================================================== -->
+    <section id="home-new"> <!-- Use the new ID for styling -->
+        <div class="container"> <!-- Container specific to the new hero -->
+            <!-- Left Content - Centered and Professional -->
+            <div class="content-left">
+                <h1>Votre expert en hygiène et lutte antiparasitaire</h1>
+                <p>Solutions professionnelles pour <span class="highlight">un environnement propre</span>, sain et sécurisé, adaptées à tous vos besoins.</p>
 
-      <div class="content-wrapper">
-        <h1 class="main-heading">
-          Votre expert  en hygiène et lutte antiparasitaire</h1>
-        <h2 class="sub-heading">Solutions professionnelles pour <span class="glow-text">un environnement propre</span>, sain et sécurisé, adaptées à
-          tous vos besoins.</h2>
-        <a href="/contact.html" class="cta-button">Demandez votre Devis Gratuit</a> <!-- CHANGED: Point to separate contact page -->
-      </div>
+                <div class="buttons">
+                    <a href="/contact.html" class="btn"> <!-- Link to contact page or anchor -->
+                        <i class="fas fa-file-invoice icon"></i>
+                        Demandez votre Devis Gratuit
+                    </a>
+                    <a href="tel:+212632533159" class="btn btn-outline"> <!-- Make sure phone number is correct -->
+                        <i class="fas fa-phone-alt icon"></i>
+                        +212 632-533-159
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Content - Professional Form -->
+            <div class="content-right">
+                <h3 class="form-header">Contactez-nous</h3>
+                <!-- <p class="form-subheader">Nous vous répondrons dans les plus brefs délais</p> -->
+                <!-- Add action="/your-form-handler-script" method="POST" to the form tag when ready -->
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" name="name" placeholder="Votre nom et prénom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Numéro de téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Votre numéro de téléphone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" name="message" placeholder="Comment pouvons-nous vous aider?" required></textarea>
+                    </div>
+
+                    <div class="form-btn">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </section>
+    <!-- ====================================================== -->
+    <!-- ========= END: NEW HERO SECTION REPLACEMENT ========== -->
+    <!-- ====================================================== -->
+
 
     <!-- About Section -->
     <section id="about" class="about-section">
-      <div class="container">
+      <div class="container"> <!-- Use general container -->
         <div class="section-heading">
           <h2>À Propos de MVE Service</h2>
           <p>Votre partenaire de confiance pour garantir un environnement sain et sans nuisibles depuis plus de 5 ans.
@@ -1390,7 +1452,7 @@
                 <div class="stat-label">Années d'expérience</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">5000+</div>
+                <div class="stat-number">1000+</div>
                 <div class="stat-label">Clients Satisfaits</div>
               </div>
               <div class="stat-item">
@@ -1402,7 +1464,8 @@
                 <div class="stat-label">Intervention Rapide</div>
               </div>
             </div>
-            <a href="/contact.html" class="btn" style="margin-top: 2rem;">En Savoir Plus</a> <!-- CHANGED: Point to separate contact page -->
+             <!-- Use general .btn style here -->
+            <a href="/contact.html" class="btn" style="margin-top: 2rem;">En Savoir Plus</a>
           </div>
 
           <div class="about-image">
@@ -1414,7 +1477,7 @@
 
     <!-- Services Section -->
     <section id="services">
-      <div class="container">
+      <div class="container"> <!-- Use general container -->
         <div class="section-heading">
           <h2>Nos Services Professionnels</h2>
           <p>Des solutions expertes en dératisation, nettoyage et entretien des espaces verts pour un environnement
@@ -1425,7 +1488,7 @@
           <div class="service-card">
             <div class="service-image">
               <img
-                src="img/unrecognizable-person-white-chemical-protection-suit-doing-disinfection-public-areas-stop-spreading-highly-contagious-corona-virus.jpg"
+                src="service-img/deratisation.jpg"
                 alt="Service de Dératisation">
             </div>
             <div class="service-content">
@@ -1438,7 +1501,7 @@
           <!-- Service Card 2 -->
           <div class="service-card">
             <div class="service-image">
-              <img src="img/close-up-hand-with-rubber-glove-cleaning-window.jpg" alt="Nettoyage Professionnel">
+              <img src="service-img/nettoyage2.jpg" alt="Nettoyage Professionnel">
             </div>
             <div class="service-content">
               <h3>Nettoyage
@@ -1451,7 +1514,7 @@
           <!-- Service Card 3 -->
           <div class="service-card">
             <div class="service-image">
-              <img src="img/gardener-with-weedwacker-cutting-grass-garden.jpg" alt="Entretien Jardin">
+              <img src="service-img/Entretien&nettoyage-des-espaces-verts.jpg" alt="Entretien Jardin">
             </div>
             <div class="service-content">
               <h3>Jardinage</h3>
@@ -1462,14 +1525,15 @@
           </div>
         </div>
         <div style="text-align: center; margin-top: 3rem;">
-           <a href="/contact.html" class="btn">Voir toutes nos prestations</a> <!-- CHANGED: Point to separate contact page -->
+           <!-- Use general .btn style here -->
+           <a href="nos_services.html" class="btn">Voir toutes nos prestations</a>
         </div>
       </div>
     </section>
 
     <!-- Why Choose Us Section -->
     <section id="why-choose" class="why-choose-section">
-      <div class="container">
+      <div class="container"> <!-- Use general container -->
         <div class="section-heading">
           <h2>Pourquoi Choisir MVE Service ?</h2>
           <p>Nous nous engageons à fournir un service exceptionnel, rapide et discret.</p>
@@ -1500,11 +1564,11 @@
     </section>
 
     <!-- Nos Partenaires Section -->
-    <section id="partners" class="partners-section"> <!-- New ID, New Class for styling if needed -->
-        <div class="container">
+    <section id="partners" class="partners-section">
+        <div class="container"> <!-- Use general container -->
             <div class="section-heading">
-                 <h2>Nos Partenaires</h2> <!-- French Title -->
-                 <p>Les entreprises et organisations qui nous ont fait confiance.</p> <!-- Optional Subtitle -->
+                 <h2>Nos Partenaires</h2>
+                 <p>Les entreprises et organisations qui nous ont fait confiance.</p>
             </div>
 
             <!-- Carousel HTML Structure -->
@@ -1555,18 +1619,17 @@
         </div>
     </section>
 
-
-
     <!-- Call to Action Section -->
     <section class="cta-section">
-      <div class="container">
+      <div class="container"> <!-- Use general container -->
         <div class="cta-content">
           <h2>Prêt à retrouver un environnement sain ?</h2>
           <p>Contactez <strong>MVE Service</strong> dès aujourd'hui pour une évaluation gratuite de vos besoins et un
             devis personnalisé sans engagement.</p>
           <div class="cta-buttons">
-             <a href="/contact.html" class="btn btn-white">Demander un Devis Gratuit</a> <!-- CHANGED: Point to separate contact page -->
-            <a href="tel:+212650649109" class="btn btn-outline-white">Appelez-nous : +212 650-649109</a> <!-- Updated tel link -->
+             <!-- Use general .btn styles with modifiers -->
+             <a href="/contact.html" class="btn btn-white">Demander un Devis Gratuit</a>
+            <a href="tel:+212650649109" class="btn btn-outline-white">Appelez-nous : +212 650-649109</a>
           </div>
         </div>
       </div>
@@ -1576,7 +1639,7 @@
   </main>
 
   <footer>
-    <div class="container">
+    <div class="container"> <!-- Footer uses its own grid but constrained by container width/padding -->
       <div class="footer-content">
         <div class="footer-column">
           <div class="footer-logo">
@@ -1585,89 +1648,69 @@
           <p>Expert en hygiène et lutte antiparasitaire au Maroc. MVE Service vous propose des solutions rapides,
             efficaces et respectueuses de l'environnement.</p>
           <div class="social-links">
-        <!-- Facebook -->
-        <a href="https://www.facebook.com/share/v/1BPxMuCHex/" class="social-link fb" aria-label="Facebook">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-            <path
-              d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
-          </svg>
-        </a>
-
-        <!-- WhatsApp -->
-        <a href="https://wa.me/212650649109" class="social-link wa" aria-label="WhatsApp" target="_blank"> <!-- Added link -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path
-              d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-          </svg>
-        </a>
-
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/mve__service?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link ig" aria-label="Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path
-              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-          </svg>
-        </a>
+            <a href="#" class="social-link fb" aria-label="Facebook"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg> </a>
+            <a href="https://wa.me/212650649109" class="social-link wa" aria-label="WhatsApp" target="_blank"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" /></svg> </a>
+            <a href="#" class="social-link ig" aria-label="Instagram"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" /></svg> </a>
           </div>
         </div>
         <div class="footer-column">
           <h3>Liens Rapides</h3>
           <ul class="footer-links">
-            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Accueil</a></li> <!-- Adjust links if needed -->
             <li><a href="#about">À Propos</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="nos_services.html">Services</a></li>
             <li><a href="#why-choose">Pourquoi Nous</a></li>
-            <li><a href="#partners">Nos Partenaires</a></li> <!-- CHANGED -->
-            <li><a href="/contact.html">Contact</a></li> <!-- CHANGED: Point to separate contact page -->
+            <li><a href="#partners">Nos Partenaires</a></li>
+            <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h3>Nos Prestations</h3>
           <ul class="footer-links">
-            <li><a href="#services">Dératisation</a></li>
-            <li><a href="#services">Désinsectisation</a></li>
-            <li><a href="#services">Désinfection</a></li>
-            <li><a href="#services">Punaises de lit</a></li>
-            <li><a href="#services">Traitement Bois</a></li>
-            <li><a href="#services">Dépigeonnage</a></li>
+             <li><a href="nos_services.html#deratisation">Dératisation</a></li>
+            <li><a href="nos_services.html#punaises-de-lit">Punaises de lit</a></li>
+            <li><a href="nos_services.html#desinfection">Désinfection</a></li>
+            <li><a href="nos_services.html#traitement-du-bois">Traitement Bois</a></li>
+            <li><a href="nos_services.html#depigeonnage">Dépigeonnisation</a></li>
+             <li><a href="nos_services.html#nettoyage-professionnel">Nettoyage Pro</a></li>
+            <li><a href="nos_services.html#entretien-espaces-verts">Entretien Espaces Verts</a></li>
+            <li><a href="nos_services.html#jardinage-amenagement">Jardinage</a></li>
+            <li><a href="nos_services.html#nettoyage-haute-pression">Nettoyage HP</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h3>Contact Info</h3>
-          <p><strong>Adresse :</strong><br>Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p> <!-- Update Address -->
-          <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a></p> <!-- Updated tel link -->
-          <p><strong>Email :</strong><br><a href="mailto:soattimarouane@gmail.com"
-              style="color:#d1d5db;">soattimarouane@gmail.com</a></p> <!-- Updated email link -->
+          <p><strong>Adresse :</strong><br>Imm 30 Appt 08 Rue Mly Ahmed Loukili Av, Moulay Hassan Rabat</p>
+          <p><strong>Téléphone :</strong><br><a href="tel:+212650649109" style="color:#d1d5db;">+212 650-649109</a></p>
+          <p><strong>Email :</strong><br><a href="mailto:contact.mveservice@gmail.com" style="color:#d1d5db;">contact.mveservice@gmail.com</a></p>
           <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra & partout au Maroc</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> |
-          <a href="#">Politique de Confidentialité</a></p>
+        <p>© <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> | <a href="#">Politique de Confidentialité</a></p>
       </div>
-    </div>
+    </div> <!-- Closing footer container -->
   </footer>
 
   <script>
+    // Existing JS should still work, including menu, carousel, footer year
     document.addEventListener('DOMContentLoaded', () => {
 
       // --- Mobile Menu Toggle ---
       const menuToggle = document.getElementById('mobile-menu-toggle');
       const mobileMenu = document.getElementById('mobile-menu');
-      const navLinksMobile = mobileMenu.querySelectorAll('a'); // Get all links in mobile menu
+      const navLinksMobile = mobileMenu.querySelectorAll('a');
 
       if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', () => {
           menuToggle.classList.toggle('active');
           mobileMenu.classList.toggle('active');
-          // ARIA attribute update
           const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
           menuToggle.setAttribute('aria-expanded', !isExpanded);
         });
 
-        // Close menu when a link is clicked
         navLinksMobile.forEach(link => {
-          // Only add listener for hash links to close menu on same page navigation
+          // Close menu on same-page hash link clicks
           if (link.getAttribute('href').startsWith('#')) {
               link.addEventListener('click', () => {
                 if (mobileMenu.classList.contains('active')) {
@@ -1677,9 +1720,10 @@
                 }
               });
           }
+           // For external links or different pages, you might not want to auto-close
+           // depending on desired UX. Currently only closes for hash links.
         });
 
-        // Optional: Close menu if clicked outside
         document.addEventListener('click', (event) => {
           const isClickInsideNav = menuToggle.contains(event.target) || mobileMenu.contains(event.target);
           if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
@@ -1690,30 +1734,24 @@
         });
       }
 
-      // --- REMOVED: Testimonial Slider Logic ---
-
-      // --- START: NEW CAROUSEL JAVASCRIPT ---
+      // --- Carousel JavaScript ---
       const track = document.getElementById('carouselTrack');
-      if (track) { // Check if the carousel track exists before running its JS
+      if (track) {
           const prevBtn = document.getElementById('prevBtn');
           const nextBtn = document.getElementById('nextBtn');
-          const cards = Array.from(track.children).filter(node => node.classList.contains('carousel-card')); // Ensure we only count cards
+          const cards = Array.from(track.children).filter(node => node.classList.contains('carousel-card'));
           const cardCount = cards.length;
 
-          if (cardCount > 0 && prevBtn && nextBtn) { // Only proceed if cards and buttons exist
+          if (cardCount > 0 && prevBtn && nextBtn) {
 
               const transitionDuration = 500;
               const autoScrollInterval = 3000;
+              const clonesToUse = Math.min(cardCount, 3);
 
               let currentIndex = 0;
               let cardWidth = 0;
-              // let trackOffset = 0; // This variable wasn't used, removed
               let isTransitioning = false;
               let autoScrollTimer = null;
-
-              // Calculate how many clones are needed based on viewport width and card width (simplified approach)
-              // Simplified: Use a fixed number of clones suitable for most screens
-              const clonesToUse = Math.min(cardCount, 3); // Use up to 3 clones at each end
 
               const clonesStart = cards.slice(-clonesToUse).map(card => card.cloneNode(true));
               const clonesEnd = cards.slice(0, clonesToUse).map(card => card.cloneNode(true));
@@ -1722,17 +1760,16 @@
               clonesEnd.forEach(clone => track.appendChild(clone));
 
               const allCards = track.querySelectorAll('.carousel-card');
-              const totalCardsWithClones = allCards.length;
-              const clonesStartCount = clonesStart.length; // Actual number of start clones added
+              const clonesStartCount = clonesStart.length;
 
               function calculateCardWidthAndOffset() {
                   if (cards.length === 0) return;
                   const firstOriginalCard = track.children[clonesStartCount];
                   if (!firstOriginalCard) return;
-
                   const cardStyle = window.getComputedStyle(firstOriginalCard);
                   const cardMargin = parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
                   cardWidth = firstOriginalCard.getBoundingClientRect().width + cardMargin;
+                  if(cardWidth <= 0) cardWidth = 230 + 30; // Fallback if width calculation fails initially
               }
 
               function updateCarousel(instant = false) {
@@ -1740,21 +1777,13 @@
                   isTransitioning = !instant;
 
                   const targetDomIndex = currentIndex + clonesStartCount;
-                  const viewportWidth = track.parentElement.offsetWidth; // carousel-container width
-                  if (cardWidth === 0) calculateCardWidthAndOffset(); // Calculate if not already done
-                  if (cardWidth === 0) { // Still zero? Use a fallback
-                     cardWidth = 230 + 30; // Approx card width + margin
-                  }
+                  const viewportWidth = track.parentElement.offsetWidth;
+                  if (cardWidth === 0) calculateCardWidthAndOffset();
 
                   const centeringAdjustment = (viewportWidth / 2) - (cardWidth / 2);
                   const targetTranslateX = -(targetDomIndex * cardWidth) + centeringAdjustment;
 
-                  if (instant) {
-                      track.style.transition = 'none';
-                  } else {
-                      track.style.transition = `transform ${transitionDuration}ms ease-in-out`;
-                  }
-
+                  track.style.transition = instant ? 'none' : `transform ${transitionDuration}ms ease-in-out`;
                   track.style.transform = `translateX(${targetTranslateX}px)`;
 
                   allCards.forEach((card, index) => {
@@ -1767,22 +1796,20 @@
                           checkInfiniteLoopJump();
                       }, transitionDuration);
                   } else {
-                      isTransitioning = false; // Ensure flag is reset even on instant jumps
-                       checkInfiniteLoopJump(); // Check immediately after instant jump
+                      isTransitioning = false;
+                      checkInfiniteLoopJump();
                   }
               }
 
               function checkInfiniteLoopJump() {
-                   // Important: Check against the original card count
                    if (currentIndex <= -1) {
-                      currentIndex = cardCount - 1; // Jump to the equivalent original card at the end
-                      updateCarousel(true); // Instant jump
+                      currentIndex = cardCount - 1;
+                      updateCarousel(true);
                    } else if (currentIndex >= cardCount) {
-                      currentIndex = 0; // Jump to the equivalent original card at the start
-                      updateCarousel(true); // Instant jump
+                      currentIndex = 0;
+                      updateCarousel(true);
                    }
               }
-
 
               function moveToNext() {
                   if (isTransitioning) return;
@@ -1797,19 +1824,17 @@
               }
 
               function startAutoScroll() {
-                  stopAutoScroll(); // Clear any existing timer
+                  stopAutoScroll();
                   autoScrollTimer = setInterval(moveToNext, autoScrollInterval);
               }
 
-              function stopAutoScroll() {
-                   clearInterval(autoScrollTimer);
-              }
+              function stopAutoScroll() { clearInterval(autoScrollTimer); }
 
-              nextBtn.addEventListener('click', () => { moveToNext(); stopAutoScroll(); /* User interaction pauses auto-scroll */ });
-              prevBtn.addEventListener('click', () => { moveToPrev(); stopAutoScroll(); /* User interaction pauses auto-scroll */ });
+              nextBtn.addEventListener('click', () => { moveToNext(); stopAutoScroll(); });
+              prevBtn.addEventListener('click', () => { moveToPrev(); stopAutoScroll(); });
 
               const viewport = document.querySelector('.carousel-viewport');
-               if (viewport) { // Check if viewport exists
+               if (viewport) {
                   viewport.addEventListener('mouseenter', stopAutoScroll);
                   viewport.addEventListener('mouseleave', startAutoScroll);
                }
@@ -1819,22 +1844,15 @@
                    clearTimeout(resizeTimeout);
                    resizeTimeout = setTimeout(() => {
                       calculateCardWidthAndOffset();
-                      updateCarousel(true); // Update instantly on resize
+                      updateCarousel(true);
                    }, 150);
                });
 
-              // Initial setup
               calculateCardWidthAndOffset();
-              updateCarousel(true); // Set initial position instantly
+              updateCarousel(true);
               startAutoScroll();
-          } else {
-              console.warn("Carousel track, cards, or buttons not found. Carousel script not fully initialized.");
           }
-      } else {
-          // console.log("Carousel track not found on this page."); // Optional: Log if carousel isn't expected everywhere
       }
-      // --- END: NEW CAROUSEL JAVASCRIPT ---
-
 
       // --- Update Footer Year ---
       const yearSpan = document.getElementById('currentYear');
@@ -1842,64 +1860,61 @@
         yearSpan.textContent = new Date().getFullYear();
       }
 
-      // --- REMOVED: Contact Form Handler ---
-
-      // --- Active Nav Link Highlighting on Scroll --- (Updated)
-      const sections = document.querySelectorAll('section[id]'); // Get all sections with an ID
+      // --- Active Nav Link Highlighting on Scroll ---
+      // Make sure sections have IDs that match nav links (e.g., <section id="about">)
+      const sections = document.querySelectorAll('main section[id]'); // Target sections within main
       const navLinksDesktop = document.querySelectorAll('.desktop-nav a[href^="#"]');
-      const navLinksMobileAll = document.querySelectorAll('.mobile-menu a[href^="#"]'); // Only select hash links
+      const navLinksMobileAll = document.querySelectorAll('.mobile-menu a[href^="#"]');
 
       function setActiveLink() {
         let currentSectionId = '';
-        const headerHeight = (document.querySelector('header')?.offsetHeight || 70) + 10; // Offset for sticky header + small buffer
+        const headerHeight = (document.querySelector('header')?.offsetHeight || 70) + 20; // Increased offset buffer
 
         sections.forEach(section => {
-          const sectionTop = section.offsetTop - headerHeight; // Adjust for header height
+          const sectionTop = section.offsetTop - headerHeight;
           const sectionHeight = section.clientHeight;
-          const scrollPosition = window.scrollY;
-
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            currentSectionId = section.getAttribute('id');
+          // Check if section is within the viewport range, considering the header offset
+          // Special check for bottom of page: if scrolled past the top of the last section, keep it active
+          if (window.scrollY >= sectionTop) {
+             currentSectionId = section.getAttribute('id');
           }
         });
 
-         // Special case for top of page or scrolling up past first section
-         if (window.scrollY < (sections[0]?.offsetTop - headerHeight || 200)) {
-             currentSectionId = ''; // No specific section active, implies 'Home'
+         // If scrolled near the top, explicitly set 'Accueil' (linked to '#') as active
+         // Use the ID of the *new* hero section for this check
+         const heroSection = document.getElementById('home-new');
+         if (heroSection && window.scrollY < (heroSection.offsetTop + heroSection.offsetHeight - headerHeight)) {
+             currentSectionId = 'home-new'; // Or whatever ID you gave the hero section if it needs nav highlighting
+                                        // If 'Accueil' links to '#', keep currentSectionId empty or handle '#' specifically
+         }
+         // If 'Accueil' links to '#', we need to handle the empty case:
+         if (window.scrollY < (document.getElementById('about')?.offsetTop - headerHeight || 300)) {
+             currentSectionId = ''; // Represents top of page / default state
          }
 
 
-        // Update Desktop Nav
+        const activeHref = currentSectionId ? `#${currentSectionId}` : '#'; // Target href based on section or '#' for top
+
         navLinksDesktop.forEach(link => {
-          link.classList.remove('active');
-          const linkHref = link.getAttribute('href');
-          if (linkHref === `#${currentSectionId}` || (currentSectionId === '' && linkHref === '#')) { // Highlight section or Home
-            link.classList.add('active');
-          }
+          link.classList.toggle('active', link.getAttribute('href') === activeHref);
         });
 
-        // Update Mobile Nav
         navLinksMobileAll.forEach(link => {
-          link.classList.remove('active');
-           const linkHref = link.getAttribute('href');
-          if (linkHref === `#${currentSectionId}` || (currentSectionId === '' && linkHref === '#')) { // Highlight section or Home
-            link.classList.add('active');
-          }
+          link.classList.toggle('active', link.getAttribute('href') === activeHref);
         });
       }
 
-      // Use throttle to limit frequency of setActiveLink calls during scroll
       let scrollTimeout;
       window.addEventListener('scroll', () => {
           if (!scrollTimeout) {
               scrollTimeout = setTimeout(() => {
                   setActiveLink();
                   scrollTimeout = null;
-              }, 100); // Adjust throttle time (ms) as needed
+              }, 100);
           }
       });
 
-      setActiveLink(); // Initial check on load
+      setActiveLink(); // Initial check
 
     });
   </script>
