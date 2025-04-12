@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVE Service - FAQ</title>
+    <style>
+        :root {
+            --primary-green: #5DC370;
+            --text-dark: #263238;
+            --text-gray: #546E7A;
+            --background-white: #FFFFFF;
+            --background-light: #F5F7F9;
+            --border-light: #E0E0E0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .faq-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .faq-title {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .faq-subtitle {
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .faq-subtitle span {
+            color: var(--primary-green);
+        }
+        
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .faq-item {
+            background-color: var(--background-white);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 5px 15px rgba(93, 195, 112, 0.1);
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(93, 195, 112, 0.05);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: var(--primary-green);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-gray);
+            background-color: var(--background-light);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px 25px;
+            max-height: 1000px;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-answer ul, .faq-answer ol {
+            margin: 15px 0 15px 20px;
+        }
+        
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+        
+        .faq-answer strong {
+            color: var(--primary-green);
+        }
+        
+        .contact-section {
+            background: linear-gradient(90deg, rgba(93, 195, 112, 0.1) 0%, rgba(93, 195, 112, 0.05) 100%);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(93, 195, 112, 0.2);
+        }
+        
+        .contact-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .contact-text {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-button:hover {
+            background-color: #4daf61;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(93, 195, 112, 0.4);
+        }
+        
+        .contact-button svg, .phone-button svg {
+            margin-right: 10px;
+        }
+        
+        .phone-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--text-dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        .phone-button:hover {
+            background-color: rgba(93, 195, 112, 0.1);
+        }
+        
+        .green-underline {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto 30px;
+            width: 130px;
+            height: 4px;
+            background-color: var(--primary-green);
+        }
+        
+        @media (max-width: 768px) {
+            .faq-title {
+                font-size: 32px;
+            }
+            
+            .faq-subtitle {
+                font-size: 18px;
+            }
+            
+            .contact-section {
+                padding: 30px 20px;
+            }
+            
+            .contact-title {
+                font-size: 24px;
+            }
+            
+            .contact-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-button, .phone-button {
+                margin-right: 0;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="faq-container">
+        <h1 class="faq-title">Questions Fréquemment Posées</h1>
+        <div class="green-underline"></div>
+        <p class="faq-subtitle">Tout ce que vous devez savoir sur nos solutions professionnelles pour <span>un environnement propre, sain et sécurisé</span>, adaptées à tous vos besoins.</p>
+        
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">Quels services d'hygiène et antiparasitaires proposez-vous ?</div>
+                <div class="faq-answer">
+                    <p>MVE Service propose une gamme complète de solutions pour l'hygiène et la lutte antiparasitaire :</p>
+                    <ul>
+                        <li>Traitement contre les <strong>nuisibles</strong> (rongeurs, cafards, punaises de lit, etc.)</li>
+                        <li>Désinfection et <strong>assainissement</strong> des locaux</li>
+                        <li>Services de <strong>dératisation</strong> préventive et curative</li>
+                        <li>Traitement contre les <strong>insectes volants et rampants</strong></li>
+                        <li>Solutions de <strong>désinsectisation</strong> pour particuliers et professionnels</li>
+                        <li>Programmes de <strong>maintenance préventive</strong> personnalisés</li>
+                        <li>Audits et diagnostics de <strong>contamination parasitaire</strong></li>
+                    </ul>
+                    <p>Tous nos services respectent les normes d'hygiène et environnementales en vigueur, et sont réalisés par des techniciens qualifiés.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Pour quels types d'établissements intervenez-vous ?</div>
+                <div class="faq-answer">
+                    <p>Notre expertise s'étend à différents secteurs et types d'établissements :</p>
+                    <ul>
+                        <li><strong>Commerces et restauration</strong> : restaurants, boulangeries, supermarchés, commerces alimentaires</li>
+                        <li><strong>Hôtellerie</strong> : hôtels, résidences, locations saisonnières</li>
+                        <li><strong>Entreprises</strong> : bureaux, entrepôts, usines de production</li>
+                        <li><strong>Secteur médical</strong> : cliniques, cabinets médicaux, maisons de retraite</li>
+                        <li><strong>Établissements publics</strong> : écoles, administrations, centres de loisirs</li>
+                        <li><strong>Logements</strong> : particuliers, immeubles, copropriétés</li>
+                        <li><strong>Industries agroalimentaires</strong> : conformément aux normes HACCP</li>
+                    </ul>
+                    <p>Nous adaptons nos interventions aux spécificités et contraintes de chaque environnement.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Comment se déroule une intervention type ?</div>
+                <div class="faq-answer">
+                    <p>Une intervention MVE Service se déroule généralement en plusieurs étapes :</p>
+                    <ol>
+                        <li><strong>Évaluation initiale</strong> : Visite sur site pour identifier l'étendue du problème et déterminer les solutions appropriées</li>
+                        <li><strong>Proposition de traitement</strong> : Établissement d'un devis détaillé avec solutions recommandées</li>
+                        <li><strong>Préparation</strong> : Instructions pour préparer les lieux avant l'intervention</li>
+                        <li><strong>Traitement</strong> : Intervention par nos techniciens qualifiés avec équipements et produits adaptés</li>
+                        <li><strong>Suivi</strong> : Contrôle post-traitement pour vérifier l'efficacité et ajuster si nécessaire</li>
+                        <li><strong>Prévention</strong> : Conseils et mesures préventives pour éviter la réapparition des problèmes</li>
+                    </ol>
+                    <p>La durée et la nature exactes de l'intervention dépendent du type de problème et de l'étendue de l'infestation.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Vos traitements sont-ils dangereux pour la santé ?</div>
+                <div class="faq-answer">
+                    <p>La sécurité est notre priorité absolue. Nos traitements sont conçus pour être efficaces contre les nuisibles tout en minimisant les risques pour les humains, les animaux domestiques et l'environnement :</p>
+                    <ul>
+                        <li>Nous utilisons des <strong>produits homologués</strong> et conformes aux réglementations en vigueur</li>
+                        <li>Nos techniciens sont formés aux <strong>bonnes pratiques</strong> d'application des traitements</li>
+                        <li>Nous privilégions les <strong>méthodes ciblées</strong> qui limitent l'exposition aux substances actives</li>
+                        <li>Des <strong>consignes de sécurité</strong> précises sont fournies avant chaque intervention</li>
+                        <li>Nous proposons des <strong>alternatives écologiques</strong> lorsque c'est possible</li>
+                    </ul>
+                    <p>Un délai de réentrée dans les locaux après traitement peut être nécessaire selon le type d'intervention. Ces informations vous sont systématiquement communiquées.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Proposez-vous des contrats d'entretien régulier ?</div>
+                <div class="faq-answer">
+                    <p>Oui, nous proposons des contrats d'entretien régulier adaptés à vos besoins :</p>
+                    <ul>
+                        <li><strong>Contrats préventifs</strong> : Visites régulières pour éviter l'apparition de nuisibles</li>
+                        <li><strong>Maintenance trimestrielle, semestrielle ou annuelle</strong> selon vos besoins spécifiques</li>
+                        <li><strong>Plans de lutte intégrée</strong> combinant différentes approches (mécanique, biologique, chimique)</li>
+                        <li><strong>Audits d'hygiène</strong> réguliers avec rapports détaillés</li>
+                        <li><strong>Formation du personnel</strong> aux bonnes pratiques d'hygiène</li>
+                    </ul>
+                    <p>Ces contrats incluent généralement une assistance prioritaire en cas d'infestation soudaine et des tarifs préférentiels sur les interventions supplémentaires.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Quel est le délai d'intervention après une demande ?</div>
+                <div class="faq-answer">
+                    <p>Nous nous engageons à répondre rapidement à toutes les demandes :</p>
+                    <ul>
+                        <li><strong>Situations d'urgence</strong> (infestations graves) : Intervention sous 24 à 48 heures</li>
+                        <li><strong>Demandes standard</strong> : Intervention planifiée sous 3 à 5 jours ouvrés</li>
+                        <li><strong>Clients sous contrat</strong> : Service prioritaire avec délais d'intervention raccourcis</li>
+                    </ul>
+                    <p>Notre service client est disponible pour vous renseigner sur les disponibilités précises au moment de votre demande. Pour les établissements alimentaires ou de santé confrontés à une situation critique, nous mettons tout en œuvre pour intervenir dans les plus brefs délais.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Quelles zones géographiques couvrez-vous ?</div>
+                <div class="faq-answer">
+                    <p>MVE Service intervient principalement dans les régions suivantes :</p>
+                    <ul>
+                        <li>Toute la région de <strong>Casablanca et ses environs</strong></li>
+                        <li><strong>Rabat</strong> et sa périphérie</li>
+                        <li>La région de <strong>Marrakech</strong></li>
+                        <li><strong>Tanger</strong> et le nord du pays</li>
+                        <li>Les principales <strong>villes côtières</strong> du Maroc</li>
+                    </ul>
+                    <p>Pour les clients professionnels avec des sites multiples, nous pouvons étendre notre couverture à l'ensemble du territoire national. N'hésitez pas à nous consulter pour connaître notre disponibilité dans votre secteur.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <h2 class="contact-title">Vous avez d'autres questions ?</h2>
+            <p class="contact-text">Notre équipe d'experts est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins spécifiques en matière d'hygiène et de lutte antiparasitaire.</p>
+            <div class="contact-buttons">
+                <a href="#" class="contact-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Demandez votre Devis Gratuit
+                </a>
+                <a href="tel:+212632533159" class="phone-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 16.92V19.92C22 20.4704 21.7893 20.9996 21.4142 21.3747C21.0391 21.7498 20.5099 21.9605 19.96 21.96C14.9 22.49 10.02 20.98 6.02 17.63C2.34 14.55 0.81 9.79 1.33 4.84C1.33543 4.29297 1.54913 3.77001 1.92839 3.39921C2.30765 3.02841 2.82877 2.82536 3.37 2.83H6.37C7.37 2.82 8.21 3.56 8.35 4.54C8.48 5.56 8.72 6.56 9.07 7.52C9.32 8.19 9.11 8.95 8.57 9.36L7.11 10.47C8.25012 13.3 10.64 15.6799 13.47 16.81L14.58 15.35C14.99 14.81 15.75 14.6 16.42 14.85C17.3813 15.2022 18.382 15.4393 19.4 15.56C20.4 15.71 21.14 16.57 21.12 17.57L22 16.92Z" stroke="#5DC370" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    +212 632-533-159
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
