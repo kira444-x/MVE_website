@@ -1,0 +1,471 @@
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* Base font size */
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa; /* Light background for contrast */
+}
+
+main {
+  flex-grow: 1; /* Pushes footer down if one were present */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: #6b7280;
+}
+
+a {
+  color: #1a8754; /* Link color consistent with primary */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0d6e3c;
+  
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Prevents extra space below images */
+}
+
+/* --- Utility Classes --- */
+.container { /* Can be used in main content */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.btn {
+  display: inline-flex; /* Use flex for icon alignment */
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between text and icon */
+  background-color: #1a8754; /* Primary color from form */
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px; /* Consistent with form */
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background-color: #0d6e3c; /* Darker primary */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(26, 135, 84, 0.2);
+}
+
+.btn i { /* Icon specific style within button */
+   transition: transform 0.3s ease;
+}
+.btn:hover i {
+    transform: translateX(5px);
+}
+
+/* --- Contact Page Specific Styles --- */
+
+/* Banner */
+.contact-banner {
+  width: 100%;
+  height: 400px; /* Increased height for text */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/img/Contact.jpg); /* Added overlay */
+  background-size: cover;
+  background-position: center;
+  display: flex; /* Use flex for centering */
+  flex-direction: column; /* Stack title and description */
+  align-items: center;
+  justify-content: center; /* Center vertically */
+  text-align: center; /* Center text horizontally */
+  padding: 2rem 5%; /* Add some padding */
+  position: relative; /* Context for absolute elements if needed */
+}
+
+/* Typing Text Effect */
+.typing-text-wrapper { /* Added wrapper for layout */
+    display: inline-block; /* Fit content */
+    position: relative; /* For cursor positioning */
+    margin-bottom: 1rem; /* Space below typing text */
+}
+
+.typing-text {
+  font-size: clamp(1.8rem, 5vw, 3rem); /* Responsive font size */
+  letter-spacing: 3px; /* Adjusted spacing for smoother look */
+  font-family: monospace;
+  max-width: 100%; /* Ensure it doesn't overflow container */
+  width: 0; /* Start with no width */
+  display: inline-block; /* Important for width animation */
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
+  /* Smooth width animation instead of steps */
+  animation: typing 2.5s linear forwards, cursor .6s step-end infinite alternate;
+  margin: 0; /* Remove default margins */
+  border-right: 3px solid white; /* Initial cursor */
+}
+
+@keyframes cursor {
+  0%, 100% { border-color: white; } /* Visible cursor */
+  50% { border-color: transparent; } /* Blinking */
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 20ch; } /* FIXED: Adjusted to 15 characters ("Contactez-Nous...") */
+}
+
+/* Main Contact Section Layout (using CSS Grid) */
+ .contact-section {
+    padding: 3rem 0; /* Add vertical padding */
+ }
+
+.contact-grid-parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem; /* Add gap between columns */
+  max-width: 1200px; /* Limit width */
+  margin: 0 auto; /* Center the grid */
+  padding: 0 5%; /* Padding for smaller screens */
+}
+
+.contact-info-column { /* Was div2 */
+  grid-column: span 5 / span 5; /* Default: full width */
+  /* Styles moved to .info-card */
+}
+
+.contact-form-column { /* Was div3 */
+  grid-column: span 5 / span 5; /* Default: full width */
+  /* Form styles below */
+}
+
+/* Contact Info Cards */
+.contact-info-column h2 {
+    color: #1a8754;
+    font-size: 1.8rem; /* Slightly smaller than main heading */
+    margin-bottom: 1.5rem;
+    text-align: center; /* Center heading */
+    margin-top: 0; /* Added to reset potential top margin */
+}
+
+.info-card {
+  background-color: #fff;
+  margin-bottom: 1.5rem; /* Space between cards */
+  padding: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out; /* Remove transform transition */
+  text-align: center; /* Center card content */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+ /* Styling for Font Awesome Icons in Info Cards */
+ .info-card .info-icon {
+    font-size: 2.2rem; /* Adjust icon size */
+    color: #1a8754; /* Primary color */
+    margin-bottom: 15px; /* Space below icon */
+    display: inline-block; /* Needed for margin */
+    transition: transform 0.3s ease;
+ }
+
+.info-card h3 { /* Changed from h2 for better hierarchy */
+  margin-top: 0; /* Reset top margin */
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  color: #333;
+}
+.info-card a {
+  text-decoration: none;
+  color: #333;
+  display: block; /* Make links block level for easier clicking */
+  margin-bottom: 5px; /* Space between multiple links */
+  font-weight: 500;
+}
+ .info-card a:hover {
+    color: #1a8754; /* Highlight on hover */
+    text-decoration: none; /* Keep no underline */
+ }
+
+.info-card:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  /* Apply bounce animation on hover */
+  animation: bounce 0.7s ease; /* Play once on hover */
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); } /* Adjust scale/translate */
+}
+
+
+/* --- Contact Form Styles --- */
+:root { /* Keep variables for consistency */
+    --primary: #1a8754;
+    --primary-dark: #0d6e3c;
+    --primary-light: rgba(26, 135, 84, 0.1);
+    --white: #ffffff;
+    --light-bg: #f8f9fa;
+    --text-dark: #333333;
+    --text-muted: #6c757d;
+    --shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+    --border-color: #ddd;
+    --input-bg: #f9f9f9;
+}
+
+.contact-form-container { /* Was .container-2 */
+   /* Removed max-width and margin, handled by grid parent */
+   /* Removed padding, handled by .contact-form */
+}
+
+.contact-form {
+    background: var(--white);
+    padding: 30px 40px; /* More padding */
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.contact-form h2 { /* Form heading */
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 15px;
+    text-align: center; /* Center form heading */
+}
+.contact-form h2::after { /* Underline for heading */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Center underline */
+    transform: translateX(-50%);
+    width: 60px; /* Wider underline */
+    height: 3px;
+    background-color: var(--primary);
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 20px; /* Space between columns */
+    margin-bottom: 15px; /* Spacing between rows */
+}
+.form-col {
+    flex: 1; /* Each column takes equal space */
+    min-width: 200px; /* Minimum width before wrapping */
+}
+
+.form-group {
+    margin-bottom: 0; /* Row handles bottom margin now */
+    position: relative; /* Crucial for icon positioning */
+}
+
+.form-label {
+    display: block; /* Ensure label is on its own line */
+    margin-bottom: 8px; /* Space below label */
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.required {
+    color: #dc3545; /* Red asterisk */
+    margin-left: 3px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%; /* Take full width of column */
+    padding: 14px 15px 14px 45px; /* Adjust padding for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--input-bg);
+    line-height: 1.5; /* Ensure text fits well */
+    position: relative; /* Needed if icon was relative *to input* */
+}
+.form-control:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 135, 84, 0.2);
+    background-color: var(--white);
+}
+/* Select specific styles */
+ select.form-control {
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231a8754" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px 12px;
+    padding-right: 40px; /* Make space for arrow */
+    cursor: pointer;
+ }
+
+ /* Textarea specific styles */
+textarea.form-control {
+    min-height: 120px; /* Increased height */
+    resize: vertical;
+    padding-top: 14px; /* Match other inputs */
+    padding-left: 45px; /* Ensure icon space */
+}
+
+/* --- FORM ICON POSITIONING (Centered Vertically in Input Area) --- */
+.form-icon {
+    position: absolute;
+    left: 15px;
+    /* Calculate top: Add label height+margin, then half of the input's height */
+    /* Approx Label height (1em * line-height + margin-bottom) = ~ (0.95rem * 1.3) + 8px = ~19px + 8px = 27px */
+    /* Input height = padding-top + padding-bottom + line-height + border = 14px + 14px + (1rem * 1.5) + 2px = 28 + 24 + 2 = 54px */
+    /* Half input height = 54px / 2 = 27px */
+    /* Total top offset = 27px (label area) + 27px (half input) = 54px */
+    top: 54px;
+    transform: translateY(-50%); /* Vertically center the icon itself at the 'top' position */
+
+    color: var(--primary);
+    font-size: 1rem;
+    pointer-events: none; /* Make icon non-interactive */
+    z-index: 2; /* Ensure icon is above input background */
+    transition: color 0.3s ease; /* Add transition for focus */
+}
+
+/* Change icon color on input focus */
+.form-control:focus ~ .form-icon {
+    color: var(--primary-dark);
+}
+
+/* Adjust icon top position specifically for TEXTAREA (Align near top) */
+textarea ~ .form-icon {
+    /* Place near the top padding, without vertical centering transform */
+    /* Top position = label area + input padding-top + a small offset */
+    top: calc( (0.95rem * 1.3) + 8px + 14px + 4px); /* Label area + padding-top + 4px offset */
+    top: 45px; /* Fine-tuned value */
+    transform: none; /* Remove vertical centering */
+}
+
+/* Form Button Style (Using .btn class defined earlier) */
+.contact-form .btn {
+    width: 100%; /* Make button full width */
+    margin-top: 15px; /* Add space above button */
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Laptops / Desktops */
+@media (min-width: 901px) {
+     .contact-grid-parent {
+        grid-template-columns: 2fr 3fr; /* Info column smaller, Form column larger */
+     }
+    .contact-info-column {
+        grid-column: 1 / 2; /* First column */
+    }
+    .contact-form-column {
+        grid-column: 2 / 3; /* Second column */
+    }
+     .contact-info-column h2, .contact-form h2 {
+        text-align: left; /* Align headings left on larger screens */
+     }
+     .contact-form h2::after {
+         left: 0; /* Align underline left */
+         transform: none;
+     }
+      .info-card {
+        text-align: left; /* Align card content left */
+      }
+      /* Align icon left */
+      .info-card .info-icon {
+         margin-left: 0;
+         margin-right: auto; /* Keep margin bottom */
+      }
+
+}
+
+ /* Tablets */
+@media (max-width: 992px) {
+  /* Styles affecting removed elements were here */
+}
+
+/* Mobile Menu Trigger Point & Tablet Grid Adjustments */
+@media (max-width: 768px) {
+   .contact-grid-parent {
+       gap: 1.5rem; /* Reduce gap */
+   }
+   /* Stack columns */
+   .contact-info-column, .contact-form-column {
+        grid-column: 1 / -1; /* Full width */
+   }
+   /* Center headings again on mobile */
+    .contact-info-column h2, .contact-form h2 {
+        text-align: center;
+     }
+     .contact-form h2::after {
+         left: 50%;
+         transform: translateX(-50%);
+     }
+     /* Center info card content/icon on mobile */
+     .info-card {
+        text-align: center;
+     }
+      .info-card .info-icon {
+         margin-left: auto;
+         margin-right: auto;
+      }
+
+    /* Adjust form padding on mobile */
+    .contact-form {
+         padding: 25px 20px;
+    }
+    .form-row {
+        flex-direction: column; /* Stack form fields */
+        gap: 0; /* Remove gap when stacked */
+        margin-bottom: 0; /* Remove row margin */
+    }
+    .form-col {
+        min-width: 100%; /* Full width */
+        margin-bottom: 15px; /* Add margin back between stacked fields */
+    }
+    .form-group {
+         margin-bottom: 0; /* Reset margin here as .form-col handles it */
+    }
+    /* Recalculate icon position for stacked view */
+     .form-icon { top: 54px; } /* Re-assert center position */
+     textarea ~ .form-icon { top: 45px; } /* Re-assert textarea position */
+
+    /* Styles affecting removed elements were here */
+}
+
+/* Small Mobiles */
+@media (max-width: 576px) {
+   /* Styles affecting removed elements were here */
+   .typing-text { font-size: 1.5rem; letter-spacing: 2px;} /* Adjust typing text */
+   .contact-banner { height: 350px; } /* Adjust height if needed */
+   /* Adjust headings */
+   .contact-info-column h2, .contact-form h2 { font-size: 1.6rem;}
+}
+
+ @media (max-width: 400px) {
+   .contact-form { padding: 20px 15px; } /* Reduce form padding further */
+   .typing-text { font-size: 1.3rem; letter-spacing: 1px;}
+    /* Adjust icon position slightly for very small screens if needed */
+    .form-icon { top: 52px; }
+    textarea ~ .form-icon { top: 43px; }
+ }

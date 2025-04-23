@@ -1,0 +1,268 @@
+
+    html {
+    scroll-behavior: smooth;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+    color: #1f2937; /* Consistent heading color */
+  }
+
+   h3 {
+      color: #374151;
+      margin-bottom: 1rem; /* Consistent margin */
+   }
+
+  p {
+    margin-bottom: 1rem;
+    color: #6b7280;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-heading h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    color: #1f2937;
+  }
+
+  .section-heading h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #4CAF50; /* Main accent color */
+  }
+
+  .section-heading p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 1rem auto 0;
+    color: #6b7280;
+  }
+
+  section {
+    padding: 4rem 0;
+    overflow: hidden;
+  }
+
+  /* --- Quick Access Navigation --- */
+  .quick-access {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 2rem auto 3rem;
+    padding: 0 5%;
+    max-width: 1200px;
+  }
+
+  .quick-access-link {
+    padding: 10px 20px;
+    background-color: #e8f5e9;
+    color: #3e8e41;
+    border: 1px solid #a5d6a7;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+  }
+
+  .quick-access-link:hover {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+  }
+  /* --- End Quick Access Navigation --- */
+
+
+  /* --- Standard Service Card Section Styles --- */
+  #standard-services {
+      background-color: #ffffff;
+      padding-bottom: 4rem; /* Adjusted padding */
+  }
+
+  .service-item {
+      display: flex;
+      flex-direction: column; /* Mobile first: stack */
+      align-items: center; /* Mobile: center stack */
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      margin-bottom: 3rem;
+      overflow: hidden;
+      border: 1px solid #eee;
+  }
+
+  .service-item-image {
+      flex-shrink: 0;
+      width: 100%; /* Mobile: full width */
+      max-width: 480px; /* Mobile: limit width */
+      margin-bottom: 1.5rem; /* Mobile: space below image */
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 1.5rem 1.5rem 0 1.5rem; /* Mobile padding */
+  }
+
+  .service-item-image img {
+      width: 100%;
+      height: auto; /* Maintain aspect ratio */
+      max-height: 350px; /* Limit image height */
+      object-fit: cover; /* Cover the area */
+      display: block;
+      border-radius: 6px;
+      transition: transform 0.4s ease;
+  }
+
+  .service-item:hover .service-item-image img {
+      transform: scale(1.05);
+  }
+
+  .service-item-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%; /* Mobile: full width */
+      padding: 0 1.5rem 1.5rem 1.5rem; /* Mobile padding */
+      flex-grow: 1;
+      text-align: center; /* Mobile: center text */
+  }
+
+  .service-text-content {
+      flex-grow: 1; /* Allow text to take space */
+      margin-bottom: 1rem; /* Add space between text and button */
+  }
+
+  .service-item-content h3 {
+      color: #4CAF50;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+  }
+
+  .service-item-content p {
+      color: #555;
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+  }
+
+  .service-item-content .btn {
+      /* margin-top: 1.5rem; */ /* Use margin on .service-text-content instead */
+      align-self: center; /* Mobile: center button */
+  }
+
+
+  /* --- Other Shared Styles (Buttons, Header, Footer - Kept existing) --- */
+  /* Button Styles */
+  .btn { display: inline-block; background-color: #4CAF50; color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; white-space: nowrap; }
+  .btn:hover { background-color: #3e8e41; transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); } /* Standard button hover */
+
+
+  /* Call to Action Section */
+  .cta-section { background: linear-gradient(45deg, #4CAF50, #3e8e41); color: white; text-align: center; padding: 5rem 0; }
+  .cta-content { max-width: 800px; margin: 0 auto; padding: 0 5%; }
+  .cta-content h2 { color: white; font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 600; }
+  .cta-content p { margin-bottom: 2.5rem; font-size: 1.1rem; opacity: 0.95; color: #f0fdf4; }
+  .cta-buttons { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  /* CTA Button Styles */
+  .btn-white { background-color: white; color: #4CAF50; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+  .btn-white:hover {
+      background-color: #f1f1f1;
+      color: #3e8e41;
+   }
+  .btn-outline-white { background-color: transparent; border: 2px solid white; color: white; box-shadow: none; }
+  .btn-outline-white:hover {
+      background-color: white;
+      color: #4CAF50;
+  }
+
+  /* Footer */
+ 
+
+  /* --- Media Queries --- */
+  @media (min-width: 768px) {
+      /* Styles for standard service card layout on desktop */
+      .service-item {
+          flex-direction: row; /* Side-by-side */
+          gap: 2rem;
+          align-items: stretch; /* Make columns equal height by default */
+      }
+
+      .service-item-image {
+          flex: 0 0 45%; /* Fixed width for image column */
+          max-width: none;
+          margin-bottom: 0;
+          padding: 2rem;
+          /* --- Vertically center the image within this container --- */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          /* --- End centering --- */
+      }
+
+      /* Content takes remaining space */
+      .service-item-content {
+          flex: 1 1 55%;
+          padding: 2rem 2rem 2rem 0; /* Default padding (for image on left) */
+          /* --- Vertically center the content block --- */
+          display: flex;
+          flex-direction: column;
+          justify-content: center; /* Center content vertically */
+          text-align: left; /* Align text left on desktop */
+           /* --- End centering --- */
+      }
+
+      .service-item-content .btn {
+           align-self: flex-start; /* Align button left */
+           margin-top: auto; /* Push button to bottom of content area */
+           /* padding-top: 1.5rem; /* REMOVED - Spacing fixed */
+      }
+
+      /* Zigzag: Reverse direction for even items */
+      .service-item:nth-child(even) {
+           flex-direction: row-reverse;
+      }
+
+       /* Adjust padding for images on the right */
+       .service-item:nth-child(even) .service-item-image {
+            padding: 2rem; /* Consistent padding */
+       }
+
+       /* Adjust padding for text on the left */
+       .service-item:nth-child(even) .service-item-content {
+           padding: 2rem 0 2rem 2rem; /* Adjust padding */
+       }
+  }
+
+
+
+
+
+    /* Adjust service item text size */
+     .service-item-content h3 { font-size: 1.6rem; }
+     .service-item-content p { font-size: 1rem; }
+     .service-item-image { padding: 1rem 1rem 0 1rem; }
+     .service-item-content { padding: 0 1rem 1.5rem 1rem; }
+     .service-text-content { margin-bottom: 1rem; } /* Ensure space on mobile too */
+
+     .quick-access { gap: 8px; }
+     .quick-access-link { padding: 7px 12px; font-size: 0.75rem; }
+  
