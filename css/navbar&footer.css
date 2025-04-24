@@ -383,8 +383,7 @@ footer {
   nav { padding: 0.8rem 5%; }
   .logo img { height: 45px; }
   .footer-content { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  main { padding-top: 75px;
-       margin-top:75px} /* Adjust padding for smaller header */
+  main { padding-top: 75px;} /* Adjust padding for smaller header */
 }
 
 @media (max-width: 576px) {
@@ -395,13 +394,11 @@ footer {
    .footer-links a::before { margin-right: 5px; }
    .footer-links a:hover { transform: none; }
    .social-links { justify-content: center; }
-   main { padding-top: 75px; 
-        margin-top:75px} /* Adjust padding for smaller header */
+   main { padding-top: 75px;} /* Adjust padding for smaller header */
 }
 
  @media (max-width: 400px) {
    nav { padding: 0.8rem 3%; }
    .logo img { height: 40px; }
-   main { padding-top: 75px; 
-        margin-top:75px} /* Adjust padding for smaller header */
+   main { padding-top: 75px;} /* Adjust padding for smaller header */
  }
